@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan · HOLOGRAPHIC BLUEPRINT</title>
+    <title>minahil khan · HOLOGRAPHIC ASSEMBLY</title>
     <style>
         * {
             margin: 0;
@@ -151,7 +151,7 @@
 
         /* SECTION 2 */
         #section2 {
-            min-height: 100vh;
+            min-height: 200vh; /* Taller to allow scrolling animation */
             padding: 4rem 2rem;
             background: transparent;
             border-top: 1px solid #8b1a1a40;
@@ -164,6 +164,8 @@
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
+            position: sticky;
+            top: 2rem;
         }
 
         .split-layout {
@@ -313,7 +315,7 @@
                     <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
                 </div>
                 <div class="status">
-                    <span>⟫</span> HOLOGRAPHIC BLUEPRINT · PHASE: ASSEMBLY <span>⟫</span>
+                    <span>⟫</span> HOLOGRAPHIC ASSEMBLY · SCATTERED PHASE <span>⟫</span>
                 </div>
             </div>
         </section>
@@ -435,81 +437,70 @@
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0a0a0a);
         
-        // Camera - positioned to see laptop at x=7
+        // Camera
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(9, 3, 12);
-        camera.lookAt(7, 1.5, 0.5);
+        camera.position.set(8, 3, 14);
+        camera.lookAt(6, 1.5, 0);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.shadowMap.enabled = false; // No shadows for holographic look
         renderer.setPixelRatio(window.devicePixelRatio);
         container.appendChild(renderer.domElement);
 
-        // --- LIGHTS (ambient for holographic) ---
+        // --- LIGHTS ---
         const ambientLight = new THREE.AmbientLight(0x403020);
         scene.add(ambientLight);
 
-        // Key light - warm beige
         const keyLight = new THREE.DirectionalLight(0xe0c9a6, 1.2);
         keyLight.position.set(5, 10, 10);
         scene.add(keyLight);
 
-        // Blueprint glow - deep red
         const blueLight = new THREE.PointLight(0x8b1a1a, 1.5);
-        blueLight.position.set(7, 2, 2);
+        blueLight.position.set(6, 2, 2);
         scene.add(blueLight);
 
-        // Grid floor (very subtle)
+        // Grid floor
         const gridHelper = new THREE.GridHelper(30, 40, 0xe0c9a6, 0x8b1a1a);
-        gridHelper.position.y = -0.3;
+        gridHelper.position.y = -0.5;
         gridHelper.material.opacity = 0.1;
         gridHelper.material.transparent = true;
         scene.add(gridHelper);
 
-        // --- HOLOGRAPHIC LAPTOP (Blueprint style - wireframe + glow) ---
+        // --- LAPTOP (Target assembly point at x=6) ---
         
-        // Laptop base - wireframe
+        // Laptop base wireframe
         const baseWireframe = new THREE.LineSegments(
             new THREE.EdgesGeometry(new THREE.BoxGeometry(4.5, 0.2, 3.2)),
-            new THREE.LineBasicMaterial({ color: 0xe0c9a6, linewidth: 1 })
+            new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
         );
-        baseWireframe.position.set(7, 0.3, 0.5);
+        baseWireframe.position.set(6, 0.3, 0.5);
         scene.add(baseWireframe);
 
         // Base glow
-        const baseGlowGeo = new THREE.BoxGeometry(4.5, 0.2, 3.2);
-        const baseGlowMat = new THREE.MeshBasicMaterial({ 
-            color: 0x8b1a1a, 
-            transparent: true, 
-            opacity: 0.15,
-            wireframe: true
-        });
-        const baseGlow = new THREE.Mesh(baseGlowGeo, baseGlowMat);
-        baseGlow.position.set(7, 0.3, 0.5);
+        const baseGlow = new THREE.Mesh(
+            new THREE.BoxGeometry(4.5, 0.2, 3.2),
+            new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
+        );
+        baseGlow.position.set(6, 0.3, 0.5);
         scene.add(baseGlow);
 
-        // Screen - wireframe
+        // Screen wireframe
         const screenWireframe = new THREE.LineSegments(
             new THREE.EdgesGeometry(new THREE.BoxGeometry(4.0, 2.5, 0.2)),
-            new THREE.LineBasicMaterial({ color: 0xe0c9a6, linewidth: 1 })
+            new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
         );
-        screenWireframe.position.set(7, 1.8, 0.5);
+        screenWireframe.position.set(6, 1.8, 0.5);
         scene.add(screenWireframe);
 
         // Screen glow
-        const screenGlowGeo = new THREE.BoxGeometry(4.0, 2.5, 0.2);
-        const screenGlowMat = new THREE.MeshBasicMaterial({ 
-            color: 0x8b1a1a, 
-            transparent: true, 
-            opacity: 0.1,
-            wireframe: true
-        });
-        const screenGlow = new THREE.Mesh(screenGlowGeo, screenGlowMat);
-        screenGlow.position.set(7, 1.8, 0.5);
+        const screenGlow = new THREE.Mesh(
+            new THREE.BoxGeometry(4.0, 2.5, 0.2),
+            new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
+        );
+        screenGlow.position.set(6, 1.8, 0.5);
         scene.add(screenGlow);
 
-        // Screen content (holographic text)
+        // Screen content
         const canvas = document.createElement('canvas');
         canvas.width = 512;
         canvas.height = 512;
@@ -522,49 +513,39 @@
         ctx.fillText('ACTIVE', 256, 400);
 
         const texture = new THREE.CanvasTexture(canvas);
-        const screenMat = new THREE.MeshBasicMaterial({ 
-            map: texture, 
-            transparent: true, 
-            opacity: 0.4,
-            side: THREE.DoubleSide
-        });
+        const screenMat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
         const screenDisplay = new THREE.Mesh(new THREE.PlaneGeometry(3.8, 2.3), screenMat);
-        screenDisplay.position.set(7, 1.8, 0.6);
+        screenDisplay.position.set(6, 1.8, 0.6);
         scene.add(screenDisplay);
 
-        // Keyboard (dots for keys)
+        // Keyboard dots
         for (let i = 0; i < 20; i++) {
             for (let j = 0; j < 6; j++) {
                 const keyDot = new THREE.Mesh(
                     new THREE.SphereGeometry(0.05, 4, 4),
                     new THREE.MeshBasicMaterial({ color: 0xe0c9a6, transparent: true, opacity: 0.3 })
                 );
-                keyDot.position.set(5.7 + i*0.2, 0.35, -0.4 + j*0.22);
+                keyDot.position.set(4.7 + i*0.2, 0.35, -0.4 + j*0.22);
                 scene.add(keyDot);
             }
         }
 
-        // --- HOLOGRAPHIC FLOATING PARTS (Blueprint style) ---
+        // --- HOLOGRAPHIC PARTS (Scattered EVERYWHERE) ---
         const parts = [];
 
         function createHoloPart(geo, color, x, y, z, scale = 1) {
-            // Wireframe
             const wireframe = new THREE.LineSegments(
                 new THREE.EdgesGeometry(geo),
-                new THREE.LineBasicMaterial({ color: color, linewidth: 1 })
+                new THREE.LineBasicMaterial({ color: color })
             );
             wireframe.position.set(x, y, z);
             wireframe.scale.set(scale, scale, scale);
             scene.add(wireframe);
             
-            // Glow mesh
-            const glowMat = new THREE.MeshBasicMaterial({ 
-                color: color, 
-                transparent: true, 
-                opacity: 0.1,
-                wireframe: true
-            });
-            const glow = new THREE.Mesh(geo, glowMat);
+            const glow = new THREE.Mesh(
+                geo,
+                new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.1, wireframe: true })
+            );
             glow.position.set(x, y, z);
             glow.scale.set(scale, scale, scale);
             scene.add(glow);
@@ -572,133 +553,151 @@
             return { wireframe, glow };
         }
 
-        // 1. Motherboard
-        const mbGroup = createHoloPart(new THREE.BoxGeometry(3.5, 0.2, 2.8), 0xe0c9a6, -5, 2.5, -4);
-        parts.push({ 
-            wireframe: mbGroup.wireframe, 
-            glow: mbGroup.glow,
-            targetPos: new THREE.Vector3(7, 0.5, 0.5),
-            startPos: new THREE.Vector3(-5, 2.5, -4)
-        });
+        // Helper to get random scattered position
+        function randomPos(range, yRange) {
+            return {
+                x: (Math.random() - 0.5) * range,
+                y: Math.random() * yRange,
+                z: (Math.random() - 0.5) * range
+            };
+        }
 
-        // 2. CPU
-        const cpuGroup = createHoloPart(new THREE.BoxGeometry(1.4, 0.5, 1.4), 0x8b1a1a, -4, 3.2, -3);
-        parts.push({ 
-            wireframe: cpuGroup.wireframe, 
-            glow: cpuGroup.glow,
-            targetPos: new THREE.Vector3(6.8, 0.9, 0.4),
-            startPos: new THREE.Vector3(-4, 3.2, -3)
-        });
+        // Store target positions (where they should assemble)
+        const targets = [
+            { x: 5.8, y: 0.5, z: 0.4 }, // motherboard area
+            { x: 6.2, y: 0.9, z: 0.3 }, // cpu
+            { x: 5.5, y: 0.7, z: 0.2 }, // ram
+            { x: 6.5, y: 1.0, z: 0.8 }, // gpu
+            { x: 6.0, y: 0.6, z: 0.6 }, // ssd
+            { x: 5.3, y: 0.8, z: 0.1 }, // ram chips
+            { x: 6.8, y: 0.9, z: 0.9 }, // gpu die
+            { x: 5.7, y: 0.7, z: 0.3 }, // capacitors
+            { x: 6.3, y: 0.5, z: 0.7 }, // connectors
+            { x: 5.9, y: 0.6, z: 0.5 }  // extra
+        ];
 
-        // CPU pins (smaller cubes)
+        // 1. Motherboard (scattered far left)
+        const mbPos = randomPos(15, 5);
+        const mb = createHoloPart(new THREE.BoxGeometry(3.5, 0.2, 2.8), 0xe0c9a6, mbPos.x, mbPos.y, mbPos.z);
+        parts.push({ wireframe: mb.wireframe, glow: mb.glow, target: targets[0], start: mbPos });
+
+        // 2. CPU (scattered top right)
+        const cpuPos = randomPos(15, 6);
+        cpuPos.x = Math.abs(cpuPos.x) + 5; // force right side
+        const cpu = createHoloPart(new THREE.BoxGeometry(1.4, 0.5, 1.4), 0x8b1a1a, cpuPos.x, cpuPos.y, cpuPos.z);
+        parts.push({ wireframe: cpu.wireframe, glow: cpu.glow, target: targets[1], start: cpuPos });
+
+        // CPU pins (many small cubes)
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 6; j++) {
-                const pinGroup = createHoloPart(new THREE.BoxGeometry(0.1, 0.15, 0.1), 0xe0c9a6, -4 + i*0.15, 2.9, -3 + j*0.15);
+                const pinPos = randomPos(14, 5.5);
+                pinPos.x = pinPos.x - 5; // force left side
+                const pin = createHoloPart(new THREE.BoxGeometry(0.1, 0.15, 0.1), 0xe0c9a6, pinPos.x, pinPos.y, pinPos.z);
                 parts.push({ 
-                    wireframe: pinGroup.wireframe, 
-                    glow: pinGroup.glow,
-                    targetPos: new THREE.Vector3(6.8 + i*0.06, 0.6, 0.4 + j*0.06),
-                    startPos: new THREE.Vector3(-4 + i*0.15, 2.9, -3 + j*0.15)
+                    wireframe: pin.wireframe, 
+                    glow: pin.glow, 
+                    target: { 
+                        x: targets[1].x - 0.3 + i*0.1, 
+                        y: targets[1].y - 0.2, 
+                        z: targets[1].z - 0.3 + j*0.1 
+                    },
+                    start: pinPos 
                 });
             }
         }
 
-        // 3. RAM
-        const ramGroup = createHoloPart(new THREE.BoxGeometry(1.8, 0.15, 0.4), 0xe0c9a6, -3, 2.8, -4.5);
-        parts.push({ 
-            wireframe: ramGroup.wireframe, 
-            glow: ramGroup.glow,
-            targetPos: new THREE.Vector3(6.5, 0.7, 0.2),
-            startPos: new THREE.Vector3(-3, 2.8, -4.5)
-        });
+        // 3. RAM (scattered bottom)
+        const ramPos = randomPos(12, 2);
+        ramPos.y = -ramPos.y; // force bottom
+        const ram = createHoloPart(new THREE.BoxGeometry(1.8, 0.15, 0.4), 0xe0c9a6, ramPos.x, ramPos.y, ramPos.z);
+        parts.push({ wireframe: ram.wireframe, glow: ram.glow, target: targets[2], start: ramPos });
 
         // RAM chips
         for (let k = 0; k < 4; k++) {
-            const chipGroup = createHoloPart(new THREE.BoxGeometry(0.25, 0.1, 0.2), 0x8b1a1a, -3.3 + k*0.4, 2.9, -4.6);
+            const chipPos = randomPos(13, 3);
+            chipPos.z = chipPos.z + 5; // force far back
+            const chip = createHoloPart(new THREE.BoxGeometry(0.25, 0.1, 0.2), 0x8b1a1a, chipPos.x, chipPos.y, chipPos.z);
             parts.push({ 
-                wireframe: chipGroup.wireframe, 
-                glow: chipGroup.glow,
-                targetPos: new THREE.Vector3(6.4 + k*0.1, 0.75, 0.15),
-                startPos: new THREE.Vector3(-3.3 + k*0.4, 2.9, -4.6)
+                wireframe: chip.wireframe, 
+                glow: chip.glow, 
+                target: { x: targets[2].x - 0.4 + k*0.2, y: targets[2].y + 0.05, z: targets[2].z },
+                start: chipPos 
             });
         }
 
-        // 4. GPU
-        const gpuGroup = createHoloPart(new THREE.BoxGeometry(2.2, 0.5, 1.2), 0xe0c9a6, -5, 3.5, 0.5);
-        parts.push({ 
-            wireframe: gpuGroup.wireframe, 
-            glow: gpuGroup.glow,
-            targetPos: new THREE.Vector3(7.3, 1.0, 0.8),
-            startPos: new THREE.Vector3(-5, 3.5, 0.5)
-        });
+        // 4. GPU (scattered top left)
+        const gpuPos = randomPos(14, 7);
+        gpuPos.x = gpuPos.x - 8; // far left
+        gpuPos.y = gpuPos.y + 2; // high
+        const gpu = createHoloPart(new THREE.BoxGeometry(2.2, 0.5, 1.2), 0xe0c9a6, gpuPos.x, gpuPos.y, gpuPos.z);
+        parts.push({ wireframe: gpu.wireframe, glow: gpu.glow, target: targets[3], start: gpuPos });
 
         // GPU die
-        const dieGroup = createHoloPart(new THREE.BoxGeometry(0.8, 0.1, 0.5), 0x8b1a1a, -5, 3.7, 0.7);
-        parts.push({ 
-            wireframe: dieGroup.wireframe, 
-            glow: dieGroup.glow,
-            targetPos: new THREE.Vector3(7.3, 1.1, 0.9),
-            startPos: new THREE.Vector3(-5, 3.7, 0.7)
-        });
+        const diePos = randomPos(13, 6);
+        diePos.x = diePos.x - 4;
+        diePos.z = diePos.z + 3;
+        const die = createHoloPart(new THREE.BoxGeometry(0.8, 0.1, 0.5), 0x8b1a1a, diePos.x, diePos.y, diePos.z);
+        parts.push({ wireframe: die.wireframe, glow: die.glow, target: targets[6], start: diePos });
 
-        // 5. Capacitors (cylinders)
-        for (let i = 0; i < 6; i++) {
-            const capGroup = createHoloPart(new THREE.CylinderGeometry(0.15, 0.15, 0.5, 8), 0x8b1a1a, -4 + i*0.4, 2.9, 2);
+        // 5. Capacitors (scattered all over)
+        for (let i = 0; i < 8; i++) {
+            const capPos = randomPos(16, 5);
+            capPos.y = capPos.y + 1;
+            const cap = createHoloPart(new THREE.CylinderGeometry(0.15, 0.15, 0.5, 8), 0x8b1a1a, capPos.x, capPos.y, capPos.z);
             parts.push({ 
-                wireframe: capGroup.wireframe, 
-                glow: capGroup.glow,
-                targetPos: new THREE.Vector3(6.9 + i*0.1, 0.7, 0.3),
-                startPos: new THREE.Vector3(-4 + i*0.4, 2.9, 2)
+                wireframe: cap.wireframe, 
+                glow: cap.glow, 
+                target: { x: targets[7].x + i*0.1, y: targets[7].y, z: targets[7].z },
+                start: capPos 
             });
         }
 
-        // 6. SSD
-        const ssdGroup = createHoloPart(new THREE.BoxGeometry(1.4, 0.15, 0.9), 0xe0c9a6, -2, 2.6, 1.5);
-        parts.push({ 
-            wireframe: ssdGroup.wireframe, 
-            glow: ssdGroup.glow,
-            targetPos: new THREE.Vector3(6.7, 0.7, 0.6),
-            startPos: new THREE.Vector3(-2, 2.6, 1.5)
-        });
+        // 6. SSD (scattered back)
+        const ssdPos = randomPos(15, 4);
+        ssdPos.z = ssdPos.z - 8; // far back
+        const ssd = createHoloPart(new THREE.BoxGeometry(1.4, 0.15, 0.9), 0xe0c9a6, ssdPos.x, ssdPos.y, ssdPos.z);
+        parts.push({ wireframe: ssd.wireframe, glow: ssd.glow, target: targets[4], start: ssdPos });
 
-        // 7. Connectors
+        // 7. Connectors (scattered front)
         for (let i = 0; i < 4; i++) {
-            const connGroup = createHoloPart(new THREE.BoxGeometry(0.3, 0.2, 0.6), 0xe0c9a6, -5.5 + i*0.4, 2.5, 2.8);
+            const connPos = randomPos(14, 4);
+            connPos.z = connPos.z + 8; // far front
+            const conn = createHoloPart(new THREE.BoxGeometry(0.3, 0.2, 0.6), 0xe0c9a6, connPos.x, connPos.y, connPos.z);
             parts.push({ 
-                wireframe: connGroup.wireframe, 
-                glow: connGroup.glow,
-                targetPos: new THREE.Vector3(7.1 + i*0.1, 0.5, 0.7),
-                startPos: new THREE.Vector3(-5.5 + i*0.4, 2.5, 2.8)
+                wireframe: conn.wireframe, 
+                glow: conn.glow, 
+                target: { x: targets[8].x + i*0.1, y: targets[8].y, z: targets[8].z },
+                start: connPos 
             });
         }
 
         // Store original positions
         parts.forEach(part => {
-            part.origPos = part.startPos.clone();
+            part.origPos = new THREE.Vector3(part.start.x, part.start.y, part.start.z);
+            part.targetPos = new THREE.Vector3(part.target.x, part.target.y, part.target.z);
         });
 
         // --- ANIMATION ---
-        let clock = new THREE.Clock();
-
         function animate() {
             requestAnimationFrame(animate);
 
-            const elapsedTime = performance.now() / 1000;
-
-            // Scroll animation
+            // Scroll-based animation
             const scrollY = window.scrollY;
             const maxScroll = document.body.scrollHeight - window.innerHeight;
-            // Progress from 0 to 1 as we scroll through section2
-            let progress = 0;
             
+            // Progress from 0 to 1 based on scroll through section2
             const section2 = document.getElementById('section2');
-            if (section2) {
-                const rect = section2.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                // When section2 top hits viewport center, start animation
-                const startPoint = viewportHeight * 0.3;
-                const endPoint = -section2.clientHeight + viewportHeight * 0.7;
-                progress = Math.min(1, Math.max(0, (viewportHeight - rect.top - startPoint) / (endPoint - startPoint)));
+            const rect = section2.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // When section2 enters viewport, start animation
+            let progress = 0;
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                // Calculate progress based on how far we've scrolled through section2
+                const section2Top = section2.offsetTop;
+                const scrollInSection = scrollY - section2Top;
+                const sectionHeight = section2.clientHeight;
+                progress = Math.min(1, Math.max(0, scrollInSection / (sectionHeight * 0.7)));
             }
 
             // Animate parts
@@ -713,17 +712,11 @@
                     part.glow.position.y = part.wireframe.position.y;
                     part.glow.position.z = part.wireframe.position.z;
                     
-                    // Rotate slowly
-                    part.wireframe.rotation.y += 0.005;
-                    part.glow.rotation.y += 0.005;
-                }
-            });
-
-            // Pulse opacity of glows
-            const pulse = Math.sin(elapsedTime * 2) * 0.1 + 0.15;
-            parts.forEach(part => {
-                if (part.glow.material) {
-                    part.glow.material.opacity = pulse;
+                    // Rotate while floating
+                    part.wireframe.rotation.x += 0.01;
+                    part.wireframe.rotation.y += 0.02;
+                    part.glow.rotation.x = part.wireframe.rotation.x;
+                    part.glow.rotation.y = part.wireframe.rotation.y;
                 }
             });
 
