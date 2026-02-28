@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan · HOLOGRAPHIC ASSEMBLY</title>
+    <title>minahil khan · HOLOGRAPHIC PORTFOLIO</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
             background-color: #0a0a0a;
         }
 
-        /* CANVAS - 3D scenes */
+        /* CANVAS */
         #canvas-container {
             position: fixed;
             top: 0;
@@ -26,50 +26,12 @@
             width: 100%;
             height: 100vh;
             z-index: 1;
-            pointer-events: none;
-        }
-
-        /* TERMINAL RAIN */
-        #terminal-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 5;
-            pointer-events: none;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1;
-            color: #8b1a1a;
-            opacity: 0.15;
-            white-space: pre;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            align-content: flex-start;
-        }
-
-        .rain-column {
-            width: 20px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            animation: rain linear infinite;
-            color: #8b1a1a;
-            text-shadow: 0 0 8px #8b1a1a;
-        }
-
-        @keyframes rain {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
         }
 
         /* CONTENT */
         .content {
             position: relative;
-            z-index: 10;
+            z-index: 20;
             pointer-events: none;
         }
 
@@ -83,27 +45,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none;
             position: relative;
-            z-index: 20;
+            z-index: 25;
         }
 
         .center-stage {
             text-align: center;
             max-width: 700px;
             padding: 3rem 4rem;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 10, 0.7); /* More transparent so components show through */
+            backdrop-filter: blur(8px);
             border: 1px solid #8b1a1a60;
             border-radius: 8px;
             box-shadow: 0 0 80px rgba(139, 26, 26, 0.3);
-            pointer-events: auto;
         }
 
         h1 {
             font-size: 5rem;
             font-weight: 300;
-            letter-spacing: -0.02em;
             color: #e0c9a6;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
@@ -116,8 +75,6 @@
             letter-spacing: 0.3em;
             text-transform: uppercase;
             margin-bottom: 2rem;
-            font-weight: 300;
-            text-shadow: 0 0 15px #8b1a1a80;
         }
 
         .manifesto {
@@ -134,7 +91,6 @@
         .manifesto span {
             color: #8b1a1a;
             font-style: italic;
-            text-shadow: 0 0 10px #8b1a1a;
         }
 
         .status {
@@ -142,14 +98,13 @@
             font-family: monospace;
             font-size: 0.8rem;
             color: #5a5a5a;
-            letter-spacing: 0.2em;
         }
 
         .status span {
             color: #8b1a1a;
         }
 
-        /* SECTION 2 - Education panel on left, laptop on extreme right */
+        /* SECTION 2 - Education + laptop */
         #section2 {
             min-height: 100vh;
             padding: 4rem 2rem;
@@ -157,20 +112,18 @@
             border-top: 1px solid #8b1a1a40;
             position: relative;
             z-index: 30;
-            pointer-events: none;
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
-            width: 100%;
         }
 
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            align-items: start;
+            align-items: center;
         }
 
         .left-content {
@@ -179,9 +132,7 @@
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid #8b1a1a40;
-            pointer-events: auto;
             max-width: 500px;
-            margin-left: 2rem;
         }
 
         .left-content h2 {
@@ -189,11 +140,8 @@
             font-weight: 300;
             color: #e0c9a6;
             margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-            font-family: monospace;
             border-bottom: 2px solid #8b1a1a;
             padding-bottom: 0.5rem;
-            text-shadow: 0 0 20px #8b1a1a;
         }
 
         .section-block h3 {
@@ -202,19 +150,12 @@
             letter-spacing: 0.3em;
             color: #8b1a1a;
             margin-bottom: 1.2rem;
-            font-weight: 400;
-            text-shadow: 0 0 10px #8b1a1a;
         }
 
         .edu-item, .ctf-item {
             margin-bottom: 1.5rem;
             padding-left: 1rem;
             border-left: 2px solid #2a2a2a;
-            transition: border-color 0.3s;
-        }
-
-        .edu-item:hover, .ctf-item:hover {
-            border-left-color: #e0c9a6;
         }
 
         .edu-date, .ctf-date {
@@ -226,12 +167,6 @@
         .edu-title, .ctf-name {
             font-size: 1rem;
             color: #fff;
-            margin: 0.2rem 0;
-        }
-
-        .edu-place, .ctf-detail {
-            color: #a58e6d;
-            font-size: 0.85rem;
         }
 
         .project-item {
@@ -245,50 +180,29 @@
         .project-link {
             color: #8b1a1a;
             text-decoration: none;
-            font-size: 0.8rem;
-            transition: color 0.2s;
-        }
-
-        .project-link:hover {
-            color: #e0c9a6;
-            text-shadow: 0 0 10px #e0c9a6;
         }
 
         .cert-item {
             background: #0f0f0f;
             padding: 1rem;
             margin-bottom: 0.8rem;
-            border: 1px solid #2a2a2a;
             border-left: 4px solid #8b1a1a;
-        }
-
-        .cert-progress {
-            color: #e0c9a6;
-            font-size: 0.8rem;
-            margin-top: 0.2rem;
         }
 
         .contact-links {
             margin-top: 3rem;
             display: flex;
             gap: 2rem;
-            font-family: monospace;
         }
 
         .contact-links a {
             color: #a58e6d;
             text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .contact-links a:hover {
-            color: #e0c9a6;
         }
 
         .right-content {
+            height: 500px;
             position: relative;
-            height: 80vh;
-            pointer-events: none;
         }
 
         @media (max-width: 768px) {
@@ -298,9 +212,6 @@
     </style>
 </head>
 <body>
-    <!-- Terminal Rain -->
-    <div id="terminal-rain"></div>
-
     <!-- Three.js Canvas -->
     <div id="canvas-container"></div>
 
@@ -314,7 +225,7 @@
                     <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
                 </div>
                 <div class="status">
-                    <span>⟫</span> COMPONENTS AROUND NAME · PHASE: SCATTERED <span>⟫</span>
+                    <span>⟫</span> COMPONENTS AROUND ME · PHASE: FLOATING <span>⟫</span>
                 </div>
             </div>
         </section>
@@ -338,15 +249,15 @@
                             <h3>PROJECTS</h3>
                             <div class="project-item">
                                 <span>Caesar Cipher · C</span>
-                                <a href="https://github.com/Minahil66/Caesar-Cipher" class="project-link">project repo</a>
+                                <a href="#" class="project-link">repo</a>
                             </div>
                             <div class="project-item">
                                 <span>Cipher Cascade · C++</span>
-                                <a href="https://github.com/Minahil66/CipherCascade" class="project-link">project repo</a>
+                                <a href="#" class="project-link">repo</a>
                             </div>
                             <div class="project-item">
                                 <span>SysMon · Bash</span>
-                                <a href="https://github.com/Minahil66/Bash" class="project-link">project repo</a>
+                                <a href="#" class="project-link">repo</a>
                             </div>
                         </div>
 
@@ -371,53 +282,23 @@
                                 <div class="cert-progress">40% · IN PROGRESS</div>
                             </div>
                             <div class="cert-item">
-                                <div class="cert-name">CompTIA Security</div>
+                                <div class="cert-name">CompTIA Security+</div>
                                 <div class="cert-progress">IN PROGRESS</div>
                             </div>
                         </div>
 
                         <div class="contact-links">
-                            <a href="https://github.com/Minahil66">GitHub</a>
-                            <a href="https://www.linkedin.com/in/minahil-k-a573b8384?utm_source=share_via&utm_content=profile&utm_medium=member_android">Linkedin</a>
-                            <a href="#">tryhackme</a>
+                            <a href="#">GitHub</a>
+                            <a href="#">LinkedIn</a>
+                            <a href="#">TryHackMe</a>
                         </div>
                     </div>
 
-                    <div class="right-content"></div>
+                    <div class="right-content" id="laptop-container"></div>
                 </div>
             </div>
         </section>
     </div>
-
-    <script>
-        // Terminal rain generator
-        const rainContainer = document.getElementById('terminal-rain');
-        
-        function generateRain() {
-            rainContainer.innerHTML = '';
-            const columns = Math.floor(window.innerWidth / 16);
-            
-            for (let i = 0; i < columns; i++) {
-                const col = document.createElement('div');
-                col.className = 'rain-column';
-                col.style.animationDuration = Math.random() * 3 + 2 + 's';
-                col.style.animationDelay = Math.random() * 5 + 's';
-                
-                const length = Math.floor(Math.random() * 30 + 20);
-                let text = '';
-                for (let j = 0; j < length; j++) {
-                    text += Math.random() > 0.5 ? '1' : '0';
-                    if (j < length - 1) text += '\n';
-                }
-                col.textContent = text;
-                
-                rainContainer.appendChild(col);
-            }
-        }
-        
-        generateRain();
-        window.addEventListener('resize', generateRain);
-    </script>
 
     <!-- Three.js -->
     <script type="importmap">
@@ -436,10 +317,10 @@
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0a0a0a);
         
-        // Camera - dynamic, will follow scroll
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 2, 18); // Start centered for section1
-        
+        camera.position.set(0, 2, 15);
+        camera.lookAt(0, 1, 0);
+
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
@@ -453,83 +334,14 @@
         keyLight.position.set(5, 10, 10);
         scene.add(keyLight);
 
-        const redLight = new THREE.PointLight(0x8b1a1a, 1.5);
-        redLight.position.set(0, 2, 5);
+        const redLight = new THREE.PointLight(0x8b1a1a, 1);
+        redLight.position.set(0, 3, 5);
         scene.add(redLight);
 
-        // Grid floor
-        const gridHelper = new THREE.GridHelper(30, 40, 0xe0c9a6, 0x8b1a1a);
-        gridHelper.position.y = -1;
-        gridHelper.material.opacity = 0.1;
-        gridHelper.material.transparent = true;
-        scene.add(gridHelper);
-
-        // --- LAPTOP at EXTREME RIGHT (x=15) ---
-        
-        // Base
-        const baseWireframe = new THREE.LineSegments(
-            new THREE.EdgesGeometry(new THREE.BoxGeometry(4.5, 0.2, 3.2)),
-            new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
-        );
-        baseWireframe.position.set(15, 0.3, 0);
-        scene.add(baseWireframe);
-
-        const baseGlow = new THREE.Mesh(
-            new THREE.BoxGeometry(4.5, 0.2, 3.2),
-            new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
-        );
-        baseGlow.position.set(15, 0.3, 0);
-        scene.add(baseGlow);
-
-        // Screen
-        const screenWireframe = new THREE.LineSegments(
-            new THREE.EdgesGeometry(new THREE.BoxGeometry(4.0, 2.5, 0.2)),
-            new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
-        );
-        screenWireframe.position.set(15, 1.8, 0);
-        scene.add(screenWireframe);
-
-        const screenGlow = new THREE.Mesh(
-            new THREE.BoxGeometry(4.0, 2.5, 0.2),
-            new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
-        );
-        screenGlow.position.set(15, 1.8, 0);
-        scene.add(screenGlow);
-
-        // Screen content
-        const canvas = document.createElement('canvas');
-        canvas.width = 512;
-        canvas.height = 512;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#8b1a1a';
-        ctx.font = 'bold 40px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText('KALI', 256, 200);
-        ctx.fillText('minahil@ark', 256, 300);
-        ctx.fillText('ACTIVE', 256, 400);
-
-        const texture = new THREE.CanvasTexture(canvas);
-        const screenMat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
-        const screenDisplay = new THREE.Mesh(new THREE.PlaneGeometry(3.8, 2.3), screenMat);
-        screenDisplay.position.set(15, 1.8, 0.1);
-        scene.add(screenDisplay);
-
-        // Keyboard dots
-        for (let i = 0; i < 20; i++) {
-            for (let j = 0; j < 6; j++) {
-                const keyDot = new THREE.Mesh(
-                    new THREE.SphereGeometry(0.05, 4, 4),
-                    new THREE.MeshBasicMaterial({ color: 0xe0c9a6, transparent: true, opacity: 0.3 })
-                );
-                keyDot.position.set(13.7 + i*0.2, 0.35, -0.5 + j*0.22);
-                scene.add(keyDot);
-            }
-        }
-
-        // --- HOLOGRAPHIC PARTS (Scattered AROUND name in section1) ---
+        // --- CREATE HOLOGRAPHIC COMPONENTS (Visible around name) ---
         const parts = [];
 
-        function createHoloPart(geo, color, x, y, z, scale = 1) {
+        function createPart(geo, color, x, y, z, scale = 1) {
             const wireframe = new THREE.LineSegments(
                 new THREE.EdgesGeometry(geo),
                 new THREE.LineBasicMaterial({ color: color })
@@ -540,7 +352,7 @@
             
             const glow = new THREE.Mesh(
                 geo,
-                new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.1, wireframe: true })
+                new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.15, wireframe: true })
             );
             glow.position.set(x, y, z);
             glow.scale.set(scale, scale, scale);
@@ -549,130 +361,150 @@
             return { wireframe, glow };
         }
 
-        // Target positions (where parts assemble - around laptop at x=15)
-        const targets = [
-            { x: 14.8, y: 0.5, z: -0.2 }, // motherboard
-            { x: 15.2, y: 0.6, z: 0.3 }, // pcb
-            { x: 14.5, y: 0.7, z: 0.4 }, // microcontroller
-            { x: 13.5, y: 0.4, z: 0.1 }, // keyboard
-            { x: 16.5, y: 1.8, z: 0 },   // screen
-            { x: 15, y: 0.8, z: 1.2 },    // disk
-            { x: 14.3, y: 0.6, z: -0.3 }, // cap1
-            { x: 14.6, y: 0.6, z: -0.3 }, // cap2
-            { x: 15.4, y: 0.5, z: -0.1 }, // res1
-            { x: 15.7, y: 0.5, z: -0.1 }, // res2
-            { x: 14.2, y: 0.7, z: 0.1 },  // chip1
-            { x: 15.8, y: 0.7, z: 0.2 }   // chip2
-        ];
+        // Store target positions (laptop position for section 2)
+        const laptopX = 5; // Position beside education panel
 
-        // 1. LEFT SIDE PARTS (around name)
-        const keyboard = createHoloPart(new THREE.BoxGeometry(3.0, 0.1, 1.5), 0xe0c9a6, -5, 1, -2);
-        parts.push({ wireframe: keyboard.wireframe, glow: keyboard.glow, target: targets[3], start: { x: -5, y: 1, z: -2 } });
+        // 1. MOTHERBOARD (floating right of name)
+        const mb = createPart(new THREE.BoxGeometry(3.0, 0.2, 2.5), 0xe0c9a6, 4, 2, -1);
+        parts.push({ wireframe: mb.wireframe, glow: mb.glow, target: { x: laptopX - 0.5, y: 0.5, z: -0.2 } });
 
-        const screen = createHoloPart(new THREE.BoxGeometry(2.5, 1.8, 0.2), 0xe0c9a6, -4, 3, 3);
-        parts.push({ wireframe: screen.wireframe, glow: screen.glow, target: targets[4], start: { x: -4, y: 3, z: 3 } });
+        // 2. CPU (floating top right)
+        const cpu = createPart(new THREE.BoxGeometry(1.2, 0.4, 1.2), 0x8b1a1a, 5, 3.5, 1);
+        parts.push({ wireframe: cpu.wireframe, glow: cpu.glow, target: { x: laptopX, y: 0.8, z: 0 } });
 
-        const disk = createHoloPart(new THREE.CylinderGeometry(0.8, 0.8, 0.2, 16), 0x8b1a1a, -6, 2, 4);
-        parts.push({ wireframe: disk.wireframe, glow: disk.glow, target: targets[5], start: { x: -6, y: 2, z: 4 } });
+        // 3. RAM (floating left)
+        const ram = createPart(new THREE.BoxGeometry(1.5, 0.1, 0.3), 0xe0c9a6, -4, 1.8, 2);
+        parts.push({ wireframe: ram.wireframe, glow: ram.glow, target: { x: laptopX - 0.3, y: 0.6, z: 0.2 } });
 
-        // 2. RIGHT SIDE PARTS (around name)
-        const motherboard = createHoloPart(new THREE.BoxGeometry(3.5, 0.2, 2.8), 0xe0c9a6, 6, 2, -3);
-        parts.push({ wireframe: motherboard.wireframe, glow: motherboard.glow, target: targets[0], start: { x: 6, y: 2, z: -3 } });
+        // 4. GPU (floating top left)
+        const gpu = createPart(new THREE.BoxGeometry(2.0, 0.4, 1.0), 0x8b1a1a, -3, 3.2, -2);
+        parts.push({ wireframe: gpu.wireframe, glow: gpu.glow, target: { x: laptopX + 0.5, y: 0.9, z: 0.3 } });
 
-        const pcb = createHoloPart(new THREE.BoxGeometry(2.8, 0.1, 2.0), 0x8b1a1a, 7, 3, 2);
-        parts.push({ wireframe: pcb.wireframe, glow: pcb.glow, target: targets[1], start: { x: 7, y: 3, z: 2 } });
+        // 5. SCREEN (floating bottom right)
+        const screen = createPart(new THREE.BoxGeometry(2.5, 1.8, 0.2), 0xe0c9a6, 3, 0.5, 3);
+        parts.push({ wireframe: screen.wireframe, glow: screen.glow, target: { x: laptopX, y: 1.8, z: 0 } });
 
-        const microcontroller = createHoloPart(new THREE.BoxGeometry(1.2, 0.3, 0.8), 0xe0c9a6, 5, 4, -4);
-        parts.push({ wireframe: microcontroller.wireframe, glow: microcontroller.glow, target: targets[2], start: { x: 5, y: 4, z: -4 } });
+        // 6. KEYBOARD (floating bottom left)
+        const keyboard = createPart(new THREE.BoxGeometry(3.0, 0.1, 1.2), 0xe0c9a6, -3, 0.8, -3);
+        parts.push({ wireframe: keyboard.wireframe, glow: keyboard.glow, target: { x: laptopX, y: 0.3, z: 0.2 } });
 
-        // 3. TOP COMPONENTS (above name)
+        // 7. SSD (floating top)
+        const ssd = createPart(new THREE.BoxGeometry(1.2, 0.1, 0.8), 0x8b1a1a, 0, 4, -2);
+        parts.push({ wireframe: ssd.wireframe, glow: ssd.glow, target: { x: laptopX - 0.2, y: 0.7, z: 0.4 } });
+
+        // 8. CAPACITORS (scattered around)
         for (let i = 0; i < 4; i++) {
-            const cap = createHoloPart(new THREE.CylinderGeometry(0.15, 0.15, 0.4, 8), 0x8b1a1a, -2 + i*1.5, 5, -1 + i);
+            const cap = createPart(new THREE.CylinderGeometry(0.15, 0.15, 0.4), 0x8b1a1a, -2 + i*1.5, 2.5, -2 + i);
             parts.push({ 
                 wireframe: cap.wireframe, 
                 glow: cap.glow, 
-                target: i < 2 ? targets[6] : targets[7],
-                start: { x: -2 + i*1.5, y: 5, z: -1 + i }
-            });
-        }
-
-        // 4. BOTTOM COMPONENTS (below name)
-        for (let i = 0; i < 4; i++) {
-            const res = createHoloPart(new THREE.BoxGeometry(0.2, 0.1, 0.3), 0xe0c9a6, -3 + i*2, -1, 2 - i);
-            parts.push({ 
-                wireframe: res.wireframe, 
-                glow: res.glow, 
-                target: i < 2 ? targets[8] : targets[9],
-                start: { x: -3 + i*2, y: -1, z: 2 - i }
-            });
-        }
-
-        // 5. EXTRA CHIPS (floating around)
-        for (let i = 0; i < 4; i++) {
-            const chip = createHoloPart(new THREE.BoxGeometry(0.4, 0.1, 0.3), 0x8b1a1a, -4 + i*2, 4, -3 - i);
-            parts.push({ 
-                wireframe: chip.wireframe, 
-                glow: chip.glow, 
-                target: i < 2 ? targets[10] : targets[11],
-                start: { x: -4 + i*2, y: 4, z: -3 - i }
+                target: { x: laptopX - 0.3 + i*0.2, y: 0.5, z: -0.1 } 
             });
         }
 
         // Store original positions
         parts.forEach(part => {
-            part.origPos = new THREE.Vector3(part.start.x, part.start.y, part.start.z);
-            part.targetPos = new THREE.Vector3(part.target.x, part.target.y, part.target.z);
+            part.origPos = part.wireframe.position.clone();
         });
+
+        // --- CREATE LAPTOP (already at target position) ---
+        
+        // Laptop base
+        const laptopBaseWire = new THREE.LineSegments(
+            new THREE.EdgesGeometry(new THREE.BoxGeometry(3.5, 0.2, 2.5)),
+            new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
+        );
+        laptopBaseWire.position.set(laptopX, 0.3, 0);
+        scene.add(laptopBaseWire);
+
+        const laptopBaseGlow = new THREE.Mesh(
+            new THREE.BoxGeometry(3.5, 0.2, 2.5),
+            new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
+        );
+        laptopBaseGlow.position.set(laptopX, 0.3, 0);
+        scene.add(laptopBaseGlow);
+
+        // Laptop screen
+        const laptopScreenWire = new THREE.LineSegments(
+            new THREE.EdgesGeometry(new THREE.BoxGeometry(3.2, 2.0, 0.2)),
+            new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
+        );
+        laptopScreenWire.position.set(laptopX, 1.5, 0);
+        scene.add(laptopScreenWire);
+
+        const laptopScreenGlow = new THREE.Mesh(
+            new THREE.BoxGeometry(3.2, 2.0, 0.2),
+            new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
+        );
+        laptopScreenGlow.position.set(laptopX, 1.5, 0);
+        scene.add(laptopScreenGlow);
+
+        // Screen content
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#8b1a1a';
+        ctx.font = 'bold 30px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('KALI', 256, 200);
+        ctx.fillText('minahil', 256, 280);
+        ctx.fillText('ACTIVE', 256, 360);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        const screenMat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
+        const screenDisplay = new THREE.Mesh(new THREE.PlaneGeometry(3.0, 1.8), screenMat);
+        screenDisplay.position.set(laptopX, 1.5, 0.1);
+        scene.add(screenDisplay);
+
+        // Keyboard dots
+        for (let i = 0; i < 15; i++) {
+            for (let j = 0; j < 5; j++) {
+                const key = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.04, 4),
+                    new THREE.MeshBasicMaterial({ color: 0xe0c9a6, transparent: true, opacity: 0.3 })
+                );
+                key.position.set(laptopX - 1.5 + i*0.22, 0.25, -0.8 + j*0.25);
+                scene.add(key);
+            }
+        }
 
         // --- ANIMATION ---
         function animate() {
             requestAnimationFrame(animate);
 
-            // Scroll-based animation
+            // Scroll animation
             const scrollY = window.scrollY;
             const section2 = document.getElementById('section2');
             const rect = section2.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
             
             let progress = 0;
-            if (rect.top < viewportHeight && rect.bottom > 0) {
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                // Calculate progress based on scroll through section2
                 const section2Top = section2.offsetTop;
                 const scrollInSection = scrollY - section2Top;
-                const sectionHeight = section2.clientHeight;
-                progress = Math.min(1, Math.max(0, scrollInSection / (sectionHeight * 0.3)));
+                progress = Math.min(1, Math.max(0, scrollInSection / 300));
             }
 
             // Animate parts to laptop
             parts.forEach((part) => {
-                if (part.origPos && part.targetPos) {
-                    part.wireframe.position.x = part.origPos.x * (1 - progress) + part.targetPos.x * progress;
-                    part.wireframe.position.y = part.origPos.y * (1 - progress) + part.targetPos.y * progress;
-                    part.wireframe.position.z = part.origPos.z * (1 - progress) + part.targetPos.z * progress;
+                if (progress === 0) {
+                    // At start: original scattered positions
+                    part.wireframe.position.copy(part.origPos);
+                    part.glow.position.copy(part.origPos);
+                } else {
+                    // Move toward target positions
+                    part.wireframe.position.x = part.origPos.x * (1 - progress) + part.target.x * progress;
+                    part.wireframe.position.y = part.origPos.y * (1 - progress) + part.target.y * progress;
+                    part.wireframe.position.z = part.origPos.z * (1 - progress) + part.target.z * progress;
                     
-                    part.glow.position.x = part.wireframe.position.x;
-                    part.glow.position.y = part.wireframe.position.y;
-                    part.glow.position.z = part.wireframe.position.z;
-                    
-                    part.wireframe.rotation.x += 0.01;
-                    part.wireframe.rotation.y += 0.02;
-                    part.glow.rotation.x = part.wireframe.rotation.x;
-                    part.glow.rotation.y = part.wireframe.rotation.y;
+                    part.glow.position.copy(part.wireframe.position);
                 }
+                
+                // Rotate
+                part.wireframe.rotation.y += 0.01;
+                part.glow.rotation.y += 0.01;
             });
-
-            // Move camera to follow scroll
-            if (progress > 0) {
-                // Pan camera right to show laptop at x=15
-                camera.position.x = 0 + progress * 15;
-                camera.position.y = 2;
-                camera.position.z = 18;
-                camera.lookAt(progress * 15, 1.5, 0);
-            } else {
-                camera.position.x = 0;
-                camera.position.y = 2;
-                camera.position.z = 18;
-                camera.lookAt(0, 1.5, 0);
-            }
 
             renderer.render(scene, camera);
         }
@@ -683,7 +515,6 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            generateRain();
         });
     </script>
 </body>
