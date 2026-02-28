@@ -55,7 +55,7 @@
             z-index: 3;
         }
 
-        /* MAIN 3D LAPTOP - Blueprint style */
+        /* MAIN 3D LAPTOP - Blueprint style - BLUE ONLY */
         .blueprint-laptop {
             width: 320px;
             height: 240px;
@@ -65,7 +65,7 @@
             transform-origin: center center;
         }
 
-        /* All laptop parts share these blueprint lines */
+        /* All laptop parts - BLUE ONLY */
         .laptop-part {
             position: absolute;
             border: 1px solid #00a8ff;
@@ -155,7 +155,7 @@
             opacity: 0.6;
         }
 
-        /* Blueprint dimension lines */
+        /* Blueprint dimension lines - BLUE ONLY */
         .dimension-line {
             position: absolute;
             border: 1px dashed #00a8ff;
@@ -178,7 +178,7 @@
             transform: translateX(-50%);
         }
 
-        /* Corner markers (blueprint style) */
+        /* Corner markers - BLUE ONLY */
         .corner {
             position: absolute;
             width: 15px;
@@ -215,7 +215,7 @@
             border-top: none;
         }
 
-        /* Floating measurement labels */
+        /* Measurement labels - BLUE ONLY */
         .measurement {
             position: absolute;
             color: #00a8ff;
@@ -237,7 +237,7 @@
             transform: translateY(-50%) rotate(90deg);
         }
 
-        /* Glow effect */
+        /* Glow effect - BLUE ONLY */
         .blueprint-glow {
             position: absolute;
             width: 100%;
@@ -247,25 +247,7 @@
             z-index: -1;
         }
 
-        /* Animations */
-        @keyframes slowRotate {
-            0% { transform: rotateY(0deg) rotateX(2deg); }
-            25% { transform: rotateY(8deg) rotateX(4deg); }
-            75% { transform: rotateY(-8deg) rotateX(0deg); }
-            100% { transform: rotateY(0deg) rotateX(2deg); }
-        }
-
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-
-        @keyframes pulseBlue {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; box-shadow: 0 0 30px #00a8ff; }
-        }
-
-        /* Floating blueprint dots */
+        /* Floating blueprint dots - BLUE ONLY */
         .blueprint-dot {
             position: absolute;
             width: 2px;
@@ -281,7 +263,25 @@
             50% { opacity: 0.8; }
         }
 
-        /* 3D EFFECT - Cards (keeping your existing style) */
+        /* Animations */
+        @keyframes slowRotate {
+            0% { transform: rotateY(0deg) rotateX(2deg); }
+            25% { transform: rotateY(8deg) rotateX(4deg); }
+            75% { transform: rotateY(-8deg) rotateX(0deg); }
+            100% { transform: rotateY(0deg) rotateX(2deg); }
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes pulseRed {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; box-shadow: 0 0 20px #8b0000; }
+        }
+
+        /* 3D EFFECT - Cards - RED ACCENTS (CHANGED) */
         .card {
             background: #141414;
             padding: 2rem;
@@ -298,13 +298,13 @@
         .card:hover {
             transform: translateY(-2px);
             box-shadow: 
-                0 20px 40px -15px rgba(0, 168, 255, 0.2),
-                0 0 0 1px #00a8ff inset,
+                0 20px 40px -15px rgba(139, 0, 0, 0.2),
+                0 0 0 1px #8b0000 inset,
                 0 0 0 2px #0a0a0a inset;
-            border-left-color: #00a8ff;
+            border-left-color: #8b0000;
         }
 
-        /* TYPOGRAPHY - Updated with blue accents */
+        /* TYPOGRAPHY - RED ACCENTS (CHANGED) */
         h1 {
             font-size: 5rem;
             font-weight: 600;
@@ -318,7 +318,7 @@
             font-size: 1.2rem;
             color: #888;
             margin-bottom: 2rem;
-            border-bottom: 2px solid #00a8ff;
+            border-bottom: 2px solid #8b0000; /* CHANGED TO RED */
             padding-bottom: 1rem;
             display: inline-block;
         }
@@ -331,7 +331,7 @@
         }
 
         .student-info span {
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
         }
 
         /* GRID */
@@ -342,12 +342,12 @@
             margin: 3rem 0;
         }
 
-        /* SECTION TITLES - Now blue */
+        /* SECTION TITLES - RED (CHANGED) */
         .section-title {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
             margin-bottom: 1.5rem;
             font-weight: 500;
             display: flex;
@@ -357,10 +357,10 @@
 
         .section-title::before {
             content: "⟫";
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
         }
 
-        /* ACHIEVEMENTS */
+        /* ACHIEVEMENTS - RED (CHANGED) */
         .achievement {
             margin-bottom: 2rem;
             position: relative;
@@ -369,28 +369,29 @@
         }
 
         .achievement:hover {
-            border-left-color: #00a8ff;
+            border-left-color: #8b0000; /* CHANGED TO RED */
         }
 
         .achievement-date {
             font-size: 0.8rem;
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
             font-weight: 600;
             letter-spacing: 0.05em;
         }
 
         .project-link {
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
             text-decoration: none;
             font-size: 0.8rem;
             font-family: monospace;
+            word-break: break-all;
         }
 
         .project-link:hover {
-            color: #ffffff;
+            color: #ff0000;
         }
 
-        /* COMING SOON - Blue theme */
+        /* COMING SOON - RED theme (CHANGED) */
         .coming-soon {
             color: #444;
             font-style: italic;
@@ -410,7 +411,7 @@
             right: 0;
             bottom: 0;
             background: #0a0a0a;
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -425,7 +426,7 @@
             opacity: 0.8;
         }
 
-        /* PROJECT LIST */
+        /* PROJECT LIST - RED (CHANGED) */
         .project-list {
             list-style: none;
         }
@@ -437,23 +438,31 @@
             justify-content: space-between;
             align-items: center;
             color: #ccc;
+            flex-wrap: wrap;
         }
 
         .project-list li:hover {
             color: #ffffff;
-            border-bottom-color: #00a8ff;
+            border-bottom-color: #8b0000; /* CHANGED TO RED */
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .tag {
             background: #1f1f1f;
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
             padding: 0.2rem 0.5rem;
             font-size: 0.7rem;
             border-radius: 2px;
-            border: 1px solid #003366;
+            border: 1px solid #330000;
         }
 
-        /* CONTACT */
+        /* CONTACT - RED (CHANGED) */
         .contact-row {
             display: flex;
             gap: 2rem;
@@ -472,16 +481,25 @@
         }
 
         .contact-row a:hover {
-            color: #00a8ff;
+            color: #8b0000; /* CHANGED TO RED */
         }
 
-        .blue-dot {
+        .red-dot { /* CHANGED FROM blue-dot TO red-dot */
             width: 4px;
             height: 4px;
-            background: #00a8ff;
+            background: #8b0000; /* CHANGED TO RED */
             display: inline-block;
             margin-right: 0.5rem;
-            animation: pulseBlue 2s infinite;
+            animation: pulseRed 2s infinite;
+        }
+
+        /* Status line color - Keep blue only for laptop status? 
+           Let's change this to red too to match theme */
+        .status-line {
+            color: #8b0000 !important; /* CHANGED TO RED */
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
@@ -490,6 +508,11 @@
             .landing { grid-template-columns: 1fr; }
             .hologram-container { height: 300px; }
             .blueprint-laptop { transform: scale(0.8); }
+            .project-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -501,7 +524,7 @@
             <div class="landing-text">
                 <h1>MINAHIL KHAN</h1>
                 <div class="student-info">
-                    <span class="blue-dot"></span> FIRST YEAR · CYBERSECURITY · CGPA: 3.8
+                    <span class="red-dot"></span> FIRST YEAR · CYBERSECURITY · CGPA: 3.8
                 </div>
                 <div class="subhead">EMERGING PEN TESTER · BUILDING THE ARSENAL</div>
                 
@@ -511,30 +534,30 @@
                     This is a living blueprint — every project, failure, and win gets logged here.
                 </p>
                 
-                <!-- Status line -->
-                <p style="color: #00a8ff; margin-top: 1rem; font-family: monospace; font-size: 0.9rem;">
+                <!-- Status line - CHANGED TO RED -->
+                <p style="color: #8b0000; margin-top: 1rem; font-family: monospace; font-size: 0.9rem;">
                     >_ system.online · blueprint.active · phase: INITIAL_ACCESS
                 </p>
             </div>
 
-            <!-- RIGHT: Blueprint Hologram Laptop -->
+            <!-- RIGHT: Blueprint Hologram Laptop (STAYS BLUE) -->
             <div class="hologram-container">
                 <div class="blueprint-laptop">
-                    <!-- Blueprint corner markers (makes it structured) -->
+                    <!-- Blueprint corner markers (blue) -->
                     <div class="corner corner-tl"></div>
                     <div class="corner corner-tr"></div>
                     <div class="corner corner-bl"></div>
                     <div class="corner corner-br"></div>
                     
-                    <!-- Dimension lines -->
+                    <!-- Dimension lines (blue) -->
                     <div class="dimension-line dimension-h"></div>
                     <div class="dimension-line dimension-v"></div>
                     
-                    <!-- Measurement labels -->
+                    <!-- Measurement labels (blue) -->
                     <div class="measurement measurement-width">320mm</div>
                     <div class="measurement measurement-height">240mm</div>
                     
-                    <!-- The laptop itself -->
+                    <!-- The laptop itself (blue) -->
                     <div class="laptop-part base">
                         <div class="keyboard-line line1"></div>
                         <div class="keyboard-line line2"></div>
@@ -544,10 +567,10 @@
                     <div class="laptop-part screen"></div>
                     <div class="hinge"></div>
                     
-                    <!-- Blueprint glow -->
+                    <!-- Blueprint glow (blue) -->
                     <div class="blueprint-glow"></div>
                     
-                    <!-- Floating blueprint dots (technical drawing effect) -->
+                    <!-- Floating blueprint dots (blue) -->
                     <div class="blueprint-dot" style="top: 20%; left: 10%;"></div>
                     <div class="blueprint-dot" style="top: 70%; left: 80%;"></div>
                     <div class="blueprint-dot" style="top: 30%; left: 90%;"></div>
@@ -556,7 +579,7 @@
             </div>
         </div>
 
-        <!-- PROJECTS + EDUCATION GRID (Same as before but blue accents) -->
+        <!-- PROJECTS + EDUCATION GRID (RED ACCENTS NOW) -->
         <div class="grid">
             <!-- LEFT: Projects -->
             <div class="card">
@@ -580,7 +603,7 @@
                     <div class="achievement-date">IN PROGRESS · 2025</div>
                     <div class="achievement-title">Bash Project</div>
                     <div class="achievement-company">Automated recon script</div>
-                    <a href="#" class="project-link">[ github link ]</a>
+                    <a href="#" class="project-link">https://github.com/Minahil66/Bash</a>
                 </div>
             </div>
 
@@ -668,9 +691,9 @@
 
         <!-- CONTACT -->
         <div class="contact-row">
-            <a href="#">github.com/Minahil66</a>
+            <a href="https://github.com/Minahil66">github.com/Minahil66</a>
             <a href="#">linkedin.com/in/</a>
-            <a href="#">tryhackme.com</a>
+            <a href="#">tryhackme.com/u/</a>
         </div>
 
         <!-- FOOTER -->
