@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deep · red team</title>
+    <style>
+        /* BASE - Dark grey palette */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 3D EFFECT - The secret sauce */
+        .card {
+            background: #141414;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 
+                0 10px 30px -10px rgba(0, 0, 0, 0.8),
+                0 0 0 1px #2a2a2a inset,
+                0 0 0 2px #0a0a0a inset;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 20px 40px -15px rgba(180, 0, 0, 0.2),
+                0 0 0 1px #8b0000 inset,
+                0 0 0 2px #0a0a0a inset;
+        }
+
+        /* TYPOGRAPHY - Like your architecture inspo */
+        h1 {
+            font-size: 5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #8b0000;
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* GRID - Architectural columns */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        /* SECTION STYLES */
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #8b0000;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        /* TIMELINE / ACHIEVEMENTS */
+        .achievement {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid #2a2a2a;
+        }
+
+        .achievement:hover {
+            border-left-color: #8b0000;
+        }
+
+        .achievement-date {
+            font-size: 0.8rem;
+            color: #8b0000;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .achievement-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin: 0.2rem 0;
+        }
+
+        .achievement-company {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* CLIENTS / FEEDBACK */
+        .testimonial {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: "“";
+            font-size: 4rem;
+            color: #8b0000;
+            opacity: 0.3;
+            position: absolute;
+            top: -0.5rem;
+            left: 0.5rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #ccc;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .testimonial-company {
+            color: #8b0000;
+            font-size: 0.9rem;
+        }
+
+        /* SERVICES LIST */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .service-item {
+            background: #1a1a1a;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .service-item:hover {
+            border-color: #8b0000;
+            background: #1f1f1f;
+        }
+
+        /* PROJECTS */
+        .project-list {
+            list-style: none;
+        }
+
+        .project-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            color: #ccc;
+        }
+
+        .project-list li span {
+            color: #8b0000;
+            font-family: monospace;
+        }
+
+        .project-list li:hover {
+            color: #ffffff;
+            border-bottom-color: #8b0000;
+        }
+
+        /* FOOTER / CONTACT */
+        .contact-row {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #2a2a2a;
+            color: #666;
+        }
+
+        .contact-row a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-row a:hover {
+            color: #8b0000;
+        }
+
+        /* RED ACCENTS ONLY - No other colors */
+        .red-accent {
+            color: #8b0000;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #2a2a2a;
+            margin: 2rem 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .grid { grid-template-columns: 1fr; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER - Like your inspo -->
+        <h1>DEEP</h1>
+        <div class="subhead">RED TEAM · 2030 · deep@cyber.sh</div>
+
+        <!-- KEY ACHIEVEMENTS + COLLABORATIONS GRID -->
+        <div class="grid">
+            <!-- LEFT COLUMN: Achievements -->
+            <div class="card">
+                <div class="section-title">⟫ KEY ACHIEVEMENTS</div>
+                
+                <div class="achievement">
+                    <div class="achievement-date">09.2026</div>
+                    <div class="achievement-title">First CTF Win</div>
+                    <div class="achievement-company">HackTheBox University</div>
+                </div>
+
+                <div class="achievement">
+                    <div class="achievement-date">12.2027</div>
+                    <div class="achievement-title">Custom Cipher Library</div>
+                    <div class="achievement-company">Python · 1k+ downloads</div>
+                </div>
+
+                <div class="achievement">
+                    <div class="achievement-date">03.2028</div>
+                    <div class="achievement-title">Red Team Intern</div>
+                    <div class="achievement-company">Cyber Defense Corp</div>
+                </div>
+
+                <div class="achievement">
+                    <div class="achievement-date">06.2029</div>
+                    <div class="achievement-title">OSCP Certification</div>
+                    <div class="achievement-company">Offensive Security</div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Collaborations -->
+            <div class="card">
+                <div class="section-title">⟫ SPECIAL COLLABORATIONS</div>
+                <p style="margin-bottom: 1.5rem; color: #aaa; line-height: 1.8;">
+                    Let us not forget the many people who have contributed to our success. Our team is made up of individuals from various backgrounds, each bringing their unique skills and perspectives to the table. We are grateful for their hard work and dedication.
+                </p>
+                <p style="color: #aaa; line-height: 1.8;">
+                    We would like to thank them for their contributions to our project. Their efforts have helped us achieve great things. We look forward to continuing to work with them in the future.
+                </p>
+            </div>
+        </div>
+
+        <!-- CLIENT FEEDBACK + SERVICES GRID -->
+        <div class="grid">
+            <!-- LEFT: Client Feedback -->
+            <div class="card">
+                <div class="section-title">⟫ CLIENT FEEDBACK</div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        Deep's methodology and precision during our penetration test was exceptional. Found critical vulnerabilities our team missed.
+                    </div>
+                    <div class="testimonial-author">MIRANDA MIRA</div>
+                    <div class="testimonial-company">Company Name · CISO</div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Services Offered -->
+            <div class="card">
+                <div class="section-title">⟫ SERVICES OFFERED</div>
+                <div class="services-grid">
+                    <div class="service-item">Penetration Testing</div>
+                    <div class="service-item">Red Teaming</div>
+                    <div class="service-item">Exploit Development</div>
+                    <div class="service-item">Hardware Hacking</div>
+                    <div class="service-item">Cipher Implementation</div>
+                    <div class="service-item">Security Research</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS WORKED ON (Full width) -->
+        <div class="card" style="margin-top: 2rem;">
+            <div class="section-title">⟫ PROJECTS WORKED ON</div>
+            <ul class="project-list">
+                <li>Custom Port Scanner <span>bash</span></li>
+                <li>AES-256 Implementation <span>python</span></li>
+                <li>Hardware Keylogger (RPi) <span>electronics</span></li>
+                <li>CTF: HackTheBox Cyber Apocalypse <span>top 5%</span></li>
+                <li>University Network Security Audit <span>confidential</span></li>
+                <li>RFID Cloning Device <span>arduino</span></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT / SOCIAL -->
+        <div class="contact-row">
+            <a href="#">github.com/deep</a>
+            <a href="#">linkedin.com/in/deep</a>
+            <a href="#">tryhackme.com/p/deep</a>
+            <a href="#">deep@cyber.sh</a>
+        </div>
+
+        <!-- Small red accent line at bottom -->
+        <div style="height: 2px; background: #8b0000; width: 100px; margin-top: 3rem;"></div>
+    </div>
+</body>
+</html>
