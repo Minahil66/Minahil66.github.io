@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan · HOLOGRAPHIC ASSEMBLY</title>
+    <title>minahil khan · HOLOGRAPHIC SCATTER</title>
     <style>
         * {
             margin: 0;
@@ -29,7 +29,7 @@
             pointer-events: none;
         }
 
-        /* TERMINAL RAIN - Landing page overlay */
+        /* TERMINAL RAIN */
         #terminal-rain {
             position: fixed;
             top: 0;
@@ -151,7 +151,7 @@
 
         /* SECTION 2 */
         #section2 {
-            min-height: 200vh; /* Taller to allow scrolling animation */
+            min-height: 200vh;
             padding: 4rem 2rem;
             background: transparent;
             border-top: 1px solid #8b1a1a40;
@@ -171,7 +171,7 @@
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 4rem;
             align-items: start;
         }
 
@@ -183,6 +183,7 @@
             border: 1px solid #8b1a1a40;
             pointer-events: auto;
             max-width: 500px;
+            margin-left: 2rem;
         }
 
         .left-content h2 {
@@ -299,7 +300,7 @@
     </style>
 </head>
 <body>
-    <!-- Terminal Rain Overlay -->
+    <!-- Terminal Rain -->
     <div id="terminal-rain"></div>
 
     <!-- Three.js Canvas -->
@@ -315,7 +316,7 @@
                     <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
                 </div>
                 <div class="status">
-                    <span>⟫</span> HOLOGRAPHIC ASSEMBLY · SCATTERED PHASE <span>⟫</span>
+                    <span>⟫</span> HOLOGRAPHIC SCATTER · PHASE: ASSEMBLY <span>⟫</span>
                 </div>
             </div>
         </section>
@@ -391,7 +392,7 @@
     </div>
 
     <script>
-        // TERMINAL RAIN GENERATOR
+        // Terminal rain generator
         const rainContainer = document.getElementById('terminal-rain');
         
         function generateRain() {
@@ -437,10 +438,10 @@
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0a0a0a);
         
-        // Camera
+        // Camera - positioned to see laptop at x=10 (EXTREME RIGHT)
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(8, 3, 14);
-        camera.lookAt(6, 1.5, 0);
+        camera.position.set(12, 3, 14);
+        camera.lookAt(10, 1.5, 0);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -455,9 +456,9 @@
         keyLight.position.set(5, 10, 10);
         scene.add(keyLight);
 
-        const blueLight = new THREE.PointLight(0x8b1a1a, 1.5);
-        blueLight.position.set(6, 2, 2);
-        scene.add(blueLight);
+        const redLight = new THREE.PointLight(0x8b1a1a, 1.5);
+        redLight.position.set(10, 2, 2);
+        scene.add(redLight);
 
         // Grid floor
         const gridHelper = new THREE.GridHelper(30, 40, 0xe0c9a6, 0x8b1a1a);
@@ -466,38 +467,36 @@
         gridHelper.material.transparent = true;
         scene.add(gridHelper);
 
-        // --- LAPTOP (Target assembly point at x=6) ---
+        // --- LAPTOP at EXTREME RIGHT (x=10) ---
         
-        // Laptop base wireframe
+        // Base
         const baseWireframe = new THREE.LineSegments(
             new THREE.EdgesGeometry(new THREE.BoxGeometry(4.5, 0.2, 3.2)),
             new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
         );
-        baseWireframe.position.set(6, 0.3, 0.5);
+        baseWireframe.position.set(10, 0.3, 0);
         scene.add(baseWireframe);
 
-        // Base glow
         const baseGlow = new THREE.Mesh(
             new THREE.BoxGeometry(4.5, 0.2, 3.2),
             new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
         );
-        baseGlow.position.set(6, 0.3, 0.5);
+        baseGlow.position.set(10, 0.3, 0);
         scene.add(baseGlow);
 
-        // Screen wireframe
+        // Screen
         const screenWireframe = new THREE.LineSegments(
             new THREE.EdgesGeometry(new THREE.BoxGeometry(4.0, 2.5, 0.2)),
             new THREE.LineBasicMaterial({ color: 0xe0c9a6 })
         );
-        screenWireframe.position.set(6, 1.8, 0.5);
+        screenWireframe.position.set(10, 1.8, 0);
         scene.add(screenWireframe);
 
-        // Screen glow
         const screenGlow = new THREE.Mesh(
             new THREE.BoxGeometry(4.0, 2.5, 0.2),
             new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0.1, wireframe: true })
         );
-        screenGlow.position.set(6, 1.8, 0.5);
+        screenGlow.position.set(10, 1.8, 0);
         scene.add(screenGlow);
 
         // Screen content
@@ -515,7 +514,7 @@
         const texture = new THREE.CanvasTexture(canvas);
         const screenMat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
         const screenDisplay = new THREE.Mesh(new THREE.PlaneGeometry(3.8, 2.3), screenMat);
-        screenDisplay.position.set(6, 1.8, 0.6);
+        screenDisplay.position.set(10, 1.8, 0.1);
         scene.add(screenDisplay);
 
         // Keyboard dots
@@ -525,12 +524,12 @@
                     new THREE.SphereGeometry(0.05, 4, 4),
                     new THREE.MeshBasicMaterial({ color: 0xe0c9a6, transparent: true, opacity: 0.3 })
                 );
-                keyDot.position.set(4.7 + i*0.2, 0.35, -0.4 + j*0.22);
+                keyDot.position.set(8.7 + i*0.2, 0.35, -0.5 + j*0.22);
                 scene.add(keyDot);
             }
         }
 
-        // --- HOLOGRAPHIC PARTS (Scattered EVERYWHERE) ---
+        // --- HOLOGRAPHIC PARTS ---
         const parts = [];
 
         function createHoloPart(geo, color, x, y, z, scale = 1) {
@@ -553,121 +552,72 @@
             return { wireframe, glow };
         }
 
-        // Helper to get random scattered position
-        function randomPos(range, yRange) {
-            return {
-                x: (Math.random() - 0.5) * range,
-                y: Math.random() * yRange,
-                z: (Math.random() - 0.5) * range
-            };
-        }
+        // Target positions (where parts assemble - around laptop at x=10)
+        const targets = {
+            motherboard: { x: 9.8, y: 0.5, z: -0.2 },
+            pcb: { x: 10.2, y: 0.6, z: 0.3 },
+            microcontroller: { x: 9.5, y: 0.7, z: 0.4 },
+            keyboard: { x: 8.5, y: 0.4, z: 0.1 },
+            screen: { x: 11.5, y: 1.8, z: 0 },
+            disk: { x: 10, y: 0.8, z: 1.2 },
+            capacitor1: { x: 9.3, y: 0.6, z: -0.3 },
+            capacitor2: { x: 9.6, y: 0.6, z: -0.3 },
+            resistor1: { x: 10.4, y: 0.5, z: -0.1 },
+            resistor2: { x: 10.7, y: 0.5, z: -0.1 },
+            chip1: { x: 9.2, y: 0.7, z: 0.1 },
+            chip2: { x: 10.8, y: 0.7, z: 0.2 }
+        };
 
-        // Store target positions (where they should assemble)
-        const targets = [
-            { x: 5.8, y: 0.5, z: 0.4 }, // motherboard area
-            { x: 6.2, y: 0.9, z: 0.3 }, // cpu
-            { x: 5.5, y: 0.7, z: 0.2 }, // ram
-            { x: 6.5, y: 1.0, z: 0.8 }, // gpu
-            { x: 6.0, y: 0.6, z: 0.6 }, // ssd
-            { x: 5.3, y: 0.8, z: 0.1 }, // ram chips
-            { x: 6.8, y: 0.9, z: 0.9 }, // gpu die
-            { x: 5.7, y: 0.7, z: 0.3 }, // capacitors
-            { x: 6.3, y: 0.5, z: 0.7 }, // connectors
-            { x: 5.9, y: 0.6, z: 0.5 }  // extra
-        ];
+        // 1. LEFT SIDE PARTS (keyboard, screen, disk)
+        const keyboard = createHoloPart(new THREE.BoxGeometry(3.0, 0.1, 1.5), 0xe0c9a6, -8, 1, -3);
+        parts.push({ wireframe: keyboard.wireframe, glow: keyboard.glow, target: targets.keyboard, start: { x: -8, y: 1, z: -3 } });
 
-        // 1. Motherboard (scattered far left)
-        const mbPos = randomPos(15, 5);
-        const mb = createHoloPart(new THREE.BoxGeometry(3.5, 0.2, 2.8), 0xe0c9a6, mbPos.x, mbPos.y, mbPos.z);
-        parts.push({ wireframe: mb.wireframe, glow: mb.glow, target: targets[0], start: mbPos });
+        const screen = createHoloPart(new THREE.BoxGeometry(2.5, 1.8, 0.2), 0xe0c9a6, -7, 2.5, 4);
+        parts.push({ wireframe: screen.wireframe, glow: screen.glow, target: targets.screen, start: { x: -7, y: 2.5, z: 4 } });
 
-        // 2. CPU (scattered top right)
-        const cpuPos = randomPos(15, 6);
-        cpuPos.x = Math.abs(cpuPos.x) + 5; // force right side
-        const cpu = createHoloPart(new THREE.BoxGeometry(1.4, 0.5, 1.4), 0x8b1a1a, cpuPos.x, cpuPos.y, cpuPos.z);
-        parts.push({ wireframe: cpu.wireframe, glow: cpu.glow, target: targets[1], start: cpuPos });
+        const disk = createHoloPart(new THREE.CylinderGeometry(0.8, 0.8, 0.2, 16), 0x8b1a1a, -6, 1.2, -4);
+        parts.push({ wireframe: disk.wireframe, glow: disk.glow, target: targets.disk, start: { x: -6, y: 1.2, z: -4 } });
 
-        // CPU pins (many small cubes)
+        // 2. RIGHT SIDE PARTS (motherboard, pcb, microcontroller)
+        const motherboard = createHoloPart(new THREE.BoxGeometry(3.5, 0.2, 2.8), 0xe0c9a6, 4, 2, 5);
+        parts.push({ wireframe: motherboard.wireframe, glow: motherboard.glow, target: targets.motherboard, start: { x: 4, y: 2, z: 5 } });
+
+        const pcb = createHoloPart(new THREE.BoxGeometry(2.8, 0.1, 2.0), 0x8b1a1a, 5, 2.5, -5);
+        parts.push({ wireframe: pcb.wireframe, glow: pcb.glow, target: targets.pcb, start: { x: 5, y: 2.5, z: -5 } });
+
+        const microcontroller = createHoloPart(new THREE.BoxGeometry(1.2, 0.3, 0.8), 0xe0c9a6, 3, 3, 4);
+        parts.push({ wireframe: microcontroller.wireframe, glow: microcontroller.glow, target: targets.microcontroller, start: { x: 3, y: 3, z: 4 } });
+
+        // 3. TOP SMALL COMPONENTS
         for (let i = 0; i < 6; i++) {
-            for (let j = 0; j < 6; j++) {
-                const pinPos = randomPos(14, 5.5);
-                pinPos.x = pinPos.x - 5; // force left side
-                const pin = createHoloPart(new THREE.BoxGeometry(0.1, 0.15, 0.1), 0xe0c9a6, pinPos.x, pinPos.y, pinPos.z);
-                parts.push({ 
-                    wireframe: pin.wireframe, 
-                    glow: pin.glow, 
-                    target: { 
-                        x: targets[1].x - 0.3 + i*0.1, 
-                        y: targets[1].y - 0.2, 
-                        z: targets[1].z - 0.3 + j*0.1 
-                    },
-                    start: pinPos 
-                });
-            }
-        }
-
-        // 3. RAM (scattered bottom)
-        const ramPos = randomPos(12, 2);
-        ramPos.y = -ramPos.y; // force bottom
-        const ram = createHoloPart(new THREE.BoxGeometry(1.8, 0.15, 0.4), 0xe0c9a6, ramPos.x, ramPos.y, ramPos.z);
-        parts.push({ wireframe: ram.wireframe, glow: ram.glow, target: targets[2], start: ramPos });
-
-        // RAM chips
-        for (let k = 0; k < 4; k++) {
-            const chipPos = randomPos(13, 3);
-            chipPos.z = chipPos.z + 5; // force far back
-            const chip = createHoloPart(new THREE.BoxGeometry(0.25, 0.1, 0.2), 0x8b1a1a, chipPos.x, chipPos.y, chipPos.z);
-            parts.push({ 
-                wireframe: chip.wireframe, 
-                glow: chip.glow, 
-                target: { x: targets[2].x - 0.4 + k*0.2, y: targets[2].y + 0.05, z: targets[2].z },
-                start: chipPos 
-            });
-        }
-
-        // 4. GPU (scattered top left)
-        const gpuPos = randomPos(14, 7);
-        gpuPos.x = gpuPos.x - 8; // far left
-        gpuPos.y = gpuPos.y + 2; // high
-        const gpu = createHoloPart(new THREE.BoxGeometry(2.2, 0.5, 1.2), 0xe0c9a6, gpuPos.x, gpuPos.y, gpuPos.z);
-        parts.push({ wireframe: gpu.wireframe, glow: gpu.glow, target: targets[3], start: gpuPos });
-
-        // GPU die
-        const diePos = randomPos(13, 6);
-        diePos.x = diePos.x - 4;
-        diePos.z = diePos.z + 3;
-        const die = createHoloPart(new THREE.BoxGeometry(0.8, 0.1, 0.5), 0x8b1a1a, diePos.x, diePos.y, diePos.z);
-        parts.push({ wireframe: die.wireframe, glow: die.glow, target: targets[6], start: diePos });
-
-        // 5. Capacitors (scattered all over)
-        for (let i = 0; i < 8; i++) {
-            const capPos = randomPos(16, 5);
-            capPos.y = capPos.y + 1;
-            const cap = createHoloPart(new THREE.CylinderGeometry(0.15, 0.15, 0.5, 8), 0x8b1a1a, capPos.x, capPos.y, capPos.z);
+            const cap = createHoloPart(new THREE.CylinderGeometry(0.15, 0.15, 0.4, 8), 0x8b1a1a, -3 + i, 5, -2 + i);
             parts.push({ 
                 wireframe: cap.wireframe, 
                 glow: cap.glow, 
-                target: { x: targets[7].x + i*0.1, y: targets[7].y, z: targets[7].z },
-                start: capPos 
+                target: i < 3 ? targets.capacitor1 : targets.capacitor2,
+                start: { x: -3 + i, y: 5, z: -2 + i }
             });
         }
 
-        // 6. SSD (scattered back)
-        const ssdPos = randomPos(15, 4);
-        ssdPos.z = ssdPos.z - 8; // far back
-        const ssd = createHoloPart(new THREE.BoxGeometry(1.4, 0.15, 0.9), 0xe0c9a6, ssdPos.x, ssdPos.y, ssdPos.z);
-        parts.push({ wireframe: ssd.wireframe, glow: ssd.glow, target: targets[4], start: ssdPos });
-
-        // 7. Connectors (scattered front)
-        for (let i = 0; i < 4; i++) {
-            const connPos = randomPos(14, 4);
-            connPos.z = connPos.z + 8; // far front
-            const conn = createHoloPart(new THREE.BoxGeometry(0.3, 0.2, 0.6), 0xe0c9a6, connPos.x, connPos.y, connPos.z);
+        // 4. BOTTOM SMALL COMPONENTS
+        for (let i = 0; i < 6; i++) {
+            const res = createHoloPart(new THREE.BoxGeometry(0.2, 0.1, 0.3), 0xe0c9a6, -4 + i, -1, 3 - i);
             parts.push({ 
-                wireframe: conn.wireframe, 
-                glow: conn.glow, 
-                target: { x: targets[8].x + i*0.1, y: targets[8].y, z: targets[8].z },
-                start: connPos 
+                wireframe: res.wireframe, 
+                glow: res.glow, 
+                target: i < 3 ? targets.resistor1 : targets.resistor2,
+                start: { x: -4 + i, y: -1, z: 3 - i }
+            });
+        }
+
+        // 5. EXTRA CHIPS
+        for (let i = 0; i < 4; i++) {
+            const chip = createHoloPart(new THREE.BoxGeometry(0.4, 0.1, 0.3), 0x8b1a1a, -2 + i*2, 4, 4);
+            parts.push({ 
+                wireframe: chip.wireframe, 
+                glow: chip.glow, 
+                target: i < 2 ? targets.chip1 : targets.chip2,
+                start: { x: -2 + i*2, y: 4, z: 4 }
             });
         }
 
@@ -683,27 +633,21 @@
 
             // Scroll-based animation
             const scrollY = window.scrollY;
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            
-            // Progress from 0 to 1 based on scroll through section2
             const section2 = document.getElementById('section2');
             const rect = section2.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
             
-            // When section2 enters viewport, start animation
             let progress = 0;
             if (rect.top < viewportHeight && rect.bottom > 0) {
-                // Calculate progress based on how far we've scrolled through section2
                 const section2Top = section2.offsetTop;
                 const scrollInSection = scrollY - section2Top;
                 const sectionHeight = section2.clientHeight;
-                progress = Math.min(1, Math.max(0, scrollInSection / (sectionHeight * 0.7)));
+                progress = Math.min(1, Math.max(0, scrollInSection / (sectionHeight * 0.5)));
             }
 
             // Animate parts
             parts.forEach((part) => {
                 if (part.origPos && part.targetPos) {
-                    // Interpolate position
                     part.wireframe.position.x = part.origPos.x * (1 - progress) + part.targetPos.x * progress;
                     part.wireframe.position.y = part.origPos.y * (1 - progress) + part.targetPos.y * progress;
                     part.wireframe.position.z = part.origPos.z * (1 - progress) + part.targetPos.z * progress;
@@ -712,7 +656,6 @@
                     part.glow.position.y = part.wireframe.position.y;
                     part.glow.position.z = part.wireframe.position.z;
                     
-                    // Rotate while floating
                     part.wireframe.rotation.x += 0.01;
                     part.wireframe.rotation.y += 0.02;
                     part.glow.rotation.x = part.wireframe.rotation.x;
