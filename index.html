@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>deep · red team</title>
+    <title>deep · emerging red team</title>
     <style>
         /* BASE - Dark grey palette */
         * {
@@ -18,14 +18,133 @@
             color: #e0e0e0;
             line-height: 1.6;
             padding: 4rem 2rem;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        /* 3D EFFECT - The secret sauce */
+        /* 3D HOLOGRAPHIC LAPTOP - Tony Stark edition */
+        .hologram-container {
+            position: fixed;
+            bottom: 10%;
+            right: -50px;
+            width: 400px;
+            height: 300px;
+            perspective: 1000px;
+            z-index: 1;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .laptop {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
+        }
+
+        .base {
+            position: absolute;
+            width: 280px;
+            height: 200px;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #8b0000;
+            border-radius: 10px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) rotateX(10deg);
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+        }
+
+        .screen {
+            position: absolute;
+            width: 260px;
+            height: 170px;
+            background: linear-gradient(145deg, #111111, #000000);
+            border: 2px solid #8b0000;
+            border-radius: 8px;
+            bottom: 160px;
+            left: 50%;
+            transform: translateX(-50%) rotateX(-10deg) rotateY(0deg);
+            transform-origin: bottom;
+            box-shadow: 0 0 40px rgba(139, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .screen::before {
+            content: "KALI LINUX";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #8b0000;
+            font-size: 12px;
+            font-family: monospace;
+            opacity: 0.8;
+            animation: blink 2s infinite;
+        }
+
+        .screen::after {
+            content: ">_ ready";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #8b0000;
+            font-size: 10px;
+            font-family: monospace;
+            opacity: 0.6;
+        }
+
+        .keyboard-line {
+            position: absolute;
+            width: 80%;
+            height: 2px;
+            background: #8b0000;
+            bottom: 30px;
+            left: 10%;
+            opacity: 0.3;
+            box-shadow: 0 0 10px #8b0000;
+        }
+
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(139,0,0,0.1), transparent 70%);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotateY(0deg); }
+            25% { transform: rotateY(5deg) rotateX(2deg); }
+            75% { transform: rotateY(-5deg) rotateX(-2deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+
+        /* 3D EFFECT - Cards */
         .card {
             background: #141414;
             padding: 2rem;
@@ -35,6 +154,8 @@
                 0 0 0 1px #2a2a2a inset,
                 0 0 0 2px #0a0a0a inset;
             transition: transform 0.2s, box-shadow 0.2s;
+            backdrop-filter: blur(2px);
+            border-left: 2px solid transparent;
         }
 
         .card:hover {
@@ -43,28 +164,40 @@
                 0 20px 40px -15px rgba(180, 0, 0, 0.2),
                 0 0 0 1px #8b0000 inset,
                 0 0 0 2px #0a0a0a inset;
+            border-left-color: #8b0000;
         }
 
-        /* TYPOGRAPHY - Like your architecture inspo */
+        /* TYPOGRAPHY */
         h1 {
             font-size: 5rem;
             font-weight: 600;
             letter-spacing: -0.02em;
             line-height: 1;
             color: #ffffff;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .subhead {
             font-size: 1.2rem;
             color: #888;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             border-bottom: 2px solid #8b0000;
             padding-bottom: 1rem;
             display: inline-block;
         }
 
-        /* GRID - Architectural columns */
+        .student-info {
+            color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-family: monospace;
+        }
+
+        .student-info span {
+            color: #8b0000;
+        }
+
+        /* GRID */
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -72,7 +205,7 @@
             margin: 3rem 0;
         }
 
-        /* SECTION STYLES */
+        /* SECTION TITLES */
         .section-title {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -80,9 +213,17 @@
             color: #8b0000;
             margin-bottom: 1.5rem;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        /* TIMELINE / ACHIEVEMENTS */
+        .section-title::before {
+            content: "⟫";
+            color: #8b0000;
+        }
+
+        /* ACHIEVEMENTS / PROJECTS */
         .achievement {
             margin-bottom: 2rem;
             position: relative;
@@ -113,7 +254,88 @@
             font-size: 0.9rem;
         }
 
-        /* CLIENTS / FEEDBACK */
+        .project-link {
+            color: #8b0000;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: monospace;
+            transition: color 0.2s;
+        }
+
+        .project-link:hover {
+            color: #ff0000;
+            text-decoration: underline;
+        }
+
+        /* COMING SOON / EMPTY SECTIONS */
+        .coming-soon {
+            color: #444;
+            font-style: italic;
+            padding: 1rem;
+            border: 1px dashed #2a2a2a;
+            text-align: center;
+            font-family: monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-soon::before {
+            content: "PENDING MISSION";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0a0a0a;
+            color: #8b0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: bold;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+        }
+
+        .coming-soon:hover::before {
+            opacity: 0.8;
+        }
+
+        /* PROJECT LIST */
+        .project-list {
+            list-style: none;
+        }
+
+        .project-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ccc;
+        }
+
+        .project-list li:hover {
+            color: #ffffff;
+            border-bottom-color: #8b0000;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: #1f1f1f;
+            color: #8b0000;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            border-radius: 2px;
+            border: 1px solid #330000;
+        }
+
+        /* TESTIMONIAL / QUOTE */
         .testimonial {
             background: #1a1a1a;
             padding: 2rem;
@@ -125,76 +347,13 @@
             content: "“";
             font-size: 4rem;
             color: #8b0000;
-            opacity: 0.3;
+            opacity: 0.2;
             position: absolute;
             top: -0.5rem;
             left: 0.5rem;
         }
 
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: #ccc;
-            position: relative;
-            z-index: 1;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .testimonial-company {
-            color: #8b0000;
-            font-size: 0.9rem;
-        }
-
-        /* SERVICES LIST */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .service-item {
-            background: #1a1a1a;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid #2a2a2a;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .service-item:hover {
-            border-color: #8b0000;
-            background: #1f1f1f;
-        }
-
-        /* PROJECTS */
-        .project-list {
-            list-style: none;
-        }
-
-        .project-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #2a2a2a;
-            display: flex;
-            justify-content: space-between;
-            color: #ccc;
-        }
-
-        .project-list li span {
-            color: #8b0000;
-            font-family: monospace;
-        }
-
-        .project-list li:hover {
-            color: #ffffff;
-            border-bottom-color: #8b0000;
-        }
-
-        /* FOOTER / CONTACT */
+        /* CONTACT */
         .contact-row {
             display: flex;
             gap: 2rem;
@@ -202,21 +361,27 @@
             padding-top: 2rem;
             border-top: 1px solid #2a2a2a;
             color: #666;
+            flex-wrap: wrap;
         }
 
         .contact-row a {
             color: #e0e0e0;
             text-decoration: none;
             transition: color 0.2s;
+            font-family: monospace;
         }
 
         .contact-row a:hover {
             color: #8b0000;
         }
 
-        /* RED ACCENTS ONLY - No other colors */
-        .red-accent {
-            color: #8b0000;
+        .red-dot {
+            width: 4px;
+            height: 4px;
+            background: #8b0000;
+            display: inline-block;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
         }
 
         hr {
@@ -225,101 +390,162 @@
             margin: 2rem 0;
         }
 
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
             .grid { grid-template-columns: 1fr; }
-            .container { padding: 1rem; }
+            .hologram-container { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- HEADER - Like your inspo -->
-        <h1>DEEP</h1>
-        <div class="subhead">RED TEAM · 2030 · deep@cyber.sh</div>
+    <!-- 3D Holographic Laptop -->
+    <div class="hologram-container">
+        <div class="laptop">
+            <div class="screen">
+                <div class="glow"></div>
+            </div>
+            <div class="base">
+                <div class="keyboard-line"></div>
+                <div class="keyboard-line" style="width: 60%; bottom: 50px;"></div>
+                <div class="keyboard-line" style="width: 40%; bottom: 70px;"></div>
+            </div>
+        </div>
+    </div>
 
-        <!-- KEY ACHIEVEMENTS + COLLABORATIONS GRID -->
+    <div class="container">
+        <!-- HEADER - Student Edition -->
+        <h1>DEEP</h1>
+        <div class="student-info">
+            <span class="red-dot"></span> FIRST YEAR · CYBERSECURITY · CGPA: 3.8/4.0
+        </div>
+        <div class="subhead">EMERGING RED TEAM · BUILDING THE ARSENAL · deep@cyber.sh</div>
+
+        <!-- BIO / MISSION STATEMENT -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="section-title">MISSION STATUS</div>
+            <p style="color: #aaa; line-height: 1.8;">
+                First-year cybersecurity student. Not an expert — yet. Currently building foundational skills in Python, bash, and cryptography. This portfolio is a living document of my journey from student to operator. Every project, every CTF, every failure and win gets logged here.
+            </p>
+            <p style="color: #666; margin-top: 1rem; font-family: monospace;">
+                >_ status: LEARNING · PHASE: INITIAL ACCESS · TARGET: OSCP BY YEAR 3
+            </p>
+        </div>
+
+        <!-- PROJECTS + EDUCATION GRID -->
         <div class="grid">
-            <!-- LEFT COLUMN: Achievements -->
+            <!-- LEFT: Projects (Actual ones you mentioned) -->
             <div class="card">
-                <div class="section-title">⟫ KEY ACHIEVEMENTS</div>
+                <div class="section-title">ACTIVE PROJECTS</div>
                 
                 <div class="achievement">
-                    <div class="achievement-date">09.2026</div>
-                    <div class="achievement-title">First CTF Win</div>
-                    <div class="achievement-company">HackTheBox University</div>
+                    <div class="achievement-date">COMPLETED · 2024</div>
+                    <div class="achievement-title">Caesar Cipher</div>
+                    <div class="achievement-company">Python implementation with brute force</div>
+                    <a href="#" class="project-link">[ github link ]</a>
                 </div>
 
                 <div class="achievement">
-                    <div class="achievement-date">12.2027</div>
-                    <div class="achievement-title">Custom Cipher Library</div>
-                    <div class="achievement-company">Python · 1k+ downloads</div>
+                    <div class="achievement-date">COMPLETED · 2024</div>
+                    <div class="achievement-title">Cipher Cascade</div>
+                    <div class="achievement-company">File encryption suite (AES + XOR)</div>
+                    <a href="#" class="project-link">[ github link ]</a>
                 </div>
 
                 <div class="achievement">
-                    <div class="achievement-date">03.2028</div>
-                    <div class="achievement-title">Red Team Intern</div>
-                    <div class="achievement-company">Cyber Defense Corp</div>
-                </div>
-
-                <div class="achievement">
-                    <div class="achievement-date">06.2029</div>
-                    <div class="achievement-title">OSCP Certification</div>
-                    <div class="achievement-company">Offensive Security</div>
+                    <div class="achievement-date">IN PROGRESS · 2024</div>
+                    <div class="achievement-title">Bash Project</div>
+                    <div class="achievement-company">Automated recon script</div>
+                    <a href="#" class="project-link">[ github link ]</a>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: Collaborations -->
+            <!-- RIGHT: Education / Degree -->
             <div class="card">
-                <div class="section-title">⟫ SPECIAL COLLABORATIONS</div>
-                <p style="margin-bottom: 1.5rem; color: #aaa; line-height: 1.8;">
-                    Let us not forget the many people who have contributed to our success. Our team is made up of individuals from various backgrounds, each bringing their unique skills and perspectives to the table. We are grateful for their hard work and dedication.
-                </p>
-                <p style="color: #aaa; line-height: 1.8;">
-                    We would like to thank them for their contributions to our project. Their efforts have helped us achieve great things. We look forward to continuing to work with them in the future.
-                </p>
+                <div class="section-title">EDUCATION</div>
+                
+                <div class="achievement">
+                    <div class="achievement-date">2024 - 2028</div>
+                    <div class="achievement-title">B.Sc. Cybersecurity</div>
+                    <div class="achievement-company">University Name · CGPA: 3.8/4.0</div>
+                </div>
+
+                <div class="section-title" style="margin-top: 2rem;">CERTIFICATIONS (IN PROGRESS)</div>
+                <div class="achievement">
+                    <div class="achievement-title">Google Cybersecurity Certificate</div>
+                    <div class="achievement-company">80% complete</div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-title">TryHackMe · Pre Security</div>
+                    <div class="achievement-company">Completed</div>
+                </div>
             </div>
         </div>
 
-        <!-- CLIENT FEEDBACK + SERVICES GRID -->
+        <!-- CTF + HACKATHONS + AWARDS GRID -->
         <div class="grid">
-            <!-- LEFT: Client Feedback -->
+            <!-- LEFT: CTF Participations -->
             <div class="card">
-                <div class="section-title">⟫ CLIENT FEEDBACK</div>
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        Deep's methodology and precision during our penetration test was exceptional. Found critical vulnerabilities our team missed.
-                    </div>
-                    <div class="testimonial-author">MIRANDA MIRA</div>
-                    <div class="testimonial-company">Company Name · CISO</div>
+                <div class="section-title">CTF OPERATIONS</div>
+                
+                <div class="achievement">
+                    <div class="achievement-date">2024 · FIRST OP</div>
+                    <div class="achievement-title">HackTheBox University CTF</div>
+                    <div class="achievement-company">Team: Zero Cool · Solved 3 challenges</div>
+                </div>
+
+                <!-- Future CTFs (empty but styled) -->
+                <div class="coming-soon">
+                    More operations pending...
                 </div>
             </div>
 
-            <!-- RIGHT: Services Offered -->
+            <!-- RIGHT: Hackathons + Awards -->
             <div class="card">
-                <div class="section-title">⟫ SERVICES OFFERED</div>
-                <div class="services-grid">
-                    <div class="service-item">Penetration Testing</div>
-                    <div class="service-item">Red Teaming</div>
-                    <div class="service-item">Exploit Development</div>
-                    <div class="service-item">Hardware Hacking</div>
-                    <div class="service-item">Cipher Implementation</div>
-                    <div class="service-item">Security Research</div>
+                <div class="section-title">HACKATHONS</div>
+                
+                <!-- Empty but intentional -->
+                <div class="coming-soon" style="margin-bottom: 2rem;">
+                    No hackathons yet · Registering for 2025
+                </div>
+
+                <div class="section-title">AWARDS & HONORS</div>
+                <div class="coming-soon">
+                    Coming soon · Building the trophy case
                 </div>
             </div>
         </div>
 
-        <!-- PROJECTS WORKED ON (Full width) -->
+        <!-- FULL PROJECT LIST (With your actual projects) -->
         <div class="card" style="margin-top: 2rem;">
-            <div class="section-title">⟫ PROJECTS WORKED ON</div>
+            <div class="section-title">PROJECT ARSENAL · GITHUB</div>
             <ul class="project-list">
-                <li>Custom Port Scanner <span>bash</span></li>
-                <li>AES-256 Implementation <span>python</span></li>
-                <li>Hardware Keylogger (RPi) <span>electronics</span></li>
-                <li>CTF: HackTheBox Cyber Apocalypse <span>top 5%</span></li>
-                <li>University Network Security Audit <span>confidential</span></li>
-                <li>RFID Cloning Device <span>arduino</span></li>
+                <li>
+                    Caesar Cipher · Python
+                    <div class="project-tags">
+                        <span class="tag">completed</span>
+                        <a href="#" class="project-link">[repo]</a>
+                    </div>
+                </li>
+                <li>
+                    Cipher Cascade · Encryption Suite
+                    <div class="project-tags">
+                        <span class="tag">completed</span>
+                        <a href="#" class="project-link">[repo]</a>
+                    </div>
+                </li>
+                <li>
+                    Bash Recon Tool · Work in Progress
+                    <div class="project-tags">
+                        <span class="tag">in progress</span>
+                        <a href="#" class="project-link">[repo]</a>
+                    </div>
+                </li>
+                <li>
+                    Port Scanner · Learning project
+                    <div class="project-tags">
+                        <span class="tag">planned</span>
+                    </div>
+                </li>
             </ul>
         </div>
 
@@ -328,11 +554,14 @@
             <a href="#">github.com/deep</a>
             <a href="#">linkedin.com/in/deep</a>
             <a href="#">tryhackme.com/p/deep</a>
+            <a href="#">hackthebox.com/profile/deep</a>
             <a href="#">deep@cyber.sh</a>
         </div>
 
-        <!-- Small red accent line at bottom -->
-        <div style="height: 2px; background: #8b0000; width: 100px; margin-top: 3rem;"></div>
+        <!-- BUILDING IN PUBLIC FOOTER -->
+        <div style="margin-top: 2rem; color: #333; font-size: 0.8rem; text-align: center; font-family: monospace;">
+            [ system online · building in public · year 1 of 4 ]
+        </div>
     </div>
 </body>
 </html>
