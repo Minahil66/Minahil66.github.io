@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan · a paranoid cybersecurity student</title>
+    <title>minahil khan · building the mark I</title>
     <style>
-        /* BASE - Dark grey palette */
         * {
             margin: 0;
             padding: 0;
@@ -13,699 +12,330 @@
         }
 
         body {
-            background-color: #0a0a0a;
+            background-color: #0c0c0c;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: #e0e0e0;
             line-height: 1.6;
-            padding: 4rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .container {
-            max-width: 1200px;
+        /* Main container - centered */
+        .center-stage {
+            max-width: 1000px;
+            width: 100%;
             margin: 0 auto;
             position: relative;
-            z-index: 2;
+            z-index: 10;
+            text-align: center;
         }
 
-        /* LANDING SECTION - Contains both text and hologram */
-        .landing {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
+        /* Text content - minimal, centered */
+        .text-content {
             margin-bottom: 4rem;
-            min-height: 60vh;
-        }
-
-        /* LEFT SIDE - Text */
-        .landing-text {
-            z-index: 3;
-        }
-
-        /* RIGHT SIDE - Hologram container */
-        .hologram-container {
             position: relative;
-            height: 400px;
+            z-index: 20;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #f0f0f0;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .title-line {
+            font-size: 1.2rem;
+            color: #b88b4a; /* warm olive/beige */
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            word-spacing: 0.5rem;
+        }
+
+        .manifesto {
+            font-size: 1.1rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+            border-top: 1px solid #3a3a3a;
+            padding-top: 2rem;
+            margin-top: 1rem;
+        }
+
+        .manifesto span {
+            color: #b88b4a;
+            font-style: italic;
+        }
+
+        /* Status line - subtle */
+        .status {
+            margin-top: 2rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #5a5a5a;
+            letter-spacing: 0.1em;
+        }
+
+        .status span {
+            color: #8b3a3a; /* deep red */
+        }
+
+        /* ===== HARDWARE BLUEPRINT ===== */
+        /* Container for the deconstructed motherboard */
+        .hardware-stage {
+            position: relative;
             width: 100%;
+            height: 400px;
+            margin-top: 2rem;
             perspective: 1200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 3;
+            z-index: 5;
         }
 
-        /* MAIN 3D LAPTOP - Blueprint style - BLUE ONLY */
-        .blueprint-laptop {
-            width: 320px;
-            height: 240px;
+        .motherboard {
             position: relative;
+            width: 100%;
+            height: 100%;
             transform-style: preserve-3d;
-            animation: slowRotate 20s infinite ease-in-out;
-            transform-origin: center center;
+            animation: subtleDrift 30s infinite ease-in-out;
         }
 
-        /* All laptop parts - BLUE ONLY */
-        .laptop-part {
+        /* Base board - the PCB */
+        .pcb-base {
             position: absolute;
-            border: 1px solid #00a8ff;
-            background: transparent;
-            box-shadow: 0 0 15px rgba(0, 168, 255, 0.3),
-                        inset 0 0 10px rgba(0, 168, 255, 0.1);
-            opacity: 0.9;
+            width: 600px;
+            height: 350px;
+            background: rgba(20, 20, 20, 0.6);
+            border: 2px solid #4a4a4a;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotateX(2deg) rotateY(1deg);
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px #6a4a2a inset,
+                        0 0 30px rgba(139, 58, 58, 0.2);
             backdrop-filter: blur(1px);
         }
 
-        /* Base of laptop */
-        .base {
-            width: 280px;
-            height: 180px;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) rotateX(5deg);
-            border-radius: 8px;
-            background: rgba(0, 20, 40, 0.2);
-        }
-
-        /* Screen */
-        .screen {
-            width: 260px;
-            height: 160px;
-            bottom: 140px;
-            left: 50%;
-            transform: translateX(-50%) rotateX(-5deg) rotateY(0deg);
-            transform-origin: bottom;
-            border-radius: 6px;
-            background: rgba(0, 30, 60, 0.15);
-            overflow: hidden;
-        }
-
-        /* Screen content - Kali blueprint */
-        .screen::before {
-            content: "";
+        /* PCB traces (the lines) - olive/beige */
+        .trace {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(90deg, transparent 50%, rgba(0, 168, 255, 0.05) 50%),
-                linear-gradient(0deg, transparent 50%, rgba(0, 168, 255, 0.05) 50%);
-            background-size: 20px 20px;
-            animation: scan 8s linear infinite;
-        }
-
-        .screen::after {
-            content: "KALI LINUX";
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: #00a8ff;
-            font-family: monospace;
-            font-size: 14px;
-            text-shadow: 0 0 10px #00a8ff;
-            opacity: 0.8;
-            letter-spacing: 2px;
-        }
-
-        /* Keyboard lines (blueprint style) */
-        .keyboard-line {
-            position: absolute;
-            height: 1px;
-            background: #00a8ff;
+            background: #b88b4a;
             opacity: 0.4;
-            left: 15%;
-            width: 70%;
-            box-shadow: 0 0 8px #00a8ff;
+            box-shadow: 0 0 8px #b88b4a;
         }
 
-        .line1 { bottom: 40px; }
-        .line2 { bottom: 60px; width: 60%; left: 20%; }
-        .line3 { bottom: 80px; width: 50%; left: 25%; }
-
-        /* Hinge */
-        .hinge {
-            width: 200px;
-            height: 4px;
-            background: #00a8ff;
-            bottom: 140px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 0 20px #00a8ff;
-            opacity: 0.6;
+        .trace-horizontal {
+            height: 1px;
+            width: 100px;
         }
 
-        /* Blueprint dimension lines - BLUE ONLY */
-        .dimension-line {
+        .trace-vertical {
+            width: 1px;
+            height: 80px;
+        }
+
+        /* Chips / Components */
+        .chip {
             position: absolute;
-            border: 1px dashed #00a8ff;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid #8b3a3a;
+            box-shadow: 0 0 15px rgba(139, 58, 58, 0.3),
+                        inset 0 0 5px #2a2a2a;
+            border-radius: 3px;
+        }
+
+        .chip-large {
+            width: 80px;
+            height: 60px;
+        }
+
+        .chip-medium {
+            width: 50px;
+            height: 30px;
+        }
+
+        .chip-small {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%; /* capacitor */
+        }
+
+        /* Capacitors (olive/beige) */
+        .capacitor {
+            position: absolute;
+            width: 12px;
+            height: 24px;
+            background: rgba(184, 139, 74, 0.3);
+            border: 1px solid #b88b4a;
+            border-radius: 6px;
+            transform: rotate(5deg);
+            box-shadow: 0 0 10px rgba(184, 139, 74, 0.3);
+        }
+
+        /* Wires - floating, deconstructed look */
+        .wire {
+            position: absolute;
+            background: #8b3a3a;
+            opacity: 0.3;
+            box-shadow: 0 0 10px #8b3a3a;
+        }
+
+        .wire-1 {
+            width: 2px;
+            height: 150px;
+            transform: rotate(15deg);
+        }
+
+        .wire-2 {
+            width: 120px;
+            height: 2px;
+            transform: rotate(-5deg);
+        }
+
+        /* Screws / connectors */
+        .screw {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #b88b4a;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #b88b4a;
+            opacity: 0.7;
+        }
+
+        /* Grid lines - blueprint style */
+        .grid-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(184, 139, 74, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(184, 139, 74, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        /* Floating parts - deconstructed look */
+        .floating-part {
+            position: absolute;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            animation: floatPart 8s infinite alternate;
+        }
+
+        /* Measurements */
+        .measure-line {
+            position: absolute;
+            border: 1px dashed #5a5a5a;
             opacity: 0.3;
         }
 
-        .dimension-h {
-            width: 100%;
-            height: 0;
-            border-bottom: 1px dashed #00a8ff;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .dimension-v {
-            height: 100%;
-            width: 0;
-            border-left: 1px dashed #00a8ff;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Corner markers - BLUE ONLY */
-        .corner {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border: 1px solid #00a8ff;
-            opacity: 0.6;
-        }
-
-        .corner-tl {
-            top: -5px;
-            left: -5px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .corner-tr {
-            top: -5px;
-            right: -5px;
-            border-left: none;
-            border-bottom: none;
-        }
-
-        .corner-bl {
-            bottom: -5px;
-            left: -5px;
-            border-right: none;
-            border-top: none;
-        }
-
-        .corner-br {
-            bottom: -5px;
-            right: -5px;
-            border-left: none;
-            border-top: none;
-        }
-
-        /* Measurement labels - BLUE ONLY */
-        .measurement {
-            position: absolute;
-            color: #00a8ff;
-            font-family: monospace;
-            font-size: 10px;
-            opacity: 0.5;
-            white-space: nowrap;
-        }
-
-        .measurement-width {
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .measurement-height {
-            right: -40px;
-            top: 50%;
-            transform: translateY(-50%) rotate(90deg);
-        }
-
-        /* Glow effect - BLUE ONLY */
-        .blueprint-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0,168,255,0.15), transparent 70%);
-            filter: blur(20px);
-            z-index: -1;
-        }
-
-        /* Floating blueprint dots - BLUE ONLY */
-        .blueprint-dot {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00a8ff;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.8; }
-        }
-
         /* Animations */
-        @keyframes slowRotate {
-            0% { transform: rotateY(0deg) rotateX(2deg); }
-            25% { transform: rotateY(8deg) rotateX(4deg); }
-            75% { transform: rotateY(-8deg) rotateX(0deg); }
-            100% { transform: rotateY(0deg) rotateX(2deg); }
+        @keyframes subtleDrift {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(2deg) rotateY(3deg); }
+            75% { transform: rotateX(-1deg) rotateY(-2deg); }
+            100% { transform: rotateX(0deg) rotateY(0deg); }
         }
 
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+        @keyframes floatPart {
+            0% { transform: translateY(0px) translateZ(0px); }
+            100% { transform: translateY(-10px) translateZ(20px); }
         }
 
-        @keyframes pulseRed {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; box-shadow: 0 0 20px #8b0000; }
-        }
-
-        /* 3D EFFECT - Cards - RED ACCENTS (CHANGED) */
-        .card {
-            background: #141414;
-            padding: 2rem;
-            border-radius: 4px;
-            box-shadow: 
-                0 10px 30px -10px rgba(0, 0, 0, 0.8),
-                0 0 0 1px #2a2a2a inset,
-                0 0 0 2px #0a0a0a inset;
-            transition: transform 0.2s, box-shadow 0.2s;
-            backdrop-filter: blur(2px);
-            border-left: 2px solid transparent;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 20px 40px -15px rgba(139, 0, 0, 0.2),
-                0 0 0 1px #8b0000 inset,
-                0 0 0 2px #0a0a0a inset;
-            border-left-color: #8b0000;
-        }
-
-        /* TYPOGRAPHY - RED ACCENTS (CHANGED) */
-        h1 {
-            font-size: 5rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1;
-            color: #ffffff;
-            margin-bottom: 0.25rem;
-        }
-
-        .subhead {
-            font-size: 1.2rem;
-            color: #888;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #8b0000; /* CHANGED TO RED */
-            padding-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .student-info {
-            color: #aaa;
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            font-family: monospace;
-        }
-
-        .student-info span {
-            color: #8b0000; /* CHANGED TO RED */
-        }
-
-        /* GRID */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        /* SECTION TITLES - RED (CHANGED) */
-        .section-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #8b0000; /* CHANGED TO RED */
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-title::before {
-            content: "⟫";
-            color: #8b0000; /* CHANGED TO RED */
-        }
-
-        /* ACHIEVEMENTS - RED (CHANGED) */
-        .achievement {
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 1.5rem;
-            border-left: 2px solid #2a2a2a;
-        }
-
-        .achievement:hover {
-            border-left-color: #8b0000; /* CHANGED TO RED */
-        }
-
-        .achievement-date {
-            font-size: 0.8rem;
-            color: #8b0000; /* CHANGED TO RED */
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .project-link {
-            color: #8b0000; /* CHANGED TO RED */
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-family: monospace;
-            word-break: break-all;
-        }
-
-        .project-link:hover {
-            color: #ff0000;
-        }
-
-        /* COMING SOON - RED theme (CHANGED) */
-        .coming-soon {
-            color: #444;
-            font-style: italic;
-            padding: 1rem;
-            border: 1px dashed #2a2a2a;
-            text-align: center;
-            font-family: monospace;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coming-soon::before {
-            content: "PENDING MISSION";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #0a0a0a;
-            color: #8b0000; /* CHANGED TO RED */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-weight: bold;
-            letter-spacing: 0.2em;
-            font-size: 0.8rem;
-        }
-
-        .coming-soon:hover::before {
-            opacity: 0.8;
-        }
-
-        /* PROJECT LIST - RED (CHANGED) */
-        .project-list {
-            list-style: none;
-        }
-
-        .project-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #2a2a2a;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #ccc;
-            flex-wrap: wrap;
-        }
-
-        .project-list li:hover {
-            color: #ffffff;
-            border-bottom-color: #8b0000; /* CHANGED TO RED */
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background: #1f1f1f;
-            color: #8b0000; /* CHANGED TO RED */
-            padding: 0.2rem 0.5rem;
-            font-size: 0.7rem;
-            border-radius: 2px;
-            border: 1px solid #330000;
-        }
-
-        /* CONTACT - RED (CHANGED) */
-        .contact-row {
-            display: flex;
-            gap: 2rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #2a2a2a;
-            color: #666;
-            flex-wrap: wrap;
-        }
-
-        .contact-row a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.2s;
-            font-family: monospace;
-        }
-
-        .contact-row a:hover {
-            color: #8b0000; /* CHANGED TO RED */
-        }
-
-        .red-dot { /* CHANGED FROM blue-dot TO red-dot */
-            width: 4px;
-            height: 4px;
-            background: #8b0000; /* CHANGED TO RED */
-            display: inline-block;
-            margin-right: 0.5rem;
-            animation: pulseRed 2s infinite;
-        }
-
-        /* Status line color -*/
-        .status-line {
-            color: #8b0000 !important; /* CHANGED TO RED */
-            margin-top: 1rem;
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            .grid { grid-template-columns: 1fr; }
-            .landing { grid-template-columns: 1fr; }
-            .hologram-container { height: 300px; }
-            .blueprint-laptop { transform: scale(0.8); }
-            .project-list li {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
+            h1 { font-size: 2.5rem; }
+            .title-line { font-size: 0.9rem; }
+            .manifesto { font-size: 0.95rem; padding: 1rem; }
+            .hardware-stage { height: 300px; }
+            .pcb-base { width: 450px; height: 250px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- LANDING SECTION with hologram -->
-        <div class="landing">
-            <!-- LEFT: Text -->
-            <div class="landing-text">
-                <h1>MINAHIL KHAN</h1>
-                <div class="student-info">
-                    <span class="red-dot"></span> FIRST YEAR · CYBERSECURITY · CGPA: 3.8
-                </div>
-                <div class="subhead">EMERGING PEN TESTER · BUILDING THE ARSENAL</div>
-                
-                <!-- Brief intro -->
-                <p style="color: #aaa; line-height: 1.8; margin-top: 2rem;">
-                    First-year cybersecurity student documenting the journey from zero to operator. 
-                    This is a living blueprint: Every project, failure, and win gets logged here.
-                </p>
-                
-                <!-- Status line - CHANGED TO RED -->
-                <p style="color: #8b0000; margin-top: 1rem; font-family: monospace; font-size: 0.9rem;">
-                    >_ system.online · blueprint.active · phase: INITIAL_ACCESS
-                </p>
+    <div class="center-stage">
+        <!-- CENTERED TEXT -->
+        <div class="text-content">
+            <h1>MINAHIL KHAN</h1>
+            <div class="title-line">EMERGING PEN TESTER · BUILDING THE ARSENAL</div>
+            <div class="manifesto">
+                First-year cybersecurity student documenting the journey from zero to operator.<br>
+                <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
             </div>
-
-            <!-- RIGHT: Blueprint Hologram Laptop (STAYS BLUE) -->
-            <div class="hologram-container">
-                <div class="blueprint-laptop">
-                    <!-- Blueprint corner markers (blue) -->
-                    <div class="corner corner-tl"></div>
-                    <div class="corner corner-tr"></div>
-                    <div class="corner corner-bl"></div>
-                    <div class="corner corner-br"></div>
-                    
-                    <!-- Dimension lines (blue) -->
-                    <div class="dimension-line dimension-h"></div>
-                    <div class="dimension-line dimension-v"></div>
-                    
-                    <!-- Measurement labels (blue) -->
-                    <div class="measurement measurement-width">320mm</div>
-                    <div class="measurement measurement-height">240mm</div>
-                    
-                    <!-- The laptop itself (blue) -->
-                    <div class="laptop-part base">
-                        <div class="keyboard-line line1"></div>
-                        <div class="keyboard-line line2"></div>
-                        <div class="keyboard-line line3"></div>
-                    </div>
-                    
-                    <div class="laptop-part screen"></div>
-                    <div class="hinge"></div>
-                    
-                    <!-- Blueprint glow (blue) -->
-                    <div class="blueprint-glow"></div>
-                    
-                    <!-- Floating blueprint dots (blue) -->
-                    <div class="blueprint-dot" style="top: 20%; left: 10%;"></div>
-                    <div class="blueprint-dot" style="top: 70%; left: 80%;"></div>
-                    <div class="blueprint-dot" style="top: 30%; left: 90%;"></div>
-                    <div class="blueprint-dot" style="top: 80%; left: 20%;"></div>
-                </div>
+            <div class="status">
+                <span>⟫</span> YEAR ONE · PHASE: MARK I ASSEMBLY <span>⟫</span>
             </div>
         </div>
 
-        <!-- PROJECTS + EDUCATION GRID (RED ACCENTS NOW) -->
-        <div class="grid">
-            <!-- LEFT: Projects -->
-            <div class="card">
-                <div class="section-title">ACTIVE PROJECTS</div>
+        <!-- HARDWARE BLUEPRINT - DECONSTRUCTED MOTHERBOARD -->
+        <div class="hardware-stage">
+            <div class="motherboard">
+                <!-- PCB Base -->
+                <div class="pcb-base"></div>
+
+                <!-- Grid overlay (blueprint traces) -->
+                <div class="grid-overlay" style="left: 50%; top: 50%; transform: translate(-50%, -50%); width: 600px; height: 350px;"></div>
+
+                <!-- CHIPS & COMPONENTS (positioned absolutely within the motherboard) -->
                 
-                <div class="achievement">
-                    <div class="achievement-date">COMPLETED · 2025</div>
-                    <div class="achievement-title">Caesar Cipher</div>
-                    <div class="achievement-company">C implementation with brute force</div>
-                    <a href="#" class="project-link">https://github.com/Minahil66/Caesar-Cipher</a>
-                </div>
-
-                <div class="achievement">
-                    <div class="achievement-date">COMPLETED · 2026</div>
-                    <div class="achievement-title">Cipher Cascade</div>
-                    <div class="achievement-company">File encryption suite (4 CIPHERS)</div>
-                    <a href="#" class="project-link">https://github.com/Minahil66/CipherCascade</a>
-                </div>
-
-                <div class="achievement">
-                    <div class="achievement-date">IN PROGRESS · 2025</div>
-                    <div class="achievement-title">Bash Project</div>
-                    <div class="achievement-company">Automated SysMon script</div>
-                    <a href="#" class="project-link">https://github.com/Minahil66/Bash</a>
-                </div>
-            </div>
-            
-            /*add more projects r8 here*/
-            
-
-            <!-- RIGHT: Education -->
-            <div class="card">
-                <div class="section-title">EDUCATION</div>
+                <!-- CPU (large chip) - red accents -->
+                <div class="chip chip-large" style="left: 50%; top: 50%; transform: translate(-50%, -50%) translateZ(5px);"></div>
                 
-                <div class="achievement">
-                    <div class="achievement-date">2025 - 2029</div>
-                    <div class="achievement-title">Bachelors Of Computer and Information Technology</div>
-                    <div class="achievement-company">NED University of Engineering · CGPA: 3.8</div>
-                </div>
-
-                <div class="section-title" style="margin-top: 2rem;">CERTIFICATIONS (IN PROGRESS)</div>
-                <div class="achievement">
-                    <div class="achievement-title">Certified Associate Penetration Tester </div>
-                    <div class="achievement-company">40% complete</div>
-                </div>
-                <div class="achievement">
-                    <div class="achievement-title">coming soon</div>
-                    <div class="achievement-company">coming soon</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CTF + HACKATHONS + AWARDS GRID -->
-        <div class="grid">
-            <!-- LEFT: CTF -->
-            <div class="card">
-                <div class="section-title">CTF OPERATIONS</div>
+                <!-- RAM chips - olive/beige -->
+                <div class="chip chip-medium" style="left: 35%; top: 40%; transform: translate(-50%, -50%) translateZ(3px); border-color: #b88b4a;"></div>
+                <div class="chip chip-medium" style="left: 65%; top: 40%; transform: translate(-50%, -50%) translateZ(3px); border-color: #b88b4a;"></div>
                 
-                <div class="achievement">
-                    <div class="achievement-date">2025 · FIRST OP</div>
-                    <div class="achievement-title">NED University CTF 2.0</div>
-                    <div class="achievement-company">Team: ZeroDayNexus · Solved 3 challenges</div>
-                </div>
-                 <div class="achievement">
-                    <div class="achievement-date">2026 · SECOND OP</div>
-                    <div class="achievement-title">BOOTCAMP CTF </div>
-                    <div class="achievement-company">Team: ZeroDayNexus · Solved 7 challenges</div>
-                </div>
-
-                <div class="coming-soon">
-                    More operations pending...
-                </div>
-            </div>
-
-            <!-- RIGHT: Hackathons + Awards -->
-            <div class="card">
-                <div class="section-title">HACKATHONS</div>
+                <!-- Capacitors (olive) -->
+                <div class="capacitor" style="left: 30%; top: 60%;"></div>
+                <div class="capacitor" style="left: 70%; top: 60%;"></div>
+                <div class="capacitor" style="left: 45%; top: 70%; transform: rotate(-10deg);"></div>
+                <div class="capacitor" style="left: 55%; top: 70%; transform: rotate(15deg);"></div>
                 
-                <div class="coming-soon" style="margin-bottom: 2rem;">
-                    No hackathons yet · Registering for 2026
-                </div>
+                <!-- Small chips / ICs -->
+                <div class="chip chip-small" style="left: 25%; top: 30%; background: rgba(139, 58, 58, 0.3);"></div>
+                <div class="chip chip-small" style="left: 75%; top: 30%; background: rgba(139, 58, 58, 0.3);"></div>
+                <div class="chip chip-small" style="left: 40%; top: 20%; border-color: #b88b4a;"></div>
+                <div class="chip chip-small" style="left: 60%; top: 20%; border-color: #b88b4a;"></div>
 
-                <div class="section-title">AWARDS & HONORS</div>
-                <div class="coming-soon">
-                    Coming soon · Building the trophy case
+                <!-- TRACES (the circuit paths) - olive/beige -->
+                <div class="trace trace-horizontal" style="left: 30%; top: 45%; width: 150px; transform: rotate(0deg);"></div>
+                <div class="trace trace-horizontal" style="left: 40%; top: 55%; width: 120px; transform: rotate(10deg); opacity: 0.3;"></div>
+                <div class="trace trace-vertical" style="left: 45%; top: 30%; height: 100px;"></div>
+                <div class="trace trace-vertical" style="left: 55%; top: 40%; height: 80px; opacity: 0.3;"></div>
+                
+                <!-- WIRES (floating, deconstructed) - red -->
+                <div class="wire wire-1" style="left: 20%; top: 20%; transform: rotate(45deg);"></div>
+                <div class="wire wire-2" style="left: 70%; top: 70%;"></div>
+                
+                <!-- SCREWS / CONNECTORS - olive/beige -->
+                <div class="screw" style="left: 25%; top: 25%;"></div>
+                <div class="screw" style="left: 75%; top: 25%;"></div>
+                <div class="screw" style="left: 25%; top: 75%;"></div>
+                <div class="screw" style="left: 75%; top: 75%;"></div>
+                
+                <!-- FLOATING PARTS (deconstructed effect) -->
+                <div class="floating-part" style="left: 15%; top: 15%;">
+                    <div class="chip chip-small" style="position: relative; border-color: #b88b4a; animation: floatPart 6s infinite alternate;"></div>
                 </div>
+                <div class="floating-part" style="left: 85%; top: 85%; animation-delay: -2s;">
+                    <div class="capacitor" style="position: relative; transform: rotate(30deg);"></div>
+                </div>
+                
+                <!-- Measurement lines (blueprint detail) -->
+                <div class="measure-line" style="left: 20%; top: 10%; width: 60%;"></div>
+                <div class="measure-line" style="left: 90%; top: 20%; height: 60%; transform: rotate(90deg);"></div>
             </div>
-        </div>
-
-        <!-- PROJECT ARSENAL -->
-        <div class="card" style="margin-top: 2rem;">
-            <div class="section-title">PROJECT ARSENAL · GITHUB</div>
-            <ul class="project-list">
-                <li>
-                    Caesar Cipher · C
-                    <div class="project-tags">
-                        <span class="tag">completed</span>
-                        <a href="#" class="project-link">https://github.com/Minahil66/Caesar-Cipher</a>
-                    </div>
-                </li>
-                <li>
-                    Cipher Cascade · File Encryption Suite
-                    <div class="project-tags">
-                        <span class="tag">completed</span>
-                        <a href="#" class="project-link">https://github.com/Minahil66/CipherCascade</a>
-                    </div>
-                </li>
-                <li>
-                    Bash SysMon Tool · Work in Progress
-                    <div class="project-tags">
-                        <span class="tag">in progress</span>
-                        <a href="#" class="project-link">https://github.com/Minahil66/Bash</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <!-- CONTACT -->
-        <div class="contact-row">
-            <a href="https://github.com/Minahil66">github.com/Minahil66</a>
-            <a href="#">linkedin.com/in/</a>
-            <a href="#">tryhackme.com/u/</a>
-        </div>
-
-        <!-- FOOTER -->
-        <div style="margin-top: 2rem; color: #333; font-size: 0.8rem; text-align: center; font-family: monospace;">
-            [ blueprint v1.0 · building in public · year 1 of 4 ]
         </div>
     </div>
 </body>
