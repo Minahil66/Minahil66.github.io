@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan · system assembly</title>
+    <title>Minahil khan · Arsenal ASSEMBLY</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,8 @@
         }
 
         body {
-            background-color: #0a0a0a;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #030405;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             color: #e0e0e0;
             line-height: 1.6;
             overflow-x: hidden;
@@ -31,12 +31,15 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            background: radial-gradient(circle at 20% 30%, #0f0a0a 0%, #030405 80%);
         }
 
         #content-section {
-            background-color: #0a0a0a;
+            background: #030405;
             position: relative;
             z-index: 10;
+            border-top: 1px solid #8b3a3a20;
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.8);
         }
 
         .container {
@@ -45,31 +48,40 @@
             width: 100%;
         }
 
-        /* ===== TOP SECTION - CENTERED TEXT + FLOATING PARTS ===== */
+        /* ===== TOP SECTION - CENTERED TEXT + SCI-FI FLOATING PARTS ===== */
         .center-stage {
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
             position: relative;
-            z-index: 20;
+            z-index: 30;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+            padding: 3rem;
+            border: 1px solid #b88b4a30;
+            border-radius: 4px;
+            box-shadow: 0 0 60px rgba(139, 58, 58, 0.2);
         }
 
         h1 {
             font-size: 5rem;
-            font-weight: 500;
+            font-weight: 400;
             letter-spacing: -0.02em;
-            color: #f0f0f0;
+            color: #fff;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
+            font-family: 'Inter', monospace;
+            text-shadow: 0 0 20px rgba(184, 139, 74, 0.4);
         }
 
         .title-line {
             font-size: 1.2rem;
             color: #b88b4a;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-weight: 300;
+            word-spacing: 0.5rem;
         }
 
         .manifesto {
@@ -78,14 +90,16 @@
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.8;
-            border-top: 1px solid #3a3a3a;
+            border-top: 1px solid #8b3a3a;
             padding-top: 2rem;
             margin-top: 1rem;
+            font-weight: 300;
         }
 
         .manifesto span {
             color: #b88b4a;
             font-style: italic;
+            text-shadow: 0 0 10px #b88b4a;
         }
 
         .status {
@@ -93,13 +107,31 @@
             font-family: monospace;
             font-size: 0.85rem;
             color: #5a5a5a;
+            letter-spacing: 0.2em;
         }
 
         .status span {
             color: #8b3a3a;
         }
 
-        /* ===== FLOATING HARDWARE PARTS (TOP SECTION) ===== */
+        /* ===== SCI-FI GRID BACKGROUND ===== */
+        .grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(184, 139, 74, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(184, 139, 74, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: top;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ===== FLOATING PARTS - SCI-FI STRUCTURED ===== */
         .floating-parts {
             position: absolute;
             top: 0;
@@ -107,106 +139,228 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 10;
+            z-index: 20;
+            perspective: 1200px;
         }
 
         .part {
             position: absolute;
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            backdrop-filter: blur(2px);
             transition: all 0.1s linear;
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.8));
         }
 
-        /* Part styles */
+        /* MOTHERBOARD - Main PCB */
         .part.motherboard {
-            width: 200px;
-            height: 150px;
-            border-color: #b88b4a;
-            border-radius: 4px;
-            top: 20%;
-            left: 10%;
-            transform: rotate(-5deg);
-        }
-
-        .part.cpu {
-            width: 60px;
-            height: 40px;
-            border-color: #8b3a3a;
-            top: 60%;
-            left: 15%;
-            transform: rotate(10deg);
-        }
-
-        .part.ram {
-            width: 80px;
-            height: 25px;
-            border-color: #b88b4a;
-            top: 30%;
-            right: 15%;
-            transform: rotate(15deg);
-        }
-
-        .part.capacitor {
-            width: 15px;
-            height: 30px;
-            border-color: #8b3a3a;
-            border-radius: 5px;
-            bottom: 30%;
-            right: 25%;
-            transform: rotate(-10deg);
-        }
-
-        .part.wire {
-            width: 2px;
-            height: 100px;
-            background: #b88b4a;
-            border: none;
-            box-shadow: 0 0 15px #b88b4a;
-            top: 40%;
-            left: 40%;
-            transform: rotate(45deg);
-        }
-
-        .part.screw {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #8b3a3a;
-            border: 1px solid #b88b4a;
-            bottom: 20%;
-            left: 30%;
-        }
-
-        .part.gpu {
-            width: 50px;
-            height: 30px;
-            border-color: #b88b4a;
-            top: 70%;
-            right: 10%;
-            transform: rotate(-15deg);
-        }
-
-        .part.fan {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border-color: #8b3a3a;
+            width: 280px;
+            height: 200px;
             top: 15%;
-            right: 30%;
+            left: 5%;
         }
 
-        .part.fan::after {
-            content: "";
+        .pcb-core {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, transparent 40%, #8b3a3a 70%);
-            opacity: 0.3;
+            background: linear-gradient(145deg, #1a1e24, #0f1217);
+            border: 2px solid #b88b4a;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(184, 139, 74, 0.3),
+                        inset 0 0 20px rgba(184, 139, 74, 0.1);
+            transform: rotateX(2deg) rotateY(3deg);
         }
 
-        /* ===== CONTENT SECTION (LEFT TEXT + RIGHT LAPTOP) ===== */
+        /* PCB Traces */
+        .pcb-traces {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, #b88b4a40 1px, transparent 1px),
+                linear-gradient(0deg, #b88b4a40 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.4;
+        }
+
+        /* CPU */
+        .part.cpu {
+            width: 80px;
+            height: 60px;
+            top: 40%;
+            left: 15%;
+        }
+
+        .cpu-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            border: 2px solid #8b3a3a;
+            border-radius: 4px;
+            box-shadow: 0 0 25px #8b3a3a80, inset 0 0 15px #8b3a3a40;
+        }
+
+        .cpu-pins {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            padding: 8px;
+        }
+
+        .cpu-pins span {
+            background: #b88b4a;
+            height: 2px;
+            width: 100%;
+            box-shadow: 0 0 8px #b88b4a;
+        }
+
+        /* RAM Stick */
+        .part.ram {
+            width: 100px;
+            height: 25px;
+            top: 60%;
+            right: 10%;
+        }
+
+        .ram-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            border: 2px solid #b88b4a;
+            border-radius: 4px;
+            display: flex;
+            gap: 5px;
+            padding: 3px;
+        }
+
+        .ram-chip {
+            flex: 1;
+            background: #8b3a3a;
+            height: 100%;
+            opacity: 0.6;
+        }
+
+        /* Capacitors */
+        .part.capacitor {
+            width: 20px;
+            height: 40px;
+            bottom: 25%;
+            right: 25%;
+        }
+
+        .cap-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #2a2a2a, #1a1a1a);
+            border: 2px solid #b88b4a;
+            border-radius: 8px;
+            transform: rotate(10deg);
+        }
+
+        .cap-stripe {
+            position: absolute;
+            width: 4px;
+            height: 30px;
+            background: #8b3a3a;
+            left: 30%;
+            top: 5px;
+            box-shadow: 0 0 10px #8b3a3a;
+        }
+
+        /* GPU */
+        .part.gpu {
+            width: 70px;
+            height: 40px;
+            top: 70%;
+            left: 20%;
+        }
+
+        .gpu-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #2a2a2a, #0a0a0a);
+            border: 2px solid #8b3a3a;
+            border-radius: 4px;
+            box-shadow: 0 0 20px #8b3a3a;
+        }
+
+        .gpu-fan {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #b88b4a;
+            border-radius: 50%;
+            top: 5px;
+            left: 20px;
+        }
+
+        /* Power Connector */
+        .part.power {
+            width: 50px;
+            height: 30px;
+            bottom: 15%;
+            left: 30%;
+        }
+
+        .power-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #b88b4a;
+            background: #1a1a1a;
+        }
+
+        .power-pins {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            gap: 4px;
+            padding: 5px;
+        }
+
+        .power-pins span {
+            flex: 1;
+            background: #8b3a3a;
+            height: 100%;
+        }
+
+        /* Connection lines between parts (sci-fi) */
+        .connection-line {
+            position: absolute;
+            background: linear-gradient(90deg, #8b3a3a80, transparent);
+            height: 1px;
+            transform-origin: 0 0;
+            box-shadow: 0 0 15px #8b3a3a;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        /* Floating labels */
+        .floating-label {
+            position: absolute;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #b88b4a;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            text-shadow: 0 0 10px #b88b4a;
+            opacity: 0.8;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 6px;
+            border: 1px solid #8b3a3a;
+            pointer-events: none;
+            z-index: 25;
+        }
+
+        /* ===== CONTENT SECTION ===== */
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -214,17 +368,19 @@
             align-items: start;
         }
 
-        /* LEFT SIDE - Your info */
         .left-content {
             padding-right: 2rem;
         }
 
         .left-content h2 {
             font-size: 2rem;
-            font-weight: 400;
+            font-weight: 300;
             color: #b88b4a;
             margin-bottom: 2rem;
             letter-spacing: -0.02em;
+            font-family: monospace;
+            border-bottom: 1px solid #8b3a3a;
+            padding-bottom: 0.5rem;
         }
 
         .section-block {
@@ -232,54 +388,47 @@
         }
 
         .section-block h3 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
             color: #8b3a3a;
             margin-bottom: 1.5rem;
-            border-bottom: 1px solid #2a2a2a;
-            padding-bottom: 0.5rem;
+            font-weight: 400;
         }
 
-        /* Education */
-        .edu-item {
+        .edu-item, .project-item, .ctf-item {
             margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid #2a2a2a;
+            transition: border-color 0.2s;
         }
 
-        .edu-date {
+        .edu-item:hover, .project-item:hover, .ctf-item:hover {
+            border-left-color: #8b3a3a;
+        }
+
+        .edu-date, .ctf-date {
             color: #b88b4a;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-family: monospace;
         }
 
-        .edu-title {
-            font-size: 1.1rem;
+        .edu-title, .ctf-name {
+            font-size: 1rem;
             color: #fff;
             margin: 0.2rem 0;
         }
 
-        .edu-place {
+        .edu-place, .ctf-detail {
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        /* Projects */
         .project-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .project-name {
-            color: #e0e0e0;
-        }
-
-        .project-lang {
-            color: #b88b4a;
-            font-size: 0.8rem;
-            font-family: monospace;
+            padding: 0.5rem 0 0.5rem 1rem;
         }
 
         .project-link {
@@ -293,43 +442,20 @@
             color: #b88b4a;
         }
 
-        /* CTF / Achievements */
-        .ctf-item {
-            margin-bottom: 1.2rem;
-        }
-
-        .ctf-date {
-            color: #8b3a3a;
-            font-size: 0.8rem;
-            font-family: monospace;
-        }
-
-        .ctf-name {
-            color: #fff;
-            font-size: 1rem;
-        }
-
-        .ctf-detail {
-            color: #888;
-            font-size: 0.85rem;
-        }
-
-        /* Hackathons / Awards */
         .coming-soon-block {
             border: 1px dashed #2a2a2a;
             padding: 1rem;
             text-align: center;
             color: #555;
             font-style: italic;
-            margin-top: 0.5rem;
         }
 
-        /* Certifications */
         .cert-item {
-            background: #141414;
+            background: #0f0f0f;
             padding: 1rem;
             margin-bottom: 0.8rem;
-            border-left: 2px solid #8b3a3a;
+            border: 1px solid #2a2a2a;
+            border-left: 3px solid #8b3a3a;
         }
 
         .cert-name {
@@ -338,11 +464,11 @@
 
         .cert-progress {
             color: #b88b4a;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 0.2rem;
         }
 
-        /* RIGHT SIDE - Laptop that assembles */
+        /* RIGHT SIDE - Laptop */
         .right-content {
             position: sticky;
             top: 2rem;
@@ -354,75 +480,74 @@
 
         .assembled-laptop {
             position: relative;
-            width: 400px;
-            height: 300px;
+            width: 450px;
+            height: 350px;
             transform-style: preserve-3d;
-            transform: rotateY(-5deg) rotateX(5deg);
+            transform: rotateY(-8deg) rotateX(6deg);
             transition: transform 0.3s;
         }
 
         .laptop-base {
             position: absolute;
-            width: 380px;
-            height: 250px;
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            width: 400px;
+            height: 260px;
+            background: linear-gradient(145deg, #151515, #080808);
             border: 2px solid #b88b4a;
-            border-radius: 10px;
+            border-radius: 12px;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 10px 30px rgba(139, 58, 58, 0.2);
+            box-shadow: 0 20px 40px rgba(139, 58, 58, 0.3),
+                        inset 0 0 30px #8b3a3a20;
         }
 
         .laptop-screen {
             position: absolute;
-            width: 340px;
-            height: 200px;
-            background: linear-gradient(145deg, #111111, #000000);
+            width: 360px;
+            height: 220px;
+            background: linear-gradient(145deg, #0a0a0a, #000000);
             border: 2px solid #8b3a3a;
             border-radius: 8px;
-            bottom: 200px;
+            bottom: 220px;
             left: 50%;
-            transform: translateX(-50%) rotateX(-10deg);
+            transform: translateX(-50%) rotateX(-12deg);
             transform-origin: bottom;
             overflow: hidden;
+            box-shadow: 0 0 40px #8b3a3a40;
         }
 
         .screen-content {
-            padding: 20px;
+            padding: 25px;
             color: #b88b4a;
             font-family: monospace;
-            font-size: 12px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            text-shadow: 0 0 8px #b88b4a;
         }
 
-        .screen-content::before {
-            content: ">_ kali linux\n>_ system ready\n>_ user: minahil";
-            white-space: pre;
-            color: #8b3a3a;
-        }
-
-        .keyboard {
+        .keyboard-grid {
             position: absolute;
-            width: 300px;
-            height: 80px;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
+            width: 320px;
+            height: 80px;
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             gap: 4px;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         .key {
-            background: #2a2a2a;
+            background: #1a1a1a;
             border: 1px solid #8b3a3a;
             border-radius: 3px;
+            box-shadow: 0 2px 0 #0a0a0a;
         }
 
         .touchpad {
             position: absolute;
-            width: 100px;
+            width: 120px;
             height: 50px;
             background: #1a1a1a;
             border: 1px solid #b88b4a;
@@ -432,23 +557,38 @@
             border-radius: 4px;
         }
 
-        /* Parts that will move during scroll */
-        .floating-part[data-assemble="true"] {
-            transition: all 0.1s linear;
+        /* Contact links */
+        .contact-links {
+            margin-top: 3rem;
+            display: flex;
+            gap: 2rem;
+            color: #444;
+            font-family: monospace;
+            font-size: 0.8rem;
         }
 
-        /* Responsive */
+        .contact-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-links a:hover {
+            color: #b88b4a;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
             .split-layout { grid-template-columns: 1fr; }
             .right-content { height: 400px; }
-            .assembled-laptop { transform: scale(0.8); }
         }
     </style>
 </head>
 <body>
-    <!-- TOP SECTION - Centered text + floating parts -->
+    <!-- TOP SECTION - Centered text + structured sci-fi parts -->
     <section class="section" id="top-section">
+        <div class="grid-background"></div>
+        
         <div class="center-stage">
             <h1>MINAHIL KHAN</h1>
             <div class="title-line">EMERGING PEN TESTER · BUILDING THE ARSENAL</div>
@@ -457,112 +597,135 @@
                 <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
             </div>
             <div class="status">
-                <span>⟫</span> YEAR ONE · PHASE: SYSTEM ASSEMBLY <span>⟫</span>
+                <span>⟫</span> ASSEMBLY · PHASE: STRUCTURAL INTEGRITY <span>⟫</span>
             </div>
         </div>
 
-        <!-- FLOATING HARDWARE PARTS (will move on scroll) -->
+        <!-- FLOATING STRUCTURED PARTS -->
         <div class="floating-parts" id="floatingParts">
-            <div class="part motherboard" id="part1"></div>
-            <div class="part cpu" id="part2"></div>
-            <div class="part ram" id="part3"></div>
-            <div class="part capacitor" id="part4"></div>
-            <div class="part wire" id="part5"></div>
-            <div class="part screw" id="part6"></div>
-            <div class="part gpu" id="part7"></div>
-            <div class="part fan" id="part8"></div>
+            <!-- Motherboard -->
+            <div class="part motherboard" id="part1">
+                <div class="pcb-core"></div>
+                <div class="pcb-traces"></div>
+                <div class="floating-label" style="top: -20px; left: 20px;">ATX · REV 2.0</div>
+            </div>
+
+            <!-- CPU -->
+            <div class="part cpu" id="part2">
+                <div class="cpu-core"></div>
+                <div class="cpu-pins">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="floating-label" style="top: -20px;">x86_64 · 8-CORE</div>
+            </div>
+
+            <!-- RAM -->
+            <div class="part ram" id="part3">
+                <div class="ram-core">
+                    <div class="ram-chip"></div>
+                    <div class="ram-chip"></div>
+                    <div class="ram-chip"></div>
+                    <div class="ram-chip"></div>
+                </div>
+                <div class="floating-label" style="top: -20px; right: 0;">DDR4 · 16GB</div>
+            </div>
+
+            <!-- Capacitor -->
+            <div class="part capacitor" id="part4">
+                <div class="cap-core"></div>
+                <div class="cap-stripe"></div>
+                <div class="floating-label" style="left: 30px;">1000µF</div>
+            </div>
+
+            <!-- GPU -->
+            <div class="part gpu" id="part5">
+                <div class="gpu-core"></div>
+                <div class="gpu-fan"></div>
+                <div class="floating-label" style="top: -20px;">RTX · 3070</div>
+            </div>
+
+            <!-- Power Connector -->
+            <div class="part power" id="part6">
+                <div class="power-core"></div>
+                <div class="power-pins">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="floating-label" style="bottom: -20px;">PCIe · 12V</div>
+            </div>
+
+            <!-- Connection lines (will be positioned by JS) -->
+            <svg style="position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: 18;">
+                <line id="conn1" x1="0" y1="0" x2="0" y2="0" stroke="#8b3a3a" stroke-width="1" stroke-dasharray="5,5" opacity="0.4"/>
+                <line id="conn2" x1="0" y1="0" x2="0" y2="0" stroke="#b88b4a" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+            </svg>
         </div>
     </section>
 
-    <!-- CONTENT SECTION - Left text + Right laptop -->
+    <!-- CONTENT SECTION -->
     <section class="section" id="content-section">
         <div class="container">
             <div class="split-layout">
                 <!-- LEFT: Your info -->
                 <div class="left-content">
-                    <h2>minahil · _build.log</h2>
+                    <h2>initial_access</h2>
                     
-                    <!-- Education -->
                     <div class="section-block">
                         <h3>EDUCATION</h3>
                         <div class="edu-item">
                             <div class="edu-date">2025 — 2029</div>
-                            <div class="edu-title">Bachelors in Computer & Information Technology</div>
+                            <div class="edu-title">B.C.I.T · Cybersecurity</div>
                             <div class="edu-place">NED University · CGPA: 3.8</div>
                         </div>
                     </div>
 
-                    <!-- Active Projects -->
                     <div class="section-block">
                         <h3>ACTIVE PROJECTS</h3>
-                        
                         <div class="project-item">
-                            <span class="project-name">Caesar Cipher</span>
-                            <span class="project-lang">C</span>
-                            <a href="https://github.com/Minahil66/Caesar-Cipher" class="project-link">[repo]</a>
+                            <span>Caesar Cipher · C</span>
+                            <a href="https://github.com/Minahil66/Caesar-Cipher" class="project-link">project repo</a>
                         </div>
-                        
                         <div class="project-item">
-                            <span class="project-name">Cipher Cascade</span>
-                            <span class="project-lang">4 ciphers</span>
-                            <a href="https://github.com/Minahil66/CipherCascade" class="project-link">[repo]</a>
+                            <span>Cipher Cascade · C++</span>
+                            <a href="https://github.com/Minahil66/CipherCascade" class="project-link">project repo</a>
                         </div>
-                        
                         <div class="project-item">
-                            <span class="project-name">Bash SysMon</span>
-                            <span class="project-lang">bash</span>
-                            <a href="https://github.com/Minahil66/Bash" class="project-link">[repo]</a>
+                            <span>Bash SysMon · automation</span>
+                            <a href="https://github.com/Minahil66/Bash" class="project-link">project repo</a>
                         </div>
                     </div>
 
-                    <!-- CTF Operations -->
                     <div class="section-block">
                         <h3>CTF OPERATIONS</h3>
-                        
                         <div class="ctf-item">
-                            <div class="ctf-date">2025 · FIRST OP</div>
-                            <div class="ctf-name">NED University CTF 2.0</div>
-                            <div class="ctf-detail">Team ZeroDayNexus · 3 challenges</div>
+                            <div class="ctf-date">2025 · OP-01</div>
+                            <div class="ctf-name">NEDU CTF 2.0</div>
+                            <div class="ctf-detail">ZeroDayNexus · 3 solves</div>
                         </div>
-                        
                         <div class="ctf-item">
-                            <div class="ctf-date">2026 · SECOND OP</div>
+                            <div class="ctf-date">2026 · OP-02</div>
                             <div class="ctf-name">BOOTCAMP CTF</div>
-                            <div class="ctf-detail">Team ZeroDayNexus · 7 challenges</div>
+                            <div class="ctf-detail">ZeroDayNexus · 7 solves</div>
                         </div>
-                        
-                        <div class="coming-soon-block">more operations pending...</div>
-                    </div>
-
-                    <!-- Hackathons + Awards -->
-                    <div class="section-block">
-                        <h3>HACKATHONS</h3>
-                        <div class="coming-soon-block">registering for 2026 · building the trophy case</div>
+                        <div class="coming-soon-block">pending operations...</div>
                     </div>
 
                     <div class="section-block">
-                        <h3>AWARDS & HONORS</h3>
-                        <div class="coming-soon-block">coming soon</div>
-                    </div>
-
-                    <!-- Certifications -->
-                    <div class="section-block">
-                        <h3>CERTIFICATIONS (IN PROGRESS)</h3>
+                        <h3>CERTIFICATIONS</h3>
                         <div class="cert-item">
-                            <div class="cert-name">Certified Associate Penetration Tester</div>
-                            <div class="cert-progress">40% complete</div>
+                            <div class="cert-name">Certified Associate Pen Tester</div>
+                            <div class="cert-progress">40% · IN PROGRESS</div>
                         </div>
                         <div class="cert-item">
                             <div class="cert-name">TryHackMe · Pre Security</div>
-                            <div class="cert-progress">completed</div>
+                            <div class="cert-progress">COMPLETED</div>
                         </div>
                     </div>
 
-                    <!-- Contact -->
-                    <div style="margin-top: 3rem; color: #444; font-size: 0.9rem; display: flex; gap: 2rem; flex-wrap: wrap;">
-                        <a href="https://github.com/Minahil66" style="color: #888; text-decoration: none;">github/Minahil66</a>
-                        <a href="#" style="color: #888; text-decoration: none;">linkedin/in/minahil</a>
-                        <a href="#" style="color: #888; text-decoration: none;">tryhackme/u/minahil</a>
+                    <div class="contact-links">
+                        <a href="https://github.com/Minahil66">github/Minahil66</a>
+                        <a href="#">linkedin/in/minahil</a>
+                        <a href="#">tryhackme/u/minahil</a>
                     </div>
                 </div>
 
@@ -570,12 +733,15 @@
                 <div class="right-content">
                     <div class="assembled-laptop" id="assembledLaptop">
                         <div class="laptop-screen">
-                            <div class="screen-content"></div>
+                            <div class="screen-content">
+                                >_ kali linux 6.6<br>
+                                >_ user: minahil<br>
+                                >_ shell: zsh<br>
+                                >_ ready for op
+                            </div>
                         </div>
                         <div class="laptop-base">
-                            <div class="keyboard">
-                                <!-- Keys generated by JS -->
-                            </div>
+                            <div class="keyboard-grid" id="keyboard"></div>
                             <div class="touchpad"></div>
                         </div>
                     </div>
@@ -585,101 +751,8 @@
     </section>
 
     <script>
-        // Get all floating parts
-        const parts = document.querySelectorAll('.part');
-        const laptop = document.getElementById('assembledLaptop');
-        const topSection = document.getElementById('top-section');
-        const contentSection = document.getElementById('content-section');
-
-        // Target positions for assembly (relative to laptop)
-        const targetPositions = {
-            part1: { left: '45%', top: '55%', rotate: 0 }, // motherboard becomes base
-            part2: { left: '50%', top: '45%', rotate: 0 }, // cpu onto motherboard
-            part3: { left: '40%', top: '48%', rotate: 0 }, // ram
-            part4: { left: '60%', top: '48%', rotate: 0 }, // capacitor
-            part5: { left: '48%', top: '52%', rotate: 45 }, // wire (as trace)
-            part6: { left: '52%', top: '52%', rotate: 0 }, // screw
-            part7: { left: '55%', top: '55%', rotate: 0 }, // gpu
-            part8: { left: '35%', top: '55%', rotate: 0 } // fan
-        };
-
-        // Store original positions
-        let originalPositions = [];
-        
-        // Save original positions on load
-        window.addEventListener('load', () => {
-            parts.forEach((part, index) => {
-                const rect = part.getBoundingClientRect();
-                const topSectionRect = topSection.getBoundingClientRect();
-                
-                originalPositions[index] = {
-                    left: (rect.left - topSectionRect.left) / topSectionRect.width * 100,
-                    top: (rect.top - topSectionRect.top) / topSectionRect.height * 100,
-                    rotate: part.style.transform ? parseInt(part.style.transform.match(/-?\d+/)?.[0] || 0) : 0
-                };
-            });
-        });
-
-        // Scroll animation
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const topSectionHeight = topSection.offsetHeight;
-            const contentSectionTop = contentSection.offsetTop;
-            
-            // Calculate progress (0 to 1) through the transition
-            let progress = 0;
-            
-            if (scrollY > topSectionHeight - 200) {
-                // Start transition when approaching bottom of top section
-                const startPoint = topSectionHeight - 300;
-                const endPoint = contentSectionTop + 200;
-                progress = Math.min(1, Math.max(0, (scrollY - startPoint) / (endPoint - startPoint)));
-            }
-            
-            // Animate parts
-            parts.forEach((part, index) => {
-                const partId = part.id;
-                if (!targetPositions[partId]) return;
-                
-                const target = targetPositions[partId];
-                const original = originalPositions[index] || { left: 0, top: 0, rotate: 0 };
-                
-                if (progress === 0) {
-                    // At top: scattered
-                    part.style.left = original.left + '%';
-                    part.style.top = original.top + '%';
-                    part.style.transform = `rotate(${original.rotate}deg)`;
-                } else if (progress === 1) {
-                    // Fully assembled: move to laptop position
-                    // Convert target percentages to viewport-relative for top section
-                    part.style.left = `calc(50% + ${parseFloat(target.left) - 50}%)`; // This needs refinement
-                    part.style.top = `calc(50% + ${parseFloat(target.top) - 50}%)`;
-                    part.style.transform = `rotate(${target.rotate}deg)`;
-                } else {
-                    // Interpolate
-                    const left = original.left * (1 - progress) + parseFloat(target.left) * progress;
-                    const top = original.top * (1 - progress) + parseFloat(target.top) * progress;
-                    const rotate = original.rotate * (1 - progress) + target.rotate * progress;
-                    
-                    part.style.left = left + '%';
-                    part.style.top = top + '%';
-                    part.style.transform = `rotate(${rotate}deg)`;
-                }
-            });
-            
-            // Fade out parts as they approach laptop
-            parts.forEach(part => {
-                part.style.opacity = 1 - progress * 0.8; // Fade slightly but not completely
-            });
-            
-            // Rotate laptop slightly based on scroll
-            if (laptop) {
-                laptop.style.transform = `rotateY(${-5 + progress * 2}deg) rotateX(${5 - progress * 2}deg)`;
-            }
-        });
-
         // Generate keyboard keys
-        const keyboard = document.querySelector('.keyboard');
+        const keyboard = document.getElementById('keyboard');
         if (keyboard) {
             for (let i = 0; i < 30; i++) {
                 const key = document.createElement('div');
@@ -687,6 +760,122 @@
                 keyboard.appendChild(key);
             }
         }
+
+        // Get all floating parts
+        const parts = document.querySelectorAll('.part');
+        const topSection = document.getElementById('top-section');
+        const contentSection = document.getElementById('content-section');
+        const laptop = document.getElementById('assembledLaptop');
+        const conn1 = document.getElementById('conn1');
+        const conn2 = document.getElementById('conn2');
+
+        // Store original positions
+        let originalPositions = [];
+
+        // Connection lines between parts (for sci-fi effect)
+        function updateConnections() {
+            const part1 = document.getElementById('part1');
+            const part2 = document.getElementById('part2');
+            const part3 = document.getElementById('part3');
+            
+            if (part1 && part2 && conn1) {
+                const rect1 = part1.getBoundingClientRect();
+                const rect2 = part2.getBoundingClientRect();
+                
+                conn1.setAttribute('x1', rect1.left + rect1.width/2);
+                conn1.setAttribute('y1', rect1.top + rect1.height/2);
+                conn1.setAttribute('x2', rect2.left + rect2.width/2);
+                conn1.setAttribute('y2', rect2.top + rect2.height/2);
+            }
+            
+            if (part2 && part3 && conn2) {
+                const rect2 = part2.getBoundingClientRect();
+                const rect3 = part3.getBoundingClientRect();
+                
+                conn2.setAttribute('x1', rect2.left + rect2.width/2);
+                conn2.setAttribute('y1', rect2.top + rect2.height/2);
+                conn2.setAttribute('x2', rect3.left + rect3.width/2);
+                conn2.setAttribute('y2', rect3.top + rect3.height/2);
+            }
+        }
+
+        // Save original positions
+        window.addEventListener('load', () => {
+            const topRect = topSection.getBoundingClientRect();
+            
+            parts.forEach((part, index) => {
+                const rect = part.getBoundingClientRect();
+                originalPositions[index] = {
+                    left: (rect.left - topRect.left) / topRect.width * 100,
+                    top: (rect.top - topRect.top) / topRect.height * 100,
+                    rotate: 0
+                };
+            });
+            
+            updateConnections();
+        });
+
+        // Target positions (where parts go when assembled)
+        const targets = {
+            part1: { left: 65, top: 55 },  // motherboard
+            part2: { left: 70, top: 48 },  // cpu
+            part3: { left: 62, top: 48 },  // ram
+            part4: { left: 68, top: 60 },  // capacitor
+            part5: { left: 58, top: 52 },  // gpu
+            part6: { left: 72, top: 58 }   // power
+        };
+
+        // Scroll animation
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const topSectionHeight = topSection.offsetHeight;
+            const contentSectionTop = contentSection.offsetTop;
+            
+            let progress = 0;
+            
+            if (scrollY > topSectionHeight - 400) {
+                const startPoint = topSectionHeight - 500;
+                const endPoint = contentSectionTop + 300;
+                progress = Math.min(1, Math.max(0, (scrollY - startPoint) / (endPoint - startPoint)));
+            }
+            
+            // Animate parts
+            parts.forEach((part, index) => {
+                const partId = part.id;
+                if (!targets[partId]) return;
+                
+                const target = targets[partId];
+                const original = originalPositions[index] || { left: 0, top: 0 };
+                
+                if (progress === 0) {
+                    part.style.left = original.left + '%';
+                    part.style.top = original.top + '%';
+                    part.style.opacity = '1';
+                } else if (progress === 1) {
+                    part.style.left = target.left + '%';
+                    part.style.top = target.top + '%';
+                    part.style.opacity = '0.4';
+                } else {
+                    const left = original.left * (1 - progress) + target.left * progress;
+                    const top = original.top * (1 - progress) + target.top * progress;
+                    
+                    part.style.left = left + '%';
+                    part.style.top = top + '%';
+                    part.style.opacity = 1 - progress * 0.6;
+                }
+            });
+            
+            // Update connection lines
+            updateConnections();
+            
+            // Slight laptop movement
+            if (laptop) {
+                laptop.style.transform = `rotateY(${-8 + progress * 4}deg) rotateX(${6 - progress * 3}deg)`;
+            }
+        });
+
+        // Update connections on resize
+        window.addEventListener('resize', updateConnections);
     </script>
 </body>
 </html>
