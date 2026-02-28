@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan ·  A paranoid cyber security student</title>
+    <title>minahil khan · HOLOGRAPHIC BLUEPRINT</title>
     <style>
         * {
             margin: 0;
@@ -163,23 +163,24 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .split-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 2rem;
             align-items: start;
         }
 
         .left-content {
-            padding-right: 2rem;
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(8px);
             padding: 2rem;
             border-radius: 12px;
             border: 1px solid #8b1a1a40;
             pointer-events: auto;
+            max-width: 500px;
         }
 
         .left-content h2 {
@@ -312,7 +313,7 @@
                     <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
                 </div>
                 <div class="status">
-                    <span>⟫</span> INITIAL ACCESS · PHASE: 1 <span>⟫</span>
+                    <span>⟫</span> HOLOGRAPHIC BLUEPRINT · PHASE: ASSEMBLY <span>⟫</span>
                 </div>
             </div>
         </section>
@@ -375,7 +376,7 @@
                         </div>
 
                         <div class="contact-links">
-                            <a href="https://github.com/Minahil66">gGithub</a>
+                            <a href="https://github.com/Minahil66">GitHub</a>
                             <a href="https://www.linkedin.com/in/minahil-k-a573b8384?utm_source=share_via&utm_content=profile&utm_medium=member_android">Linkedin</a>
                             <a href="#">tryhackme</a>
                         </div>
@@ -401,7 +402,6 @@
                 col.style.animationDuration = Math.random() * 3 + 2 + 's';
                 col.style.animationDelay = Math.random() * 5 + 's';
                 
-                // Generate random binary string for this column
                 const length = Math.floor(Math.random() * 30 + 20);
                 let text = '';
                 for (let j = 0; j < length; j++) {
@@ -435,348 +435,247 @@
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0a0a0a);
         
-        // Camera - positioned to see laptop at x=6
-        const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(8, 3.5, 14); // Moved right and back
-        camera.lookAt(6, 1.5, 0.5);
+        // Camera - positioned to see laptop at x=7
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(9, 3, 12);
+        camera.lookAt(7, 1.5, 0.5);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.shadowMap.enabled = false; // No shadows for holographic look
         renderer.setPixelRatio(window.devicePixelRatio);
         container.appendChild(renderer.domElement);
 
-        // --- LIGHTS (cinematic) ---
+        // --- LIGHTS (ambient for holographic) ---
         const ambientLight = new THREE.AmbientLight(0x403020);
         scene.add(ambientLight);
 
         // Key light - warm beige
-        const keyLight = new THREE.DirectionalLight(0xe0c9a6, 1.5);
-        keyLight.position.set(8, 12, 10);
-        keyLight.castShadow = true;
-        keyLight.shadow.mapSize.width = 2048;
-        keyLight.shadow.mapSize.height = 2048;
+        const keyLight = new THREE.DirectionalLight(0xe0c9a6, 1.2);
+        keyLight.position.set(5, 10, 10);
         scene.add(keyLight);
 
-        // Fill light - deep red
-        const fillLight = new THREE.DirectionalLight(0x8b1a1a, 0.8);
-        fillLight.position.set(-8, 5, 8);
-        scene.add(fillLight);
+        // Blueprint glow - deep red
+        const blueLight = new THREE.PointLight(0x8b1a1a, 1.5);
+        blueLight.position.set(7, 2, 2);
+        scene.add(blueLight);
 
-        // Rim light - blood glow
-        const rimLight = new THREE.PointLight(0x8b1a1a, 1.2);
-        rimLight.position.set(2, 4, -10);
-        scene.add(rimLight);
-
-        // Additional spotlights for metallic reflections
-        const spot1 = new THREE.SpotLight(0xe0c9a6, 0.5);
-        spot1.position.set(10, 8, 10);
-        spot1.angle = 0.3;
-        scene.add(spot1);
-
-        // Grid floor (subtle)
-        const gridHelper = new THREE.GridHelper(40, 50, 0xe0c9a6, 0x8b1a1a);
-        gridHelper.position.y = -0.5;
+        // Grid floor (very subtle)
+        const gridHelper = new THREE.GridHelper(30, 40, 0xe0c9a6, 0x8b1a1a);
+        gridHelper.position.y = -0.3;
         gridHelper.material.opacity = 0.1;
         gridHelper.material.transparent = true;
         scene.add(gridHelper);
 
-        // --- LAPTOP (Moved to x=6, fully visible) ---
+        // --- HOLOGRAPHIC LAPTOP (Blueprint style - wireframe + glow) ---
         
-        // Base - brushed metal
-        const laptopBaseGeo = new THREE.BoxGeometry(4.8, 0.3, 3.4);
-        const laptopBaseMat = new THREE.MeshStandardMaterial({ 
-            color: 0x2a2a2a,
-            emissive: 0x0a0a0a,
-            roughness: 0.3,
-            metalness: 0.8,
-            emissiveIntensity: 0.1
-        });
-        const laptopBase = new THREE.Mesh(laptopBaseGeo, laptopBaseMat);
-        laptopBase.position.set(6, 0.3, 0.5);
-        laptopBase.castShadow = true;
-        laptopBase.receiveShadow = true;
-        scene.add(laptopBase);
+        // Laptop base - wireframe
+        const baseWireframe = new THREE.LineSegments(
+            new THREE.EdgesGeometry(new THREE.BoxGeometry(4.5, 0.2, 3.2)),
+            new THREE.LineBasicMaterial({ color: 0xe0c9a6, linewidth: 1 })
+        );
+        baseWireframe.position.set(7, 0.3, 0.5);
+        scene.add(baseWireframe);
 
-        // Base trim - beige metal
-        const trimGeo = new THREE.BoxGeometry(4.9, 0.1, 3.5);
-        const trimMat = new THREE.MeshStandardMaterial({ 
-            color: 0xe0c9a6,
-            emissive: 0x3a2a1a,
-            roughness: 0.4,
-            metalness: 0.6
+        // Base glow
+        const baseGlowGeo = new THREE.BoxGeometry(4.5, 0.2, 3.2);
+        const baseGlowMat = new THREE.MeshBasicMaterial({ 
+            color: 0x8b1a1a, 
+            transparent: true, 
+            opacity: 0.15,
+            wireframe: true
         });
-        const trim = new THREE.Mesh(trimGeo, trimMat);
-        trim.position.set(6, 0.45, 0.5);
-        scene.add(trim);
+        const baseGlow = new THREE.Mesh(baseGlowGeo, baseGlowMat);
+        baseGlow.position.set(7, 0.3, 0.5);
+        scene.add(baseGlow);
 
-        // Screen
-        const screenGeo = new THREE.BoxGeometry(4.3, 2.7, 0.2);
-        const screenMat = new THREE.MeshStandardMaterial({ 
-            color: 0x1a1a1a,
-            emissive: 0x0a0a0a,
-            roughness: 0.2,
-            metalness: 0.3
-        });
-        const screen = new THREE.Mesh(screenGeo, screenMat);
-        screen.position.set(6, 1.9, 0.5);
-        screen.castShadow = true;
-        screen.receiveShadow = true;
-        scene.add(screen);
-
-        // Screen content texture
-        const screenCanvas = document.createElement('canvas');
-        screenCanvas.width = 1024;
-        screenCanvas.height = 1024;
-        const screenCtx = screenCanvas.getContext('2d');
-        
-        function updateScreenTexture() {
-            screenCtx.fillStyle = '#0a0a0a';
-            screenCtx.fillRect(0, 0, 1024, 1024);
-            
-            // Kali Linux logo
-            screenCtx.fillStyle = '#8b1a1a';
-            screenCtx.font = 'bold 60px monospace';
-            screenCtx.textAlign = 'center';
-            screenCtx.fillText('KALI LINUX', 512, 250);
-            
-            screenCtx.fillStyle = '#e0c9a6';
-            screenCtx.font = '40px monospace';
-            screenCtx.fillText('minahil@ark', 512, 400);
-            
-            screenCtx.fillStyle = '#8b1a1a';
-            screenCtx.font = '56px monospace';
-            screenCtx.fillText('ACTIVE', 512, 550);
-            
-            // Terminal lines with random numbers
-            screenCtx.fillStyle = '#a58e6d';
-            screenCtx.font = '24px monospace';
-            screenCtx.textAlign = 'left';
-            screenCtx.fillText('>_ system ready', 150, 700);
-            screenCtx.fillText('>_ ip: 192.168.1.' + Math.floor(Math.random()*255), 150, 750);
-            screenCtx.fillText('>_ uptime: ' + Math.floor(Math.random()*100) + ' days', 150, 800);
-            
-            screenTexture.needsUpdate = true;
-        }
-
-        const screenTexture = new THREE.CanvasTexture(screenCanvas);
-        const screenMaterial = new THREE.MeshStandardMaterial({ 
-            map: screenTexture,
-            emissive: 0x1a0a0a,
-            emissiveIntensity: 0.3,
-            roughness: 0.3,
-            metalness: 0.1
-        });
-        
-        const screenDisplay = new THREE.Mesh(screenGeo, screenMaterial);
-        screenDisplay.position.set(6, 1.9, 0.55);
-        screenDisplay.castShadow = true;
-        screenDisplay.receiveShadow = true;
-        scene.add(screenDisplay);
-        
-        updateScreenTexture();
+        // Screen - wireframe
+        const screenWireframe = new THREE.LineSegments(
+            new THREE.EdgesGeometry(new THREE.BoxGeometry(4.0, 2.5, 0.2)),
+            new THREE.LineBasicMaterial({ color: 0xe0c9a6, linewidth: 1 })
+        );
+        screenWireframe.position.set(7, 1.8, 0.5);
+        scene.add(screenWireframe);
 
         // Screen glow
-        const glowGeo = new THREE.BoxGeometry(4.4, 2.8, 0.1);
-        const glowMat = new THREE.MeshStandardMaterial({ 
+        const screenGlowGeo = new THREE.BoxGeometry(4.0, 2.5, 0.2);
+        const screenGlowMat = new THREE.MeshBasicMaterial({ 
             color: 0x8b1a1a, 
-            emissive: 0x3a0a0a, 
             transparent: true, 
-            opacity: 0.15 
+            opacity: 0.1,
+            wireframe: true
         });
-        const glow = new THREE.Mesh(glowGeo, glowMat);
-        glow.position.set(6, 1.9, 0.6);
-        scene.add(glow);
+        const screenGlow = new THREE.Mesh(screenGlowGeo, screenGlowMat);
+        screenGlow.position.set(7, 1.8, 0.5);
+        scene.add(screenGlow);
 
-        // Keyboard keys - metallic beige
-        const keyMat = new THREE.MeshStandardMaterial({ 
-            color: 0xe0c9a6,
-            emissive: 0x2a1a0a,
-            roughness: 0.4,
-            metalness: 0.5
+        // Screen content (holographic text)
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#8b1a1a';
+        ctx.font = 'bold 40px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('KALI', 256, 200);
+        ctx.fillText('minahil@ark', 256, 300);
+        ctx.fillText('ACTIVE', 256, 400);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        const screenMat = new THREE.MeshBasicMaterial({ 
+            map: texture, 
+            transparent: true, 
+            opacity: 0.4,
+            side: THREE.DoubleSide
         });
-        
-        for (let i = 0; i < 22; i++) {
+        const screenDisplay = new THREE.Mesh(new THREE.PlaneGeometry(3.8, 2.3), screenMat);
+        screenDisplay.position.set(7, 1.8, 0.6);
+        scene.add(screenDisplay);
+
+        // Keyboard (dots for keys)
+        for (let i = 0; i < 20; i++) {
             for (let j = 0; j < 6; j++) {
-                const keyGeo = new THREE.BoxGeometry(0.18, 0.05, 0.18);
-                const key = new THREE.Mesh(keyGeo, keyMat);
-                key.position.set(4.7 + i*0.2, 0.55, -0.6 + j*0.22);
-                key.castShadow = true;
-                key.receiveShadow = true;
-                scene.add(key);
+                const keyDot = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.05, 4, 4),
+                    new THREE.MeshBasicMaterial({ color: 0xe0c9a6, transparent: true, opacity: 0.3 })
+                );
+                keyDot.position.set(5.7 + i*0.2, 0.35, -0.4 + j*0.22);
+                scene.add(keyDot);
             }
         }
 
-        // Touchpad - blood red metal
-        const touchpadGeo = new THREE.BoxGeometry(1.4, 0.05, 0.7);
-        const touchpadMat = new THREE.MeshStandardMaterial({ 
-            color: 0x8b1a1a,
-            emissive: 0x2a0a0a,
-            roughness: 0.3,
-            metalness: 0.6
-        });
-        const touchpad = new THREE.Mesh(touchpadGeo, touchpadMat);
-        touchpad.position.set(6, 0.35, 0.5);
-        touchpad.castShadow = true;
-        touchpad.receiveShadow = true;
-        scene.add(touchpad);
-
-        // --- METAL PARTS (Realistic materials) ---
+        // --- HOLOGRAPHIC FLOATING PARTS (Blueprint style) ---
         const parts = [];
 
-        function createMetalPart(geo, baseColor, emissiveColor, metalnessVal, roughnessVal, x, y, z) {
-            const mat = new THREE.MeshStandardMaterial({ 
-                color: baseColor,
-                emissive: emissiveColor,
-                roughness: roughnessVal,
-                metalness: metalnessVal,
-                emissiveIntensity: 0.2
+        function createHoloPart(geo, color, x, y, z, scale = 1) {
+            // Wireframe
+            const wireframe = new THREE.LineSegments(
+                new THREE.EdgesGeometry(geo),
+                new THREE.LineBasicMaterial({ color: color, linewidth: 1 })
+            );
+            wireframe.position.set(x, y, z);
+            wireframe.scale.set(scale, scale, scale);
+            scene.add(wireframe);
+            
+            // Glow mesh
+            const glowMat = new THREE.MeshBasicMaterial({ 
+                color: color, 
+                transparent: true, 
+                opacity: 0.1,
+                wireframe: true
             });
-            const mesh = new THREE.Mesh(geo, mat);
-            mesh.position.set(x, y, z);
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-            scene.add(mesh);
-            return mesh;
+            const glow = new THREE.Mesh(geo, glowMat);
+            glow.position.set(x, y, z);
+            glow.scale.set(scale, scale, scale);
+            scene.add(glow);
+            
+            return { wireframe, glow };
         }
 
-        // 1. Motherboard - dark metal with copper traces
-        const mb = createMetalPart(new THREE.BoxGeometry(3.8, 0.2, 3.0), 0x3a3a3a, 0x1a1a1a, 0.7, 0.4, -5, 2.2, -3);
-        parts.push({ mesh: mb, targetPos: new THREE.Vector3(6, 0.5, 0.5) });
+        // 1. Motherboard
+        const mbGroup = createHoloPart(new THREE.BoxGeometry(3.5, 0.2, 2.8), 0xe0c9a6, -5, 2.5, -4);
+        parts.push({ 
+            wireframe: mbGroup.wireframe, 
+            glow: mbGroup.glow,
+            targetPos: new THREE.Vector3(7, 0.5, 0.5),
+            startPos: new THREE.Vector3(-5, 2.5, -4)
+        });
 
-        // Copper traces (small cylinders)
-        for (let i = 0; i < 12; i++) {
-            const traceGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.8);
-            const traceMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a6, metalness: 0.9, roughness: 0.3 });
-            const trace = new THREE.Mesh(traceGeo, traceMat);
-            trace.position.set(-5 + i*0.3, 2.3, -2.5);
-            trace.rotation.x = Math.PI/2;
-            trace.rotation.z = Math.random() * 0.5;
-            scene.add(trace);
-            parts.push({ mesh: trace, targetPos: new THREE.Vector3(6 + i*0.1, 0.6, 0.4) });
-        }
+        // 2. CPU
+        const cpuGroup = createHoloPart(new THREE.BoxGeometry(1.4, 0.5, 1.4), 0x8b1a1a, -4, 3.2, -3);
+        parts.push({ 
+            wireframe: cpuGroup.wireframe, 
+            glow: cpuGroup.glow,
+            targetPos: new THREE.Vector3(6.8, 0.9, 0.4),
+            startPos: new THREE.Vector3(-4, 3.2, -3)
+        });
 
-        // 2. CPU - brushed metal with gold pins
-        const cpuGeo = new THREE.BoxGeometry(1.4, 0.5, 1.4);
-        const cpu = createMetalPart(cpuGeo, 0x8a8a8a, 0x2a2a2a, 0.8, 0.3, -4, 2.8, -2);
-        parts.push({ mesh: cpu, targetPos: new THREE.Vector3(5.8, 0.9, 0.3) });
-
-        // CPU IHS (top) - polished metal
-        const ihsGeo = new THREE.BoxGeometry(1.2, 0.1, 1.2);
-        const ihsMat = new THREE.MeshStandardMaterial({ color: 0xc0c0c0, metalness: 0.9, roughness: 0.2 });
-        const ihs = new THREE.Mesh(ihsGeo, ihsMat);
-        ihs.position.set(-4, 3.0, -2);
-        scene.add(ihs);
-        parts.push({ mesh: ihs, targetPos: new THREE.Vector3(5.8, 1.0, 0.3) });
-
-        // Gold pins
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) {
-                const pinGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.15);
-                const pinMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a6, metalness: 0.9, roughness: 0.2 });
-                const pin = new THREE.Mesh(pinGeo, pinMat);
-                pin.position.set(-4 + i*0.12, 2.6, -2 + j*0.12);
-                scene.add(pin);
-                parts.push({ mesh: pin, targetPos: new THREE.Vector3(5.8 + i*0.06, 0.7, 0.3 + j*0.06) });
+        // CPU pins (smaller cubes)
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 6; j++) {
+                const pinGroup = createHoloPart(new THREE.BoxGeometry(0.1, 0.15, 0.1), 0xe0c9a6, -4 + i*0.15, 2.9, -3 + j*0.15);
+                parts.push({ 
+                    wireframe: pinGroup.wireframe, 
+                    glow: pinGroup.glow,
+                    targetPos: new THREE.Vector3(6.8 + i*0.06, 0.6, 0.4 + j*0.06),
+                    startPos: new THREE.Vector3(-4 + i*0.15, 2.9, -3 + j*0.15)
+                });
             }
         }
 
-        // 3. RAM - dark PCB with gold fingers
-        const ramGeo = new THREE.BoxGeometry(1.8, 0.15, 0.4);
-        const ram = createMetalPart(ramGeo, 0x2a3a2a, 0x0a1a0a, 0.4, 0.6, -3, 2.4, -3.8);
-        parts.push({ mesh: ram, targetPos: new THREE.Vector3(5.5, 0.7, 0.1) });
+        // 3. RAM
+        const ramGroup = createHoloPart(new THREE.BoxGeometry(1.8, 0.15, 0.4), 0xe0c9a6, -3, 2.8, -4.5);
+        parts.push({ 
+            wireframe: ramGroup.wireframe, 
+            glow: ramGroup.glow,
+            targetPos: new THREE.Vector3(6.5, 0.7, 0.2),
+            startPos: new THREE.Vector3(-3, 2.8, -4.5)
+        });
 
         // RAM chips
         for (let k = 0; k < 4; k++) {
-            const chipGeo = new THREE.BoxGeometry(0.25, 0.1, 0.2);
-            const chipMat = new THREE.MeshStandardMaterial({ color: 0x4a4a4a, metalness: 0.6, roughness: 0.4 });
-            const chip = new THREE.Mesh(chipGeo, chipMat);
-            chip.position.set(-3.3 + k*0.4, 2.5, -3.9);
-            scene.add(chip);
-            parts.push({ mesh: chip, targetPos: new THREE.Vector3(5.4 + k*0.1, 0.75, 0.05) });
+            const chipGroup = createHoloPart(new THREE.BoxGeometry(0.25, 0.1, 0.2), 0x8b1a1a, -3.3 + k*0.4, 2.9, -4.6);
+            parts.push({ 
+                wireframe: chipGroup.wireframe, 
+                glow: chipGroup.glow,
+                targetPos: new THREE.Vector3(6.4 + k*0.1, 0.75, 0.15),
+                startPos: new THREE.Vector3(-3.3 + k*0.4, 2.9, -4.6)
+            });
         }
 
-        // Gold fingers
-        for (let i = 0; i < 16; i++) {
-            const fingerGeo = new THREE.BoxGeometry(0.06, 0.02, 0.15);
-            const fingerMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a6, metalness: 0.9, roughness: 0.2 });
-            const finger = new THREE.Mesh(fingerGeo, fingerMat);
-            finger.position.set(-3.5 + i*0.12, 2.35, -4.0);
-            scene.add(finger);
-            parts.push({ mesh: finger, targetPos: new THREE.Vector3(5.3 + i*0.06, 0.65, -0.05) });
-        }
-
-        // 4. GPU - brushed metal with copper heat pipes
-        const gpuGeo = new THREE.BoxGeometry(2.2, 0.5, 1.2);
-        const gpu = createMetalPart(gpuGeo, 0x6a6a6a, 0x2a2a2a, 0.7, 0.4, -5, 3.0, 1.2);
-        parts.push({ mesh: gpu, targetPos: new THREE.Vector3(6.3, 1.0, 0.9) });
+        // 4. GPU
+        const gpuGroup = createHoloPart(new THREE.BoxGeometry(2.2, 0.5, 1.2), 0xe0c9a6, -5, 3.5, 0.5);
+        parts.push({ 
+            wireframe: gpuGroup.wireframe, 
+            glow: gpuGroup.glow,
+            targetPos: new THREE.Vector3(7.3, 1.0, 0.8),
+            startPos: new THREE.Vector3(-5, 3.5, 0.5)
+        });
 
         // GPU die
-        const dieGeo = new THREE.BoxGeometry(0.8, 0.1, 0.5);
-        const dieMat = new THREE.MeshStandardMaterial({ color: 0x3a4a5a, metalness: 0.5, roughness: 0.3 });
-        const die = new THREE.Mesh(dieGeo, dieMat);
-        die.position.set(-5, 3.2, 1.4);
-        scene.add(die);
-        parts.push({ mesh: die, targetPos: new THREE.Vector3(6.3, 1.1, 1.0) });
+        const dieGroup = createHoloPart(new THREE.BoxGeometry(0.8, 0.1, 0.5), 0x8b1a1a, -5, 3.7, 0.7);
+        parts.push({ 
+            wireframe: dieGroup.wireframe, 
+            glow: dieGroup.glow,
+            targetPos: new THREE.Vector3(7.3, 1.1, 0.9),
+            startPos: new THREE.Vector3(-5, 3.7, 0.7)
+        });
 
-        // Heat pipes (copper)
-        for (let h = 0; h < 3; h++) {
-            const pipeGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.0);
-            const pipeMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a6, metalness: 0.9, roughness: 0.3 });
-            const pipe = new THREE.Mesh(pipeGeo, pipeMat);
-            pipe.position.set(-5 + h*0.3, 3.1, 1.8);
-            pipe.rotation.x = Math.PI/2;
-            pipe.rotation.z = 0.2;
-            scene.add(pipe);
-            parts.push({ mesh: pipe, targetPos: new THREE.Vector3(6.3 + h*0.1, 1.0, 1.1) });
+        // 5. Capacitors (cylinders)
+        for (let i = 0; i < 6; i++) {
+            const capGroup = createHoloPart(new THREE.CylinderGeometry(0.15, 0.15, 0.5, 8), 0x8b1a1a, -4 + i*0.4, 2.9, 2);
+            parts.push({ 
+                wireframe: capGroup.wireframe, 
+                glow: capGroup.glow,
+                targetPos: new THREE.Vector3(6.9 + i*0.1, 0.7, 0.3),
+                startPos: new THREE.Vector3(-4 + i*0.4, 2.9, 2)
+            });
         }
 
-        // 5. Capacitors - metal cans
-        for (let i = 0; i < 8; i++) {
-            const capGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.5);
-            const capMat = new THREE.MeshStandardMaterial({ color: 0x8b1a1a, metalness: 0.3, roughness: 0.5 });
-            const cap = new THREE.Mesh(capGeo, capMat);
-            cap.position.set(-4 + i*0.3, 2.6, 2.2);
-            scene.add(cap);
-            parts.push({ mesh: cap, targetPos: new THREE.Vector3(5.7 + i*0.1, 0.7, 0.3) });
-            
-            // Cap top
-            const topGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.1);
-            const topMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a6, metalness: 0.7, roughness: 0.3 });
-            const top = new THREE.Mesh(topGeo, topMat);
-            top.position.set(-4 + i*0.3, 2.85, 2.2);
-            scene.add(top);
-            parts.push({ mesh: top, targetPos: new THREE.Vector3(5.7 + i*0.1, 0.95, 0.3) });
-        }
+        // 6. SSD
+        const ssdGroup = createHoloPart(new THREE.BoxGeometry(1.4, 0.15, 0.9), 0xe0c9a6, -2, 2.6, 1.5);
+        parts.push({ 
+            wireframe: ssdGroup.wireframe, 
+            glow: ssdGroup.glow,
+            targetPos: new THREE.Vector3(6.7, 0.7, 0.6),
+            startPos: new THREE.Vector3(-2, 2.6, 1.5)
+        });
 
-        // 6. SSD - metal case
-        const ssdGeo = new THREE.BoxGeometry(1.4, 0.15, 0.9);
-        const ssd = createMetalPart(ssdGeo, 0x5a5a5a, 0x2a2a2a, 0.6, 0.4, -2, 2.3, 1.8);
-        parts.push({ mesh: ssd, targetPos: new THREE.Vector3(5.7, 0.7, 0.6) });
-
-        // 7. Connectors - metal with gold pins
+        // 7. Connectors
         for (let i = 0; i < 4; i++) {
-            const connGeo = new THREE.BoxGeometry(0.3, 0.2, 0.6);
-            const connMat = new THREE.MeshStandardMaterial({ color: 0x3a3a3a, metalness: 0.7, roughness: 0.4 });
-            const conn = new THREE.Mesh(connGeo, connMat);
-            conn.position.set(-5.5 + i*0.4, 2.3, 2.8);
-            scene.add(conn);
-            parts.push({ mesh: conn, targetPos: new THREE.Vector3(5.9 + i*0.1, 0.5, 0.7) });
-            
-            // Pins
-            for (let p = 0; p < 3; p++) {
-                const pinGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.1);
-                const pinMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a6, metalness: 0.9, roughness: 0.2 });
-                const pin = new THREE.Mesh(pinGeo, pinMat);
-                pin.position.set(-5.5 + i*0.4 + (p-1)*0.1, 2.2, 3.0);
-                scene.add(pin);
-                parts.push({ mesh: pin, targetPos: new THREE.Vector3(5.9 + i*0.1 + (p-1)*0.05, 0.45, 0.8) });
-            }
+            const connGroup = createHoloPart(new THREE.BoxGeometry(0.3, 0.2, 0.6), 0xe0c9a6, -5.5 + i*0.4, 2.5, 2.8);
+            parts.push({ 
+                wireframe: connGroup.wireframe, 
+                glow: connGroup.glow,
+                targetPos: new THREE.Vector3(7.1 + i*0.1, 0.5, 0.7),
+                startPos: new THREE.Vector3(-5.5 + i*0.4, 2.5, 2.8)
+            });
         }
 
         // Store original positions
-        const originalPositions = parts.map(p => p.mesh.position.clone());
+        parts.forEach(part => {
+            part.origPos = part.startPos.clone();
+        });
 
         // --- ANIMATION ---
         let clock = new THREE.Clock();
@@ -784,29 +683,49 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            const delta = clock.getDelta();
             const elapsedTime = performance.now() / 1000;
 
             // Scroll animation
             const scrollY = window.scrollY;
             const maxScroll = document.body.scrollHeight - window.innerHeight;
-            let progress = Math.min(1, scrollY / (maxScroll * 0.6));
+            // Progress from 0 to 1 as we scroll through section2
+            let progress = 0;
+            
+            const section2 = document.getElementById('section2');
+            if (section2) {
+                const rect = section2.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                // When section2 top hits viewport center, start animation
+                const startPoint = viewportHeight * 0.3;
+                const endPoint = -section2.clientHeight + viewportHeight * 0.7;
+                progress = Math.min(1, Math.max(0, (viewportHeight - rect.top - startPoint) / (endPoint - startPoint)));
+            }
 
-            parts.forEach((part, index) => {
-                const orig = originalPositions[index];
-                const target = part.targetPos;
-                
-                if (orig && target) {
-                    part.mesh.position.x = orig.x * (1 - progress) + target.x * progress;
-                    part.mesh.position.y = orig.y * (1 - progress) + target.y * progress;
-                    part.mesh.position.z = orig.z * (1 - progress) + target.z * progress;
+            // Animate parts
+            parts.forEach((part) => {
+                if (part.origPos && part.targetPos) {
+                    // Interpolate position
+                    part.wireframe.position.x = part.origPos.x * (1 - progress) + part.targetPos.x * progress;
+                    part.wireframe.position.y = part.origPos.y * (1 - progress) + part.targetPos.y * progress;
+                    part.wireframe.position.z = part.origPos.z * (1 - progress) + part.targetPos.z * progress;
+                    
+                    part.glow.position.x = part.wireframe.position.x;
+                    part.glow.position.y = part.wireframe.position.y;
+                    part.glow.position.z = part.wireframe.position.z;
+                    
+                    // Rotate slowly
+                    part.wireframe.rotation.y += 0.005;
+                    part.glow.rotation.y += 0.005;
                 }
             });
 
-            // Update screen occasionally
-            if (Math.random() < 0.005) {
-                updateScreenTexture();
-            }
+            // Pulse opacity of glows
+            const pulse = Math.sin(elapsedTime * 2) * 0.1 + 0.15;
+            parts.forEach(part => {
+                if (part.glow.material) {
+                    part.glow.material.opacity = pulse;
+                }
+            });
 
             renderer.render(scene, camera);
         }
