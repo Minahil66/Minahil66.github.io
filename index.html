@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>deep · emerging red team</title>
+    <title>minahil khan · a paranoid cybersecurity student</title>
     <style>
         /* BASE - Dark grey palette */
         * {
@@ -28,123 +28,260 @@
             z-index: 2;
         }
 
-        /* 3D HOLOGRAPHIC LAPTOP - Tony Stark edition */
-        .hologram-container {
-            position: fixed;
-            bottom: 10%;
-            right: -50px;
-            width: 400px;
-            height: 300px;
-            perspective: 1000px;
-            z-index: 1;
-            opacity: 0.6;
-            pointer-events: none;
-            animation: float 6s ease-in-out infinite;
+        /* LANDING SECTION - Contains both text and hologram */
+        .landing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            min-height: 60vh;
         }
 
-        .laptop {
+        /* LEFT SIDE - Text */
+        .landing-text {
+            z-index: 3;
+        }
+
+        /* RIGHT SIDE - Hologram container */
+        .hologram-container {
+            position: relative;
+            height: 400px;
             width: 100%;
-            height: 100%;
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+        }
+
+        /* MAIN 3D LAPTOP - Blueprint style */
+        .blueprint-laptop {
+            width: 320px;
+            height: 240px;
             position: relative;
             transform-style: preserve-3d;
-            animation: rotate 20s linear infinite;
+            animation: slowRotate 20s infinite ease-in-out;
+            transform-origin: center center;
         }
 
-        .base {
+        /* All laptop parts share these blueprint lines */
+        .laptop-part {
             position: absolute;
+            border: 1px solid #00a8ff;
+            background: transparent;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.3),
+                        inset 0 0 10px rgba(0, 168, 255, 0.1);
+            opacity: 0.9;
+            backdrop-filter: blur(1px);
+        }
+
+        /* Base of laptop */
+        .base {
             width: 280px;
-            height: 200px;
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-            border: 2px solid #8b0000;
-            border-radius: 10px;
+            height: 180px;
             bottom: 0;
             left: 50%;
-            transform: translateX(-50%) rotateX(10deg);
-            box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+            transform: translateX(-50%) rotateX(5deg);
+            border-radius: 8px;
+            background: rgba(0, 20, 40, 0.2);
         }
 
+        /* Screen */
         .screen {
-            position: absolute;
             width: 260px;
-            height: 170px;
-            background: linear-gradient(145deg, #111111, #000000);
-            border: 2px solid #8b0000;
-            border-radius: 8px;
-            bottom: 160px;
+            height: 160px;
+            bottom: 140px;
             left: 50%;
-            transform: translateX(-50%) rotateX(-10deg) rotateY(0deg);
+            transform: translateX(-50%) rotateX(-5deg) rotateY(0deg);
             transform-origin: bottom;
-            box-shadow: 0 0 40px rgba(139, 0, 0, 0.4);
+            border-radius: 6px;
+            background: rgba(0, 30, 60, 0.15);
             overflow: hidden;
         }
 
+        /* Screen content - Kali blueprint */
         .screen::before {
-            content: "KALI LINUX";
+            content: "";
             position: absolute;
-            top: 10px;
-            left: 10px;
-            color: #8b0000;
-            font-size: 12px;
-            font-family: monospace;
-            opacity: 0.8;
-            animation: blink 2s infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 50%, rgba(0, 168, 255, 0.05) 50%),
+                linear-gradient(0deg, transparent 50%, rgba(0, 168, 255, 0.05) 50%);
+            background-size: 20px 20px;
+            animation: scan 8s linear infinite;
         }
 
         .screen::after {
-            content: ">_ ready";
+            content: "KALI LINUX";
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            color: #8b0000;
-            font-size: 10px;
+            top: 20px;
+            left: 20px;
+            color: #00a8ff;
             font-family: monospace;
+            font-size: 14px;
+            text-shadow: 0 0 10px #00a8ff;
+            opacity: 0.8;
+            letter-spacing: 2px;
+        }
+
+        /* Keyboard lines (blueprint style) */
+        .keyboard-line {
+            position: absolute;
+            height: 1px;
+            background: #00a8ff;
+            opacity: 0.4;
+            left: 15%;
+            width: 70%;
+            box-shadow: 0 0 8px #00a8ff;
+        }
+
+        .line1 { bottom: 40px; }
+        .line2 { bottom: 60px; width: 60%; left: 20%; }
+        .line3 { bottom: 80px; width: 50%; left: 25%; }
+
+        /* Hinge */
+        .hinge {
+            width: 200px;
+            height: 4px;
+            background: #00a8ff;
+            bottom: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px #00a8ff;
             opacity: 0.6;
         }
 
-        .keyboard-line {
+        /* Blueprint dimension lines */
+        .dimension-line {
             position: absolute;
-            width: 80%;
-            height: 2px;
-            background: #8b0000;
-            bottom: 30px;
-            left: 10%;
+            border: 1px dashed #00a8ff;
             opacity: 0.3;
-            box-shadow: 0 0 10px #8b0000;
         }
 
-        .glow {
+        .dimension-h {
+            width: 100%;
+            height: 0;
+            border-bottom: 1px dashed #00a8ff;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .dimension-v {
+            height: 100%;
+            width: 0;
+            border-left: 1px dashed #00a8ff;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Corner markers (blueprint style) */
+        .corner {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #00a8ff;
+            opacity: 0.6;
+        }
+
+        .corner-tl {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: -5px;
+            right: -5px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: -5px;
+            left: -5px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Floating measurement labels */
+        .measurement {
+            position: absolute;
+            color: #00a8ff;
+            font-family: monospace;
+            font-size: 10px;
+            opacity: 0.5;
+            white-space: nowrap;
+        }
+
+        .measurement-width {
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .measurement-height {
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        /* Glow effect */
+        .blueprint-glow {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(139,0,0,0.1), transparent 70%);
-            animation: pulse 3s infinite;
+            background: radial-gradient(circle at 50% 50%, rgba(0,168,255,0.15), transparent 70%);
+            filter: blur(20px);
+            z-index: -1;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        /* Animations */
+        @keyframes slowRotate {
+            0% { transform: rotateY(0deg) rotateX(2deg); }
+            25% { transform: rotateY(8deg) rotateX(4deg); }
+            75% { transform: rotateY(-8deg) rotateX(0deg); }
+            100% { transform: rotateY(0deg) rotateX(2deg); }
         }
 
-        @keyframes rotate {
-            0% { transform: rotateY(0deg); }
-            25% { transform: rotateY(5deg) rotateX(2deg); }
-            75% { transform: rotateY(-5deg) rotateX(-2deg); }
-            100% { transform: rotateY(0deg); }
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-            100% { opacity: 0.3; }
-        }
-
-        @keyframes blink {
+        @keyframes pulseBlue {
             0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.3; }
+            50% { opacity: 1; box-shadow: 0 0 30px #00a8ff; }
         }
 
-        /* 3D EFFECT - Cards */
+        /* Floating blueprint dots */
+        .blueprint-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00a8ff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+
+        /* 3D EFFECT - Cards (keeping your existing style) */
         .card {
             background: #141414;
             padding: 2rem;
@@ -161,13 +298,13 @@
         .card:hover {
             transform: translateY(-2px);
             box-shadow: 
-                0 20px 40px -15px rgba(180, 0, 0, 0.2),
-                0 0 0 1px #8b0000 inset,
+                0 20px 40px -15px rgba(0, 168, 255, 0.2),
+                0 0 0 1px #00a8ff inset,
                 0 0 0 2px #0a0a0a inset;
-            border-left-color: #8b0000;
+            border-left-color: #00a8ff;
         }
 
-        /* TYPOGRAPHY */
+        /* TYPOGRAPHY - Updated with blue accents */
         h1 {
             font-size: 5rem;
             font-weight: 600;
@@ -181,7 +318,7 @@
             font-size: 1.2rem;
             color: #888;
             margin-bottom: 2rem;
-            border-bottom: 2px solid #8b0000;
+            border-bottom: 2px solid #00a8ff;
             padding-bottom: 1rem;
             display: inline-block;
         }
@@ -194,7 +331,7 @@
         }
 
         .student-info span {
-            color: #8b0000;
+            color: #00a8ff;
         }
 
         /* GRID */
@@ -205,12 +342,12 @@
             margin: 3rem 0;
         }
 
-        /* SECTION TITLES */
+        /* SECTION TITLES - Now blue */
         .section-title {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            color: #8b0000;
+            color: #00a8ff;
             margin-bottom: 1.5rem;
             font-weight: 500;
             display: flex;
@@ -220,10 +357,10 @@
 
         .section-title::before {
             content: "⟫";
-            color: #8b0000;
+            color: #00a8ff;
         }
 
-        /* ACHIEVEMENTS / PROJECTS */
+        /* ACHIEVEMENTS */
         .achievement {
             margin-bottom: 2rem;
             position: relative;
@@ -232,42 +369,28 @@
         }
 
         .achievement:hover {
-            border-left-color: #8b0000;
+            border-left-color: #00a8ff;
         }
 
         .achievement-date {
             font-size: 0.8rem;
-            color: #8b0000;
+            color: #00a8ff;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
 
-        .achievement-title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin: 0.2rem 0;
-        }
-
-        .achievement-company {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
         .project-link {
-            color: #8b0000;
+            color: #00a8ff;
             text-decoration: none;
             font-size: 0.8rem;
             font-family: monospace;
-            transition: color 0.2s;
         }
 
         .project-link:hover {
-            color: #ff0000;
-            text-decoration: underline;
+            color: #ffffff;
         }
 
-        /* COMING SOON / EMPTY SECTIONS */
+        /* COMING SOON - Blue theme */
         .coming-soon {
             color: #444;
             font-style: italic;
@@ -287,7 +410,7 @@
             right: 0;
             bottom: 0;
             background: #0a0a0a;
-            color: #8b0000;
+            color: #00a8ff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -318,39 +441,16 @@
 
         .project-list li:hover {
             color: #ffffff;
-            border-bottom-color: #8b0000;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
+            border-bottom-color: #00a8ff;
         }
 
         .tag {
             background: #1f1f1f;
-            color: #8b0000;
+            color: #00a8ff;
             padding: 0.2rem 0.5rem;
             font-size: 0.7rem;
             border-radius: 2px;
-            border: 1px solid #330000;
-        }
-
-        /* TESTIMONIAL / QUOTE */
-        .testimonial {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 4px;
-            position: relative;
-        }
-
-        .testimonial::before {
-            content: "“";
-            font-size: 4rem;
-            color: #8b0000;
-            opacity: 0.2;
-            position: absolute;
-            top: -0.5rem;
-            left: 0.5rem;
+            border: 1px solid #003366;
         }
 
         /* CONTACT */
@@ -372,128 +472,152 @@
         }
 
         .contact-row a:hover {
-            color: #8b0000;
+            color: #00a8ff;
         }
 
-        .red-dot {
+        .blue-dot {
             width: 4px;
             height: 4px;
-            background: #8b0000;
+            background: #00a8ff;
             display: inline-block;
             margin-right: 0.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #2a2a2a;
-            margin: 2rem 0;
+            animation: pulseBlue 2s infinite;
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
             .grid { grid-template-columns: 1fr; }
-            .hologram-container { display: none; }
+            .landing { grid-template-columns: 1fr; }
+            .hologram-container { height: 300px; }
+            .blueprint-laptop { transform: scale(0.8); }
         }
     </style>
 </head>
 <body>
-    <!-- 3D Holographic Laptop -->
-    <div class="hologram-container">
-        <div class="laptop">
-            <div class="screen">
-                <div class="glow"></div>
-            </div>
-            <div class="base">
-                <div class="keyboard-line"></div>
-                <div class="keyboard-line" style="width: 60%; bottom: 50px;"></div>
-                <div class="keyboard-line" style="width: 40%; bottom: 70px;"></div>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- HEADER - Student Edition -->
-        <h1>DEEP</h1>
-        <div class="student-info">
-            <span class="red-dot"></span> FIRST YEAR · CYBERSECURITY · CGPA: 3.8/4.0
-        </div>
-        <div class="subhead">EMERGING RED TEAM · BUILDING THE ARSENAL · deep@cyber.sh</div>
+        <!-- LANDING SECTION with hologram -->
+        <div class="landing">
+            <!-- LEFT: Text -->
+            <div class="landing-text">
+                <h1>MINAHIL KHAN</h1>
+                <div class="student-info">
+                    <span class="blue-dot"></span> FIRST YEAR · CYBERSECURITY · CGPA: 3.8
+                </div>
+                <div class="subhead">EMERGING PEN TESTER · BUILDING THE ARSENAL</div>
+                
+                <!-- Brief intro -->
+                <p style="color: #aaa; line-height: 1.8; margin-top: 2rem;">
+                    First-year cybersecurity student documenting the journey from zero to operator. 
+                    This is a living blueprint — every project, failure, and win gets logged here.
+                </p>
+                
+                <!-- Status line -->
+                <p style="color: #00a8ff; margin-top: 1rem; font-family: monospace; font-size: 0.9rem;">
+                    >_ system.online · blueprint.active · phase: INITIAL_ACCESS
+                </p>
+            </div>
 
-        <!-- BIO / MISSION STATEMENT -->
-        <div class="card" style="margin-bottom: 2rem;">
-            <div class="section-title">MISSION STATUS</div>
-            <p style="color: #aaa; line-height: 1.8;">
-                First-year cybersecurity student. Not an expert — yet. Currently building foundational skills in Python, bash, and cryptography. This portfolio is a living document of my journey from student to operator. Every project, every CTF, every failure and win gets logged here.
-            </p>
-            <p style="color: #666; margin-top: 1rem; font-family: monospace;">
-                >_ status: LEARNING · PHASE: INITIAL ACCESS · TARGET: OSCP BY YEAR 3
-            </p>
+            <!-- RIGHT: Blueprint Hologram Laptop -->
+            <div class="hologram-container">
+                <div class="blueprint-laptop">
+                    <!-- Blueprint corner markers (makes it structured) -->
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <!-- Dimension lines -->
+                    <div class="dimension-line dimension-h"></div>
+                    <div class="dimension-line dimension-v"></div>
+                    
+                    <!-- Measurement labels -->
+                    <div class="measurement measurement-width">320mm</div>
+                    <div class="measurement measurement-height">240mm</div>
+                    
+                    <!-- The laptop itself -->
+                    <div class="laptop-part base">
+                        <div class="keyboard-line line1"></div>
+                        <div class="keyboard-line line2"></div>
+                        <div class="keyboard-line line3"></div>
+                    </div>
+                    
+                    <div class="laptop-part screen"></div>
+                    <div class="hinge"></div>
+                    
+                    <!-- Blueprint glow -->
+                    <div class="blueprint-glow"></div>
+                    
+                    <!-- Floating blueprint dots (technical drawing effect) -->
+                    <div class="blueprint-dot" style="top: 20%; left: 10%;"></div>
+                    <div class="blueprint-dot" style="top: 70%; left: 80%;"></div>
+                    <div class="blueprint-dot" style="top: 30%; left: 90%;"></div>
+                    <div class="blueprint-dot" style="top: 80%; left: 20%;"></div>
+                </div>
+            </div>
         </div>
 
-        <!-- PROJECTS + EDUCATION GRID -->
+        <!-- PROJECTS + EDUCATION GRID (Same as before but blue accents) -->
         <div class="grid">
-            <!-- LEFT: Projects (Actual ones you mentioned) -->
+            <!-- LEFT: Projects -->
             <div class="card">
                 <div class="section-title">ACTIVE PROJECTS</div>
                 
                 <div class="achievement">
-                    <div class="achievement-date">COMPLETED · 2024</div>
+                    <div class="achievement-date">COMPLETED · 2025</div>
                     <div class="achievement-title">Caesar Cipher</div>
-                    <div class="achievement-company">Python implementation with brute force</div>
-                    <a href="#" class="project-link">[ github link ]</a>
+                    <div class="achievement-company">C implementation with brute force</div>
+                    <a href="#" class="project-link">https://github.com/Minahil66/Caesar-Cipher</a>
                 </div>
 
                 <div class="achievement">
-                    <div class="achievement-date">COMPLETED · 2024</div>
+                    <div class="achievement-date">COMPLETED · 2026</div>
                     <div class="achievement-title">Cipher Cascade</div>
-                    <div class="achievement-company">File encryption suite (AES + XOR)</div>
-                    <a href="#" class="project-link">[ github link ]</a>
+                    <div class="achievement-company">File encryption suite (4 cIPHERS)</div>
+                    <a href="#" class="project-link">https://github.com/Minahil66/CipherCascade</a>
                 </div>
 
                 <div class="achievement">
-                    <div class="achievement-date">IN PROGRESS · 2024</div>
+                    <div class="achievement-date">IN PROGRESS · 2025</div>
                     <div class="achievement-title">Bash Project</div>
                     <div class="achievement-company">Automated recon script</div>
                     <a href="#" class="project-link">[ github link ]</a>
                 </div>
             </div>
 
-            <!-- RIGHT: Education / Degree -->
+            <!-- RIGHT: Education -->
             <div class="card">
                 <div class="section-title">EDUCATION</div>
                 
                 <div class="achievement">
-                    <div class="achievement-date">2024 - 2028</div>
-                    <div class="achievement-title">B.Sc. Cybersecurity</div>
-                    <div class="achievement-company">University Name · CGPA: 3.8/4.0</div>
+                    <div class="achievement-date">2025 - 2029</div>
+                    <div class="achievement-title">Bachelors Of Computer and Information Technology</div>
+                    <div class="achievement-company">NED University of Engineering · CGPA: 3.8</div>
                 </div>
 
                 <div class="section-title" style="margin-top: 2rem;">CERTIFICATIONS (IN PROGRESS)</div>
                 <div class="achievement">
-                    <div class="achievement-title">Google Cybersecurity Certificate</div>
-                    <div class="achievement-company">80% complete</div>
+                    <div class="achievement-title">Certified Associate Penetration Tester </div>
+                    <div class="achievement-company">40% complete</div>
                 </div>
                 <div class="achievement">
-                    <div class="achievement-title">TryHackMe · Pre Security</div>
-                    <div class="achievement-company">Completed</div>
+                    <div class="achievement-title">coming soon</div>
+                    <div class="achievement-company">coming soon</div>
                 </div>
             </div>
         </div>
 
         <!-- CTF + HACKATHONS + AWARDS GRID -->
         <div class="grid">
-            <!-- LEFT: CTF Participations -->
+            <!-- LEFT: CTF -->
             <div class="card">
                 <div class="section-title">CTF OPERATIONS</div>
                 
                 <div class="achievement">
-                    <div class="achievement-date">2024 · FIRST OP</div>
-                    <div class="achievement-title">HackTheBox University CTF</div>
-                    <div class="achievement-company">Team: Zero Cool · Solved 3 challenges</div>
+                    <div class="achievement-date">2025 · FIRST OP</div>
+                    <div class="achievement-title">NED University CTF 2.0</div>
+                    <div class="achievement-company">Team: ZeroDayNexus · Solved 3 challenges</div>
                 </div>
 
-                <!-- Future CTFs (empty but styled) -->
                 <div class="coming-soon">
                     More operations pending...
                 </div>
@@ -503,9 +627,8 @@
             <div class="card">
                 <div class="section-title">HACKATHONS</div>
                 
-                <!-- Empty but intentional -->
                 <div class="coming-soon" style="margin-bottom: 2rem;">
-                    No hackathons yet · Registering for 2025
+                    No hackathons yet · Registering for 2026
                 </div>
 
                 <div class="section-title">AWARDS & HONORS</div>
@@ -515,52 +638,44 @@
             </div>
         </div>
 
-        <!-- FULL PROJECT LIST (With your actual projects) -->
+        <!-- PROJECT ARSENAL -->
         <div class="card" style="margin-top: 2rem;">
             <div class="section-title">PROJECT ARSENAL · GITHUB</div>
             <ul class="project-list">
                 <li>
-                    Caesar Cipher · Python
+                    Caesar Cipher · C
                     <div class="project-tags">
                         <span class="tag">completed</span>
-                        <a href="#" class="project-link">[repo]</a>
+                        <a href="#" class="project-link">https://github.com/Minahil66/Caesar-Cipher</a>
                     </div>
                 </li>
                 <li>
-                    Cipher Cascade · Encryption Suite
+                    Cipher Cascade · File Encryption Suite
                     <div class="project-tags">
                         <span class="tag">completed</span>
-                        <a href="#" class="project-link">[repo]</a>
+                        <a href="#" class="project-link">https://github.com/Minahil66/CipherCascade</a>
                     </div>
                 </li>
                 <li>
-                    Bash Recon Tool · Work in Progress
+                    Bash SysMon Tool · Work in Progress
                     <div class="project-tags">
                         <span class="tag">in progress</span>
-                        <a href="#" class="project-link">[repo]</a>
-                    </div>
-                </li>
-                <li>
-                    Port Scanner · Learning project
-                    <div class="project-tags">
-                        <span class="tag">planned</span>
+                        <a href="#" class="project-link">https://github.com/Minahil66/Bash</a>
                     </div>
                 </li>
             </ul>
         </div>
 
-        <!-- CONTACT / SOCIAL -->
+        <!-- CONTACT -->
         <div class="contact-row">
-            <a href="#">github.com/deep</a>
-            <a href="#">linkedin.com/in/deep</a>
-            <a href="#">tryhackme.com/p/deep</a>
-            <a href="#">hackthebox.com/profile/deep</a>
-            <a href="#">deep@cyber.sh</a>
+            <a href="#">github.com/Minahil66</a>
+            <a href="#">linkedin.com/in/</a>
+            <a href="#">tryhackme.com</a>
         </div>
 
-        <!-- BUILDING IN PUBLIC FOOTER -->
+        <!-- FOOTER -->
         <div style="margin-top: 2rem; color: #333; font-size: 0.8rem; text-align: center; font-family: monospace;">
-            [ system online · building in public · year 1 of 4 ]
+            [ blueprint v1.0 · building in public · year 1 of 4 ]
         </div>
     </div>
 </body>
