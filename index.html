@@ -338,7 +338,6 @@
                     </div>
 
                     <div class="right-content" id="laptop-container"></div>
-                </div>
             </div>
         </section>
     </div>
@@ -467,14 +466,14 @@
             new THREE.EdgesGeometry(new THREE.BoxGeometry(3.2 * scale, 2.0 * scale, 0.2 * scale)),
             new THREE.LineBasicMaterial({ color: 0xe0c9a6, transparent: true, opacity: 0 })
         );
-        laptopScreenWire.position.set(laptopX, 1.5, 0); // SAME POSITION (y stays same because screen bottom aligns with base)
+        laptopScreenWire.position.set(laptopX, 1.5, 0); 
         scene.add(laptopScreenWire);
 
         const laptopScreenGlow = new THREE.Mesh(
             new THREE.BoxGeometry(3.2 * scale, 2.0 * scale, 0.2 * scale),
             new THREE.MeshBasicMaterial({ color: 0x8b1a1a, transparent: true, opacity: 0, wireframe: true })
         );
-        laptopScreenGlow.position.set(laptopX, 1.5, 0); // SAME POSITION
+        laptopScreenGlow.position.set(laptopX, 1.5, 0); 
         scene.add(laptopScreenGlow);
 
         // Screen content (bigger)
@@ -486,7 +485,6 @@
         ctx.font = 'bold 30px monospace';
         ctx.textAlign = 'center';
         ctx.fillText('KALI', 256, 200);
-        ctx.fillText('minahil', 256, 280);
         ctx.fillText('ACTIVE', 256, 360);
 
         const texture = new THREE.CanvasTexture(canvas);
@@ -530,7 +528,7 @@
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 const section2Top = section2.offsetTop;
                 const scrollInSection = scrollY - section2Top;
-                progress = Math.min(1, Math.max(0, scrollInSection /1));
+                progress = Math.min(1, Math.max(0, scrollInSection /100));
             }
 
             parts.forEach((part) => {
