@@ -336,7 +336,7 @@
 
         const parts = [];
 
-        function createPart(geo, color, x, y, z, scale = 1.5) { 
+        function createPart(geo, color, x, y, z, scale = 1.8) { 
             const wireframe = new THREE.LineSegments(
                 new THREE.EdgesGeometry(geo),
                 new THREE.LineBasicMaterial({ color: color })
@@ -400,7 +400,7 @@
         });
 
         // --- LAPTOP - 20% BIGGER, EXACT SAME POSITION ---
-        const scale = 1.7; // 20% bigger
+        const scale = 1.9; // 20% bigger
         
         // Laptop base
         const laptopBaseWire = new THREE.LineSegments(
