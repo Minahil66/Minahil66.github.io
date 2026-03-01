@@ -529,7 +529,7 @@
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 const section2Top = section2.offsetTop;
                 const scrollInSection = scrollY - section2Top;
-                progress = Math.min(1, Math.max(0, scrollInSection / 400));
+                progress = Math.min(1, Math.max(0, scrollInSection / 100));
             }
 
             parts.forEach((part) => {
