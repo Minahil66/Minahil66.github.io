@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minahil khan · COMPONENTS IN FRONT</title>
+    <title>minahil khan · HOLOGRAPHIC PORTFOLIO</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
             background-color: #0a0a0a;
         }
 
-        /* CANVAS - behind content but 3D renders normally */
+        /* CANVAS */
         #canvas-container {
             position: fixed;
             top: 0;
@@ -28,10 +28,10 @@
             z-index: 1;
         }
 
-        /* CONTENT - above canvas */
+        /* CONTENT */
         .content {
             position: relative;
-            z-index: 10;
+            z-index: 20;
             pointer-events: none;
         }
 
@@ -39,14 +39,14 @@
             pointer-events: auto;
         }
 
-        /* SECTION 1 */
+        /* SECTION 1 - Landing with name in center */
         #section1 {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            z-index: 20;
+            z-index: 25;
         }
 
         .center-stage {
@@ -58,6 +58,8 @@
             border: 1px solid #8b1a1a60;
             border-radius: 8px;
             box-shadow: 0 0 80px rgba(139, 26, 26, 0.3);
+            position: relative;
+            z-index: 30;
         }
 
         h1 {
@@ -104,14 +106,14 @@
             color: #8b1a1a;
         }
 
-        /* SECTION 2 */
+        /* SECTION 2 - Education + laptop */
         #section2 {
             min-height: 100vh;
             padding: 4rem 2rem;
             background: transparent;
             border-top: 1px solid #8b1a1a40;
             position: relative;
-            z-index: 20;
+            z-index: 30;
         }
 
         .container {
@@ -225,7 +227,7 @@
                     <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
                 </div>
                 <div class="status">
-                    <span>⟫</span> COMPONENTS IN FRONT · FINAL FIX <span>⟫</span>
+                    <span>⟫</span> COMPONENTS IN FRONT · FINALLY VISIBLE <span>⟫</span>
                 </div>
             </div>
         </section>
@@ -249,15 +251,15 @@
                             <h3>PROJECTS</h3>
                             <div class="project-item">
                                 <span>Caesar Cipher · C</span>
-                                <a href="https://github.com/Minahil66/Caesar-Cipher" class="project-link">repo</a>
+                                <a href="#" class="project-link">repo</a>
                             </div>
                             <div class="project-item">
                                 <span>Cipher Cascade · C++</span>
-                                <a href="https://github.com/Minahil66/CipherCascade" class="project-link">repo</a>
+                                <a href="#" class="project-link">repo</a>
                             </div>
                             <div class="project-item">
                                 <span>SysMon · Bash</span>
-                                <a href="https://github.com/Minahil66/Bash" class="project-link">repo</a>
+                                <a href="#" class="project-link">repo</a>
                             </div>
                         </div>
 
@@ -288,8 +290,8 @@
                         </div>
 
                         <div class="contact-links">
-                            <a href="https://github.com/Minahil66">GitHub</a>
-                            <a href="https://www.linkedin.com/in/minahil-k-a573b8384">LinkedIn</a>
+                            <a href="#">GitHub</a>
+                            <a href="#">LinkedIn</a>
                             <a href="#">TryHackMe</a>
                         </div>
                     </div>
@@ -317,10 +319,9 @@
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x0a0a0a);
         
-        // Camera positioned to see components in front
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 2, 10);
-        camera.lookAt(0, 1.5, -1.5);
+        camera.position.set(0, 2, 15);
+        camera.lookAt(0, 1, -3); // Look at negative Z (where components are)
 
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -331,15 +332,15 @@
         const ambientLight = new THREE.AmbientLight(0x403020);
         scene.add(ambientLight);
 
-        const keyLight = new THREE.DirectionalLight(0xe0c9a6, 1.5);
-        keyLight.position.set(2, 5, 5);
+        const keyLight = new THREE.DirectionalLight(0xe0c9a6, 1.2);
+        keyLight.position.set(5, 10, 5);
         scene.add(keyLight);
 
-        const redLight = new THREE.PointLight(0x8b1a1a, 2);
-        redLight.position.set(0, 2, 0);
+        const redLight = new THREE.PointLight(0x8b1a1a, 1);
+        redLight.position.set(0, 2, -2);
         scene.add(redLight);
 
-        // --- CREATE HOLOGRAPHIC COMPONENTS (ALL AT NEGATIVE Z) ---
+        // --- CREATE HOLOGRAPHIC COMPONENTS (IN FRONT of panel at NEGATIVE Z) ---
         const parts = [];
 
         function createPart(geo, color, x, y, z, scale = 1) {
@@ -353,7 +354,7 @@
             
             const glow = new THREE.Mesh(
                 geo,
-                new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.3, wireframe: true })
+                new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.25, wireframe: true })
             );
             glow.position.set(x, y, z);
             glow.scale.set(scale, scale, scale);
@@ -362,54 +363,53 @@
             return { wireframe, glow };
         }
 
+        // Laptop target position (beside education panel)
         const laptopX = 6;
 
-        // ALL COMPONENTS AT NEGATIVE Z (between camera and panel)
-        // Camera at Z=10, Panel at Z=0, Components at Z=-1 to -3 = IN FRONT
+        // ALL COMPONENTS AT NEGATIVE Z (in front of panel)
+        // Panel is at Z=0 to Z=1, so components at Z = -2 to -5 will be IN FRONT
         
-        // 1. Motherboard - right side
-        const mb = createPart(new THREE.BoxGeometry(3.0, 0.2, 2.5), 0xe0c9a6, 3.5, 2.2, -1.8);
+        // 1. MOTHERBOARD (top right) - Z = -3
+        const mb = createPart(new THREE.BoxGeometry(3.0, 0.2, 2.5), 0xe0c9a6, 4, 2.5, -3);
         parts.push({ wireframe: mb.wireframe, glow: mb.glow, target: { x: laptopX - 0.5, y: 0.5, z: 0 } });
 
-        // 2. CPU - top center
-        const cpu = createPart(new THREE.BoxGeometry(1.2, 0.4, 1.2), 0x8b1a1a, 0, 3.2, -2.2);
+        // 2. CPU (top left) - Z = -2.5
+        const cpu = createPart(new THREE.BoxGeometry(1.2, 0.4, 1.2), 0x8b1a1a, -3, 3, -2.5);
         parts.push({ wireframe: cpu.wireframe, glow: cpu.glow, target: { x: laptopX, y: 0.8, z: 0 } });
 
-        // 3. RAM - left side
-        const ram = createPart(new THREE.BoxGeometry(1.5, 0.1, 0.3), 0xe0c9a6, -3, 1.8, -1.5);
+        // 3. RAM (right side) - Z = -4
+        const ram = createPart(new THREE.BoxGeometry(1.5, 0.1, 0.3), 0xe0c9a6, 5, 2, -4);
         parts.push({ wireframe: ram.wireframe, glow: ram.glow, target: { x: laptopX - 0.3, y: 0.6, z: 0 } });
 
-        // 4. GPU - bottom right
-        const gpu = createPart(new THREE.BoxGeometry(2.0, 0.4, 1.0), 0x8b1a1a, 4, 1.0, -2.5);
+        // 4. GPU (left side) - Z = -3.5
+        const gpu = createPart(new THREE.BoxGeometry(2.0, 0.4, 1.0), 0x8b1a1a, -4, 2.2, -3.5);
         parts.push({ wireframe: gpu.wireframe, glow: gpu.glow, target: { x: laptopX + 0.5, y: 0.9, z: 0 } });
 
-        // 5. Screen - top left
-        const screen = createPart(new THREE.BoxGeometry(2.5, 1.8, 0.2), 0xe0c9a6, -2.5, 2.5, -2.0);
+        // 5. SCREEN (bottom right) - Z = -5
+        const screen = createPart(new THREE.BoxGeometry(2.5, 1.8, 0.2), 0xe0c9a6, 3, 1, -5);
         parts.push({ wireframe: screen.wireframe, glow: screen.glow, target: { x: laptopX, y: 1.5, z: 0 } });
 
-        // 6. Keyboard - bottom center
-        const keyboard = createPart(new THREE.BoxGeometry(3.0, 0.1, 1.2), 0xe0c9a6, 1, 0.6, -1.2);
+        // 6. KEYBOARD (bottom left) - Z = -4.5
+        const keyboard = createPart(new THREE.BoxGeometry(3.0, 0.1, 1.2), 0xe0c9a6, -3, 0.8, -4.5);
         parts.push({ wireframe: keyboard.wireframe, glow: keyboard.glow, target: { x: laptopX, y: 0.3, z: 0 } });
 
-        // 7. SSD - top right
-        const ssd = createPart(new THREE.BoxGeometry(1.2, 0.1, 0.8), 0x8b1a1a, 2.5, 3.0, -1.0);
+        // 7. SSD (top center) - Z = -2
+        const ssd = createPart(new THREE.BoxGeometry(1.2, 0.1, 0.8), 0x8b1a1a, 0, 3.5, -2);
         parts.push({ wireframe: ssd.wireframe, glow: ssd.glow, target: { x: laptopX - 0.2, y: 0.7, z: 0 } });
 
-        // 8. Capacitors - all around
+        // 8. CAPACITORS (scattered around) - ALL NEGATIVE Z
         for (let i = 0; i < 8; i++) {
-            const angle = (i / 8) * Math.PI * 2;
-            const radius = 4;
             const cap = createPart(
                 new THREE.CylinderGeometry(0.15, 0.15, 0.4), 
                 0x8b1a1a, 
-                Math.cos(angle) * radius, 
-                1.5 + Math.sin(i*2)*0.5, 
-                Math.sin(angle) * radius - 2
+                -3 + i*1.2, 
+                1.5 + Math.sin(i)*1.5, 
+                -3 - i*0.3
             );
             parts.push({ 
                 wireframe: cap.wireframe, 
                 glow: cap.glow, 
-                target: { x: laptopX - 0.3 + i*0.1, y: 0.5, z: -0.1 } 
+                target: { x: laptopX - 0.4 + i*0.1, y: 0.5, z: -0.1 } 
             });
         }
 
@@ -418,7 +418,7 @@
             part.origPos = part.wireframe.position.clone();
         });
 
-        // --- CREATE LAPTOP (invisible at first) ---
+        // --- CREATE LAPTOP (at target position, invisible until scroll) ---
         
         // Laptop base
         const laptopBaseWire = new THREE.LineSegments(
@@ -482,6 +482,7 @@
             }
         }
 
+        // Store laptop parts for opacity animation
         const laptopParts = [
             laptopBaseWire, laptopBaseGlow, 
             laptopScreenWire, laptopScreenGlow, 
@@ -492,6 +493,7 @@
         function animate() {
             requestAnimationFrame(animate);
 
+            // Scroll animation
             const scrollY = window.scrollY;
             const section2 = document.getElementById('section2');
             const rect = section2.getBoundingClientRect();
@@ -503,28 +505,34 @@
                 progress = Math.min(1, Math.max(0, scrollInSection / 400));
             }
 
+            // Animate parts to laptop
             parts.forEach((part) => {
                 if (progress === 0) {
-                    // AT START: NEGATIVE Z = IN FRONT OF PANEL
+                    // At start: original positions (NEGATIVE Z - IN FRONT OF PANEL)
                     part.wireframe.position.copy(part.origPos);
                     part.glow.position.copy(part.origPos);
+                    // Full opacity on landing page
                     part.wireframe.material.opacity = 1;
-                    part.glow.material.opacity = 0.3;
+                    part.glow.material.opacity = 0.25;
                 } else {
+                    // Move toward target positions (inside laptop at Z=0)
                     part.wireframe.position.x = part.origPos.x * (1 - progress) + part.target.x * progress;
                     part.wireframe.position.y = part.origPos.y * (1 - progress) + part.target.y * progress;
                     part.wireframe.position.z = part.origPos.z * (1 - progress) + part.target.z * progress;
                     
                     part.glow.position.copy(part.wireframe.position);
                     
+                    // Fade out components as they reach laptop
                     part.wireframe.material.opacity = 1 - progress;
-                    part.glow.material.opacity = 0.3 * (1 - progress);
+                    part.glow.material.opacity = 0.25 * (1 - progress);
                 }
                 
+                // Rotate
                 part.wireframe.rotation.y += 0.01;
                 part.glow.rotation.y += 0.01;
             });
 
+            // Fade in laptop as progress increases
             laptopParts.forEach(part => {
                 part.material.opacity = progress * 0.8;
             });
