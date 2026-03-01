@@ -208,9 +208,46 @@
             h1 { font-size: 3rem; }
             .split-layout { grid-template-columns: 1fr; }
         }
+        #terminal-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 5;
+    pointer-events: none;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1;
+    color: #8b1a1a;
+    opacity: 0.15;
+    white-space: pre;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.rain-column {
+    width: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: rain linear infinite;
+    color: #8b1a1a;
+    text-shadow: 0 0 8px #8b1a1a;
+}
+
+@keyframes rain {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
     </style>
 </head>
 <body>
+    <!-- TERMINAL RAIN -->
+<div id="terminal-rain"></div>
     <div id="canvas-container"></div>
 
     <div class="content">
@@ -524,5 +561,34 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
+    <script>
+    // Terminal rain generator
+    const rainContainer = document.getElementById('terminal-rain');
+    
+    function generateRain() {
+        rainContainer.innerHTML = '';
+        const columns = Math.floor(window.innerWidth / 16);
+        
+        for (let i = 0; i < columns; i++) {
+            const col = document.createElement('div');
+            col.className = 'rain-column';
+            col.style.animationDuration = Math.random() * 3 + 2 + 's';
+            col.style.animationDelay = Math.random() * 5 + 's';
+            
+            const length = Math.floor(Math.random() * 30 + 20);
+            let text = '';
+            for (let j = 0; j < length; j++) {
+                text += Math.random() > 0.5 ? '1' : '0';
+                if (j < length - 1) text += '\n';
+            }
+            col.textContent = text;
+            
+            rainContainer.appendChild(col);
+        }
+    }
+    
+    generateRain();
+    window.addEventListener('resize', generateRain);
+</script>
 </body>
 </html>
