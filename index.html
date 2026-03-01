@@ -208,55 +208,139 @@
             h1 { font-size: 3rem; }
             .split-layout { grid-template-columns: 1fr; }
         }
+        
         #terminal-rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 5;
-    pointer-events: none;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1;
-    color: #8b1a1a;
-    opacity: 0.15;
-    white-space: pre;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: flex-start;
-}
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 5;
+            pointer-events: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1;
+            color: #8b1a1a;
+            opacity: 0.15;
+            white-space: pre;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
 
-.rain-column {
-    width: 20px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    animation: rain linear infinite;
-    color: #8b1a1a;
-    text-shadow: 0 0 8px #8b1a1a;
-}
+        .rain-column {
+            width: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: rain linear infinite;
+            color: #8b1a1a;
+            text-shadow: 0 0 8px #8b1a1a;
+        }
 
-@keyframes rain {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
-}
+        @keyframes rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
         @keyframes scrollTicker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
         #map-overlay {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* SKILL ARSENAL STYLES */
+        .skill-arsenal {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            padding: 1.5rem;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #8b1a1a40;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .skill-header {
+            text-align: center;
+            color: #8b1a1a;
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+            font-family: monospace;
+        }
+
+        .header-icon {
+            color: #e0c9a6;
+            margin: 0 0.5rem;
+        }
+
+        .skill-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .skill-item {
+            width: 100%;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .skill-name {
+            color: #e0c9a6;
+        }
+
+        .skill-percent {
+            color: #8b1a1a;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 4px;
+            background: #2a2a2a;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b1a1a, #e0c9a6);
+            border-radius: 2px;
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        .skill-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: #e0c9a6;
+            box-shadow: 0 0 10px #8b1a1a;
+        }
     </style>
 </head>
 <body>
     <!-- TERMINAL RAIN -->
-<div id="terminal-rain"></div>
+    <div id="terminal-rain"></div>
     <div id="canvas-container"></div>
 
     <div class="content">
@@ -269,7 +353,7 @@
                     <span>This is a living blueprint:</span> Every project, failure, and win gets logged here.
                 </div>
                 <div class="status">
-                    <span>⟫</span> Portfolio · Initial_acess <span>⟫</span>
+                    <span>⟫</span> Portfolio · Initial_access <span>⟫</span>
                 </div>
             </div>
         </section>
@@ -318,11 +402,11 @@
                                 <div class="ctf-detail">8 challenges solved</div>
                             </div>
                         </div>
-                                 <div class="ctf-item">
-                                <div class="ctf-date">2026 · OP-03</div>
-                                <div class="ctf-name">pending op · Team ZeroDayNexus</div>
-                                <div class="ctf-detail">pending op</div>
-                            </div>
+                        <div class="ctf-item">
+                            <div class="ctf-date">2026 · OP-03</div>
+                            <div class="ctf-name">pending op · Team ZeroDayNexus</div>
+                            <div class="ctf-detail">pending op</div>
+                        </div>
                         
                         <div class="section-block">
                             <h3>CERTIFICATIONS</h3>
@@ -344,17 +428,86 @@
                     </div>
 
                     <div class="right-content" id="laptop-container" style="position: relative;">
-    <!-- Map overlay -->
-    <div id="map-overlay" style="position: absolute; bottom: 20px; left: 20px; right: 20px; height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); z-index: 10; overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
-        <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
-        <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
-            <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
-                 ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 
-            </div>
-        </div>
-    </div>
-</div>
-            </div>
+                        <!-- Map overlay -->
+                        <div id="map-overlay" style="position: absolute; bottom: 20px; left: 20px; right: 20px; height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); z-index: 10; overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
+                            <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
+                            <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
+                                <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
+                                    ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKILL ARSENAL -->
+                <div class="skill-arsenal" id="skill-arsenal">
+                    <div class="skill-header">
+                        <span class="header-icon">⎯</span> SKILL ARSENAL <span class="header-icon">⎯</span>
+                    </div>
+                    
+                    <div class="skill-grid">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Metasploit</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Programming (C/C++)</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Bash Scripting</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Burp Suite</span>
+                                <span class="skill-percent">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Wireshark</span>
+                                <span class="skill-percent">55%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 55%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Nmap</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -530,7 +683,6 @@
             screenDisplay, ...keys
         ];
 
-        // FIXED ANIMATE FUNCTION - Parts assemble properly!
         function animate() {
             requestAnimationFrame(animate);
 
@@ -543,19 +695,28 @@
             
             let progress = 0;
             let vanishProgress = 0;
+            let arsenalProgress = 0;
             
             if (scrollY < section1Height - 100) {
                 progress = 0;
                 vanishProgress = 0;
+                arsenalProgress = 0;
             } 
             else if (scrollY >= section1Height - 100 && scrollY < section2Top + 200) {
                 const assembleStart = section1Height - 100;
                 const assembleEnd = section2Top + 100;
                 progress = Math.min(1, Math.max(0, (scrollY - assembleStart) / (assembleEnd - assembleStart)));
                 vanishProgress = 0;
+                arsenalProgress = 0;
+            }
+            else if (scrollY >= section2Top + 200 && scrollY < section2Top + 400) {
+                vanishProgress = Math.min(1, Math.max(0, (scrollY - (section2Top + 200)) / 100));
+                progress = 1;
+                arsenalProgress = 0;
             }
             else {
-                vanishProgress = Math.min(1, Math.max(0, (scrollY - (section2Top + 200)) / 50));
+                vanishProgress = 1;
+                arsenalProgress = Math.min(1, Math.max(0, (scrollY - (section2Top + 400)) / 100));
                 progress = 1;
             }
 
@@ -563,13 +724,11 @@
                 if (progress === 0) {
                     // PHASE 1: SCATTERED
                     if (!part.scatteredPos) {
-                        // Store random scattered positions
                         part.scatteredPos = {
                             x: part.origPos.x + (Math.random() - 0.5) * 10,
                             y: part.origPos.y + (Math.random() - 0.5) * 8,
                             z: part.origPos.z + (Math.random() - 0.5) * 10
                         };
-                        // Store random rotations
                         part.scatteredRot = {
                             x: Math.random() * Math.PI * 2,
                             y: Math.random() * Math.PI * 2,
@@ -580,7 +739,6 @@
                     part.wireframe.position.copy(part.scatteredPos);
                     part.glow.position.copy(part.scatteredPos);
                     
-                    // Apply random rotations
                     part.wireframe.rotation.x = part.scatteredRot.x;
                     part.wireframe.rotation.y = part.scatteredRot.y;
                     part.wireframe.rotation.z = part.scatteredRot.z;
@@ -590,7 +748,7 @@
                     part.glow.material.opacity = 0.15;
                 } 
                 else if (progress < 1) {
-                    // PHASE 2: ASSEMBLING - FIXED!
+                    // PHASE 2: ASSEMBLING
                     if (!part.scatteredPos) {
                         part.scatteredPos = {
                             x: part.origPos.x + (Math.random() - 0.5) * 10,
@@ -604,13 +762,11 @@
                         };
                     }
                     
-                    // Smooth position transition
                     part.wireframe.position.x = part.scatteredPos.x * (1 - progress) + part.target.x * progress;
                     part.wireframe.position.y = part.scatteredPos.y * (1 - progress) + part.target.y * progress;
                     part.wireframe.position.z = part.scatteredPos.z * (1 - progress) + part.target.z * progress;
                     part.glow.position.copy(part.wireframe.position);
                     
-                    // Smooth rotation transition to ZERO (upright)
                     part.wireframe.rotation.x = part.scatteredRot.x * (1 - progress);
                     part.wireframe.rotation.y = part.scatteredRot.y * (1 - progress);
                     part.wireframe.rotation.z = part.scatteredRot.z * (1 - progress);
@@ -646,7 +802,6 @@
                             part.glow.visible = false;
                         }
                     } else {
-                        // ASSEMBLED STATE - PERFECT!
                         part.wireframe.visible = true;
                         part.glow.visible = true;
                         part.wireframe.position.copy(part.target);
@@ -654,7 +809,6 @@
                         part.wireframe.scale.set(2, 2, 2);
                         part.glow.scale.set(2, 2, 2);
                         
-                        // ZERO ROTATION when assembled!
                         part.wireframe.rotation.x = 0;
                         part.wireframe.rotation.y = 0;
                         part.wireframe.rotation.z = 0;
@@ -678,16 +832,32 @@
                 }
             });
             
+            // Control map and arsenal visibility
             const mapOverlay = document.getElementById('map-overlay');
+            const skillArsenal = document.getElementById('skill-arsenal');
+            
             if (mapOverlay) {
-                if (vanishProgress > 0) {
+                if (vanishProgress > 0 && arsenalProgress === 0) {
                     mapOverlay.style.opacity = Math.min(1, vanishProgress * 2);
                     mapOverlay.style.pointerEvents = vanishProgress > 0.5 ? 'auto' : 'none';
                     mapOverlay.style.transform = `scale(${0.8 + vanishProgress * 0.2})`;
+                } else if (arsenalProgress > 0) {
+                    mapOverlay.style.opacity = Math.max(0, 1 - arsenalProgress * 2);
+                    mapOverlay.style.pointerEvents = 'none';
                 } else {
                     mapOverlay.style.opacity = 0;
                     mapOverlay.style.pointerEvents = 'none';
                     mapOverlay.style.transform = 'scale(0.8)';
+                }
+            }
+            
+            if (skillArsenal) {
+                if (arsenalProgress > 0) {
+                    skillArsenal.style.opacity = Math.min(1, arsenalProgress * 2);
+                    skillArsenal.style.pointerEvents = arsenalProgress > 0.5 ? 'auto' : 'none';
+                } else {
+                    skillArsenal.style.opacity = 0;
+                    skillArsenal.style.pointerEvents = 'none';
                 }
             }
 
@@ -732,13 +902,6 @@
     generateRain();
     window.addEventListener('resize', generateRain);
     </script>
-    
-    <style>
-    @keyframes scrollTicker {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-    </style>
 
     <script>
         (function() {
