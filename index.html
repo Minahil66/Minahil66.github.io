@@ -244,6 +244,10 @@
     0% { transform: translateY(-100%); }
     100% { transform: translateY(100vh); }
 }
+        @keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
     </style>
 </head>
 <body>
@@ -335,7 +339,17 @@
                         </div>
                     </div>
 
-                    <div class="right-content" id="laptop-container"></div>
+                    <div class="right-content" id="laptop-container" style="position: relative;">
+    <!-- Map overlay -->
+    <div id="map-overlay" style="position: absolute; bottom: 20px; left: 20px; right: 20px; height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); z-index: 10; overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
+        <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
+        <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
+            <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
+                ⚡ ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 ⚡
+            </div>
+        </div>
+    </div>
+</div>
             </div>
             </div>
         </section>
@@ -594,6 +608,81 @@
     
     generateRain();
     window.addEventListener('resize', generateRain);
+</script>
+<style>
+@keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+</style>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('world-map');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Simple world map outline (you can replace with a real GeoJSON later)
+        function drawWorldMap() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#8b1a1a60';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Placeholder: draw some continents as rough polygons
+            ctx.beginPath();
+            ctx.strokeStyle = '#8b1a1a';
+            ctx.lineWidth = 0.5;
+
+            // Approximate continent outlines (very simplified)
+            const continents = [
+                [[100,150],[200,120],[300,140],[350,200],[300,260],[200,240],[100,200]], // Americas-ish
+                [[400,130],[480,110],[560,140],[600,200],[540,240],[460,220],[380,180]], // Europe/Africa
+                [[620,130],[700,110],[780,140],[820,200],[780,250],[700,230],[620,180]], // Asia/Australia
+            ];
+            continents.forEach(points => {
+                ctx.beginPath();
+                ctx.moveTo(points[0][0] * canvas.width/1000, points[0][1] * canvas.height/500);
+                for (let i = 1; i < points.length; i++) {
+                    ctx.lineTo(points[i][0] * canvas.width/1000, points[i][1] * canvas.height/500);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = '#8b1a1a80';
+                ctx.stroke();
+            });
+
+            // Draw random attack dots
+            for (let i = 0; i < 8; i++) {
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                ctx.fillStyle = '#8b1a1a';
+                ctx.shadowColor = '#8b1a1a';
+                ctx.shadowBlur = 15;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Pulse effect
+                ctx.beginPath();
+                ctx.arc(x, y, 10 + 5 * Math.sin(Date.now() / 300 + i), 0, 2 * Math.PI);
+                ctx.strokeStyle = '#8b1a1a40';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(drawWorldMap);
+        }
+
+        drawWorldMap();
+    })();
 </script>
 </body>
 </html>
