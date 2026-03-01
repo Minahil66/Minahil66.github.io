@@ -121,7 +121,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            align-items: center;
+            align-items: start;
         }
 
         .left-content {
@@ -200,8 +200,16 @@
         }
 
         .right-content {
-            height: 500px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        #laptop-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
         }
 
         @media (max-width: 768px) {
@@ -256,10 +264,8 @@
             pointer-events: none;
         }
 
-        /* SKILL ARSENAL STYLES */
         .skill-arsenal {
             max-width: 500px;
-            margin: 2rem auto 0;
             padding: 1.5rem;
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(8px);
@@ -339,7 +345,6 @@
     </style>
 </head>
 <body>
-    <!-- TERMINAL RAIN -->
     <div id="terminal-rain"></div>
     <div id="canvas-container"></div>
 
@@ -360,7 +365,8 @@
 
         <section id="section2">
             <div class="container">
-                                <div class="split-layout">
+                <div class="split-layout">
+                    <!-- LEFT SIDE - JOURNEY -->
                     <div class="left-content">
                         <h2>Minahil · Journey</h2>
                         
@@ -401,11 +407,11 @@
                                 <div class="ctf-name">BOOTCAMP CTF · Team ZeroDayNexus</div>
                                 <div class="ctf-detail">8 challenges solved</div>
                             </div>
-                        </div>
-                        <div class="ctf-item">
-                            <div class="ctf-date">2026 · OP-03</div>
-                            <div class="ctf-name">pending op · Team ZeroDayNexus</div>
-                            <div class="ctf-detail">pending op</div>
+                            <div class="ctf-item">
+                                <div class="ctf-date">2026 · OP-03</div>
+                                <div class="ctf-name">pending op · Team ZeroDayNexus</div>
+                                <div class="ctf-detail">pending op</div>
+                            </div>
                         </div>
                         
                         <div class="section-block">
@@ -427,21 +433,23 @@
                         </div>
                     </div>
 
-                    <div class="right-content" style="display: flex; flex-direction: column; gap: 2rem;">
-                                              <!-- Laptop Container with Map -->
-                        <div id="laptop-container" style="position: relative; height: 500px; width: 100%;">
-                            <!-- Map overlay - EXACTLY BESIDE PROJECTS! -->
-                            <div id="map-overlay" style="position: absolute; top: 120px; left: 20px; right: 20px; height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); z-index: 10; overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
-                                <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
-                                <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
-                                    <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
-                                        ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 
-                                    </div>
+                    <!-- RIGHT SIDE - LAPTOP, MAP, SKILLS -->
+                    <div class="right-content">
+                        <!-- LAPTOP (beside EDUCATION) -->
+                        <div id="laptop-container"></div>
+
+                        <!-- MAP (beside PROJECTS) -->
+                        <div id="map-overlay" style="height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
+                            <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
+                            <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
+                                <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
+                                    ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 
                                 </div>
                             </div>
                         </div>
-                        <!-- SKILL ARSENAL -  -->
-                        <div class="skill-arsenal" id="skill-arsenal" style="width: 100%; margin: 0;">
+
+                        <!-- SKILL ARSENAL (beside CTF OPS) -->
+                        <div class="skill-arsenal" id="skill-arsenal" style="width: 100%;">
                             <div class="skill-header">
                                 <span class="header-icon">⎯</span> SKILL ARSENAL <span class="header-icon">⎯</span>
                             </div>
@@ -456,7 +464,6 @@
                                         <div class="skill-fill" style="width: 75%"></div>
                                     </div>
                                 </div>
-
                                 <div class="skill-item">
                                     <div class="skill-info">
                                         <span class="skill-name">Programming (C/C++)</span>
@@ -466,7 +473,6 @@
                                         <div class="skill-fill" style="width: 70%"></div>
                                     </div>
                                 </div>
-
                                 <div class="skill-item">
                                     <div class="skill-info">
                                         <span class="skill-name">Bash Scripting</span>
@@ -476,7 +482,6 @@
                                         <div class="skill-fill" style="width: 85%"></div>
                                     </div>
                                 </div>
-
                                 <div class="skill-item">
                                     <div class="skill-info">
                                         <span class="skill-name">Burp Suite</span>
@@ -486,7 +491,6 @@
                                         <div class="skill-fill" style="width: 60%"></div>
                                     </div>
                                 </div>
-
                                 <div class="skill-item">
                                     <div class="skill-info">
                                         <span class="skill-name">Wireshark</span>
@@ -496,7 +500,6 @@
                                         <div class="skill-fill" style="width: 55%"></div>
                                     </div>
                                 </div>
-
                                 <div class="skill-item">
                                     <div class="skill-info">
                                         <span class="skill-name">Nmap</span>
@@ -510,12 +513,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- SKILL ARSENAL -->
-              </div>
+            </div>
         </section>
     </div>
 
-    <!-- Three.js -->
+    <!-- Three.js Script (same as before) -->
     <script type="importmap">
         {
             "imports": {
@@ -525,6 +527,7 @@
     </script>
 
     <script type="module">
+        // [Keep ALL your existing Three.js code exactly the same]
         import * as THREE from 'three';
 
         const container = document.getElementById('canvas-container');
@@ -725,7 +728,6 @@
 
             parts.forEach((part) => {
                 if (progress === 0) {
-                    // PHASE 1: SCATTERED
                     if (!part.scatteredPos) {
                         part.scatteredPos = {
                             x: part.origPos.x + (Math.random() - 0.5) * 10,
@@ -751,7 +753,6 @@
                     part.glow.material.opacity = 0.15;
                 } 
                 else if (progress < 1) {
-                    // PHASE 2: ASSEMBLING
                     if (!part.scatteredPos) {
                         part.scatteredPos = {
                             x: part.origPos.x + (Math.random() - 0.5) * 10,
@@ -779,7 +780,6 @@
                     part.glow.material.opacity = 0.2;
                 } 
                 else {
-                    // PHASE 3: VANISH
                     if (vanishProgress > 0) {
                         const vanishFactor = Math.pow(vanishProgress, 1.5);
                         
@@ -835,7 +835,6 @@
                 }
             });
             
-            // Control map and arsenal visibility
             const mapOverlay = document.getElementById('map-overlay');
             const skillArsenal = document.getElementById('skill-arsenal');
             
