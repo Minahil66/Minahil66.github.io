@@ -360,7 +360,7 @@
 
         <section id="section2">
             <div class="container">
-                <div class="split-layout">
+                                <div class="split-layout">
                     <div class="left-content">
                         <h2>Minahil · Journey</h2>
                         
@@ -427,88 +427,92 @@
                         </div>
                     </div>
 
-                    <div class="right-content" id="laptop-container" style="position: relative;">
-                        <!-- Map overlay -->
-                        <div id="map-overlay" style="position: absolute; bottom: 20px; left: 20px; right: 20px; height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); z-index: 10; overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
-                            <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
-                            <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
-                                <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
-                                    ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 
+                    <div class="right-content" style="display: flex; flex-direction: column; gap: 2rem;">
+                        <!-- Laptop Container with Map -->
+                        <div id="laptop-container" style="position: relative; height: 500px; width: 100%;">
+                            <!-- Map overlay -->
+                            <div id="map-overlay" style="position: absolute; bottom: 20px; left: 20px; right: 20px; height: 200px; background: rgba(10,10,10,0.85); border: 1px solid #8b1a1a; border-radius: 8px; backdrop-filter: blur(5px); z-index: 10; overflow: hidden; box-shadow: 0 0 20px rgba(139,26,26,0.3);">
+                                <canvas id="world-map" style="width: 100%; height: 70%;"></canvas>
+                                <div id="attack-ticker" style="height: 30%; border-top: 1px solid #8b1a1a; color: #e0c9a6; font-family: monospace; font-size: 12px; display: flex; align-items: center; overflow: hidden; white-space: nowrap; background: rgba(5,5,5,0.9);">
+                                    <div style="padding-left: 20px; animation: scrollTicker 20s linear infinite;">
+                                        ACTIVE THREATS: WannaCry • Log4Shell • CVE-2024-6387 • Mirai • EternalBlue • ZeroDay • PrintNightmare • ProxyLogon • Follina • CVE-2023-23397 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SKILL ARSENAL - Now on the right below the laptop -->
+                        <div class="skill-arsenal" id="skill-arsenal" style="width: 100%; margin: 0;">
+                            <div class="skill-header">
+                                <span class="header-icon">⎯</span> SKILL ARSENAL <span class="header-icon">⎯</span>
+                            </div>
+                            
+                            <div class="skill-grid">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Metasploit</span>
+                                        <span class="skill-percent">75%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Programming (C/C++)</span>
+                                        <span class="skill-percent">70%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 70%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Bash Scripting</span>
+                                        <span class="skill-percent">85%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Burp Suite</span>
+                                        <span class="skill-percent">60%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 60%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Wireshark</span>
+                                        <span class="skill-percent">55%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 55%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Nmap</span>
+                                        <span class="skill-percent">90%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-fill" style="width: 90%"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- SKILL ARSENAL -->
-                <div class="skill-arsenal" id="skill-arsenal">
-                    <div class="skill-header">
-                        <span class="header-icon">⎯</span> SKILL ARSENAL <span class="header-icon">⎯</span>
-                    </div>
-                    
-                    <div class="skill-grid">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Metasploit</span>
-                                <span class="skill-percent">75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 75%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Programming (C/C++)</span>
-                                <span class="skill-percent">70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 70%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Bash Scripting</span>
-                                <span class="skill-percent">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Burp Suite</span>
-                                <span class="skill-percent">60%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 60%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Wireshark</span>
-                                <span class="skill-percent">55%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 55%"></div>
-                            </div>
-                        </div>
-
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Nmap</span>
-                                <span class="skill-percent">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-fill" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              </div>
         </section>
     </div>
 
